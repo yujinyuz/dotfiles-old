@@ -11,9 +11,11 @@ set incsearch
 set hlsearch
 set splitright " :sp split screen to right"
 set wildmenu
+set encoding=utf8
+set lazyredraw
 
 filetype off 
-
+let mapleader = ","
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 
@@ -43,6 +45,7 @@ Plugin 'jez/vim-ispc'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'editorconfig/editorconfig-vim'
 
 call vundle#end()  
 "-------------- PLUGINS END --------------------
@@ -63,7 +66,7 @@ colorscheme solarized
 
 "---------NERD-TREE SETTINGS----------
 nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
-let g:nerdtree_tabs_open_on_console_startup = 1
+"-- let g:nerdtree_tabs_open_on_console_startup = 1
 map <F2> :NERDTreeToggle<CR>
 
 "-------- SYNTASTIC SETTINGS---------
@@ -88,10 +91,10 @@ let g:tagbar_autoclose=2
 let g:easytags_python_enabled = 1
 
 "--------- YouCompleteME ---------------
-let g:ycm_python_binary_path = 'python'
+let g:ycm_python_binary_path = 'python' " Calls the python virtenv"
 let g:ycm_semantic_triggers = {
-    \ 'python': [ 're!\w{2}' ]
-    \ }
+	    \ 'python': [ 're!\w{2}' ]
+	    \ }
 
 nmap <silent> <leader>b :TagbarToggle<CR>
 "autocmd BufEnter * nested :call tagbar#autoopen(0)
@@ -99,6 +102,8 @@ nmap <silent> <leader>b :TagbarToggle<CR>
 "---------GIT SETTINGS--------------
 hi clear SignColumn
 let g:airline#extensions#hunks#non_zero_only = 1
+let g:gitgutter_highlight_lines = 1
+set updatetime=100
 
 
 "----------DELIMITEMATE SETTINGS-----------------
@@ -113,3 +118,37 @@ augroup END
 
 "-----------TMUX SETTINGS--------------
 let g:tmux_navigator_save_on_switch = 2
+
+" --------- Whitespace -------
+set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+
+"----------- CtrlP File finder
+let g:ctrlp_map = '<C-P>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_match_window = 'results:100'
+set wildignore+=/tmp/*,.git,node_modules
+
+"------- Updating ~/.vimrc file -----
+:nnoremap <leader>ev :vsplit $MYVIMRC<CR> " edit vim file"
+:nnoremap <leader>sv :source $MYVIMRC<CR> " source vim file"
+":autocmd BufWritePost .vimrc source $MYVIMRC
+"-------- Ease of access??
+:inoremap jk <esc>
+:inoremap <esc> <nop>
+
+function! ToggleScrollMode()
+    if exists("s:scroll_mode")
+	unmap k
+	unmap j
+	unlet s:scroll_mode
+	echom "scroll mode off"
+    else
+	nnoremap j <C-e>j
+	nnoremap k <C-y>k
+	let s:scroll_mode = 1
+	echom "scroll mode on"
+    endif
+endfunction
+
+nnoremap <leader>\ :call ToggleScrollMode()<CR>
+
