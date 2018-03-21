@@ -69,6 +69,7 @@ colorscheme solarized
 nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 let g:nerdtree_tabs_open_on_console_startup = 0
 map <F2> :NERDTreeToggle<CR>
+let NERDTreeIgnore = ['\.py[co]$']
 
 "-------- SYNTASTIC SETTINGS---------
 let g:syntastic_error_symbol = '✘'
@@ -127,7 +128,7 @@ set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 let g:ctrlp_map = '<C-P>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_match_window = 'results:100'
-set wildignore+=/tmp/*,.git,node_modules
+set wildignore+=/tmp/*,.git,node_modules,*.py[co]
 
 "------- Updating ~/.vimrc file -----
 :nnoremap <leader>ev :vsplit $MYVIMRC<CR> " edit vim file"
