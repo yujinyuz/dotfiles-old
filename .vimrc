@@ -19,7 +19,8 @@ let mapleader = ","
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 
-
+" Clearlast search pattern
+nnoremap <silent> <CR> :noh<CR><CR>
 
 "-------------- PLUGINS STARTS -----------------
 call vundle#begin()
@@ -66,7 +67,7 @@ colorscheme solarized
 
 "---------NERD-TREE SETTINGS----------
 nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
-"-- let g:nerdtree_tabs_open_on_console_startup = 1
+let g:nerdtree_tabs_open_on_console_startup = 0
 map <F2> :NERDTreeToggle<CR>
 
 "-------- SYNTASTIC SETTINGS---------
