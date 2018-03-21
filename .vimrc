@@ -16,6 +16,13 @@ set lazyredraw
 
 filetype off 
 let mapleader = ","
+
+" Keys -- ubuntu bug for arrow keys on insert mode
+inoremap OA <up>
+inoremap OB <down>
+inoremap OD <left>
+inoremap OC <right>
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 
@@ -47,6 +54,7 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'ag.vim'
 
 call vundle#end()  
 "-------------- PLUGINS END --------------------
@@ -64,6 +72,8 @@ set background=dark
 let g:solarized_termcolors=256
 colorscheme solarized
 
+"--- silver searcher
+let g:ag_working_path_mode="r"
 
 "---------NERD-TREE SETTINGS----------
 nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
