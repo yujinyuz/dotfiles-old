@@ -18,10 +18,10 @@ filetype off
 let mapleader = ","
 
 " Keys -- ubuntu bug for arrow keys on insert mode
-inoremap OA <up>
-inoremap OB <down>
-inoremap OD <left>
-inoremap OC <right>
+inoremap OA <Up>
+inoremap OB <Down>
+inoremap OD <Left>
+inoremap OC <Right>
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -54,7 +54,8 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'editorconfig/editorconfig-vim'
-Plugin 'ag.vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 call vundle#end()  
 "-------------- PLUGINS END --------------------
@@ -74,12 +75,19 @@ colorscheme solarized
 
 "--- silver searcher
 let g:ag_working_path_mode="r"
+let g:ackprg = 'ag --vimgrep --smart-case'
+cnoreabbrev ag Ack!
+cnoreabbrev aG Ack!
+cnoreabbrev Ag Ack!
+cnoreabbrev AG Ack!
 
 "---------NERD-TREE SETTINGS----------
 nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
+nmap <silent> <leader>nf :NERDTreeFind<CR>
 let g:nerdtree_tabs_open_on_console_startup = 0
-map <F2> :NERDTreeToggle<CR>
+" nnoremap <F2> :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\.py[co]$']
+
 
 "-------- SYNTASTIC SETTINGS---------
 let g:syntastic_error_symbol = '✘'
@@ -141,12 +149,14 @@ let g:ctrlp_match_window = 'results:100'
 set wildignore+=/tmp/*,.git,node_modules,*.py[co]
 
 "------- Updating ~/.vimrc file -----
-:nnoremap <leader>ev :vsplit $MYVIMRC<CR> " edit vim file"
-:nnoremap <leader>sv :source $MYVIMRC<CR> " source vim file"
+nnoremap <leader>ev :vsplit $MYVIMRC<CR> " edit vim file"
+nnoremap <leader>sv :source $MYVIMRC<CR> " source vim file"
 ":autocmd BufWritePost .vimrc source $MYVIMRC
 "-------- Ease of access??
-:inoremap jk <esc>
-:inoremap <esc> <nop>
+inoremap jk <esc>
+inoremap <esc> <nop>
+nnoremap <silent> <Tab> :bnext<CR>
+nnoremap <silent> <S-Tab> :bprevious<CR>
 
 function! ToggleScrollMode()
     if exists("s:scroll_mode")
