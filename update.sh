@@ -15,6 +15,8 @@ cp vim/_vimrc ~/.vimrc
 cp -r vim/vimconfigs ~/.vimconfigs
 
 # Install vim plugins
+echo "Installing Vundle..."
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 echo "Installing vim plugins..."
 vim +PluginInstall +qall
 
