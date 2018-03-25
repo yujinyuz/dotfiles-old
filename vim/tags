@@ -1,0 +1,3 @@
+!_TAG_FILE_SORTED	2	/0=unsorted, 1=sorted, 2=foldcase/
+mapleader	/home/yujin/Projects/dotfiles/vim/_vimrc	/^let mapleader = ","$/;"	v	language:Vim
+python_highlight_all	/home/yujin/Projects/dotfiles/vim/_vimrc	/^let python_highlight_all = 1$/;"	v	language:Vim
