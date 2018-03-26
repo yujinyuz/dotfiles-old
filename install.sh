@@ -2,12 +2,14 @@
 
 set -euo pipefail
 
-CLONE_REPO="git clone https://github.com/yujinyuz/dotfiles.git $HOME/.dotfiles"
-echo "Updating dotfiles in home directory..."
-$CLONE_REPO
+echo "Installing vim configuration files. This may take several minutes..."
+echo -n "Would you like to have a clean install? [y/n] > "
 
-# Update Vim config
-cd "$HOME/.dotfiles"
+read clean_install
+
+if [ "$clean_install" == "y" ]; then
+  make clean
+fi
 
 # Copy vimrc
 echo "Copying vim configurations..."
