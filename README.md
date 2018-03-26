@@ -8,3 +8,9 @@ I've installed the following via apt:
 * ctags
 * powerline
 * silversearcher-ag
+
+# Installation Notes
+
+```
+./install.sh
+```
