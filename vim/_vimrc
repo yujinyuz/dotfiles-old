@@ -13,8 +13,12 @@ set splitright " :sp split screen to right"
 set wildmenu
 set encoding=utf-8
 set fileencoding=utf-8
+set clipboard=unnamed
 set lazyredraw
 set noswapfile
+set noerrorbells
+set visualbell
+set conceallevel=3
 
 filetype off 
 let mapleader = ","

@@ -63,7 +63,8 @@ nmap <silent> <leader>b :TagbarToggle<CR> " Shows tagbars. Cool!
 "---------AIRLINE SETTINGS-----------
 let g:airline_detect_paste=1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='term'
+" let g:airline_theme='term'
+let g:airline_theme = 'codedark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
@@ -115,5 +116,14 @@ let g:ctrlp_custom_ignore = {
   \ }
 "------------------------------------
 
+"--------- Vim workspace
+let g:workspace_autosave = 0
+let g:workspace_session_name = '.workspace.vim'
+let g:workspace_autosave_ignore = ['gitcommit', 'tagbar']
+nnoremap <leader>s :ToggleWorkspace<CR>
+
 " --------- Whitespace -------
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFoldersOpenClose = 1

@@ -25,6 +25,10 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'jelera/vim-javascript-syntax'
+Plugin 'tomasiser/vim-code-dark'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plugin 'thaerkh/vim-workspace'
 
 call vundle#end()  
 

@@ -21,7 +21,3 @@ nnoremap <silent> <S-Tab> :bprevious<CR>
 " Clearlast search pattern
 nnoremap <silent> <CR> :noh<CR><CR>
 " ---------------------------------
-
-" Save current window session
-nnoremap <leader>s :mksession<CR>
-
