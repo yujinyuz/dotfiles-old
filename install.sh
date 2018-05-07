@@ -2,37 +2,47 @@
 
 set -e
 
-SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+set -o errexit
+set -o pipefail
+set -o nounset
+# set -o xtrace
 
+# Magic vars
+__dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+__file="${__dir}/$(basename "${BASH_SOURCE[0]}")"
+__base="$(basename ${__file} .sh)"
+__root="$(cd "$(dirname "${__dir}")" && pwd)"
 
-function clean_install() {
-    echo -n "Would you like to have a clean install? [y/n] > "
-    read clean_install
-    if [ "$clean_install" == "y" ]; then
-        make clean
-    fi
-}
+arg1="${1:-}"
+
 
 function create_symlink() {
     local file_loc="$1"
     local symlink_dest="$2"
-    
-    echo "ln -sfn $file_loc $symlink_dest"
+
+    echo "ln -sfn ${file_loc} ${symlink_dest}"
     ln -sfn "$file_loc" "$symlink_dest"
 }
 
 function symlink_dotfiles() {
-    echo "Symlinking dotfiles..."
-    local vimrc_path="$SCRIPTPATH/vim/.vimrc"
-    local vimconfig_path="$SCRIPTPATH/vim/vimconfigs"
+    create_symlink "${__dir}/vim/.vimrc" "${HOME}/.vimrc"
+    create_symlink "${__dir}/vim/vimconfigs" "${HOME}/.vimconfigs"
 
-    create_symlink "$vimrc_path" "$HOME/.vimrc"
-    create_symlink "$vimconfig_path" "$HOME/.vimconfigs"
+    create_symlink "${__dir}/zsh/.zshrc" "${HOME}/.zshrc"
+    create_symlink "${__dir}/zsh/yujinyuz.zsh-theme" "${ZSH}/custom/themes/yujinyuz.zsh-theme"
+
+    create_symlink "${__dir}/ungrouped/.bash_aliases" "${HOME}/.bash_aliases"
 }
 
 function main() {
-    echo "Installing vim configuration files. This may take several minutes..."
-    symlink_dotfiles
+    # Currently just symlink since I'm not yet uploading it
+    echo -n "Just symlink? [y/n] > "
+    read is_symlink
+
+    if [ "${is_symlink}" == "y" ]; then
+        echo "Just doing some symlinks for now . . ."
+        symlink_dotfiles
+    fi
 }
 
 main
