@@ -21,7 +21,7 @@ function create_symlink() {
     local symlink_dest="$2"
 
     echo "ln -sfn ${file_loc} ${symlink_dest}"
-    ln -sfn "$file_loc" "$symlink_dest"
+    ln -sfn "${file_loc}" "${symlink_dest}"
 }
 
 function symlink_dotfiles() {
