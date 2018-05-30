@@ -1,3 +1,7 @@
 alias open="nautilus"
 alias ping="ping -O"
-alias youtubedl-video="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4' --external-downloaded aria2c"
+alias ping1="ping sgp-1.valve.net"
+alias youtubedl-video="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4' --external-downloader aria2c"
+alias gitlogprettify="git log --all --decorate --oneline --graph"
+alias lg1="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+alias gitlog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n'' %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
