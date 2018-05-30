@@ -60,14 +60,14 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-#  git
+# git
 vi-mode
 web-search
 )
 
 # Everytime `cd` is executed, execute command inside `chpwd`
 function chpwd() {
-  ls
+  ls --color=tty
 }
 
 source $ZSH/oh-my-zsh.sh
