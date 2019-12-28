@@ -1,0 +1,4 @@
+{
+    "python.jediEnabled": false,
+    "python.venvFolders": ["envs", ".pyenv", ".virtualenvs"]
+}

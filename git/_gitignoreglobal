@@ -1,0 +1,22 @@
+.gems
+tags
+.rbenv-gemsets
+.ruby-version
+Gemfile.lock
+
+# python stuffs
+.python-version
+*.pyc
+
+# .vscode stuffs
+.vscode/
+
+# temporary stuffs
+tmp/
+temp/
+
+.DS_Store
+.DS_Store/
+
+# vim stuffs
+.vim/
