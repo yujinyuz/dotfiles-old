@@ -17,32 +17,32 @@ arg1="${1:-}"
 
 
 function create_symlink() {
-    local file_loc="$1"
-    local symlink_dest="$2"
+  local file_loc="$1"
+  local symlink_dest="$2"
 
-    echo "ln -sfn ${file_loc} ${symlink_dest}"
-    ln -sfn "${file_loc}" "${symlink_dest}"
+  echo "ln -sfn ${file_loc} ${symlink_dest}"
+  ln -sfn "${file_loc}" "${symlink_dest}"
 }
 
 function symlink_dotfiles() {
-    create_symlink "${__dir}/vim/.vimrc" "${HOME}/.vimrc"
-    create_symlink "${__dir}/vim/vimconfigs" "${HOME}/.vimconfigs"
-
-    create_symlink "${__dir}/zsh/.zshrc" "${HOME}/.zshrc"
-    create_symlink "${__dir}/zsh/yujinyuz.zsh-theme" "${ZSH}/custom/themes/yujinyuz.zsh-theme"
-
-    create_symlink "${__dir}/ungrouped/.bash_aliases" "${HOME}/.bash_aliases"
+  create_symlink "${__dir}/git/_gitconfig" "${HOME}/.gitconfig"
+  create_symlink "${__dir}/git/_gitignoreglobal" "${HOME}/.gitignoreglobal"
+  create_symlink "${__dir}/tmux/_tmux.conf" "${HOME}/.tmux.conf"
+  create_symlink "${__dir}/vim/_vimrc" "${HOME}/.vimrc"
+  create_symlink "${__dir}/vim/coc-settings.json" "${HOME}/.vim/coc-settings.json"
+  create_symlink "${__dir}/zsh/_zshrc" "${HOME}/.zshrc"
+  create_symlink "${__dir}/zsh/aliases.zsh" "${HOME}/.aliases.zsh"
 }
 
 function main() {
-    # Currently just symlink since I'm not yet uploading it
-    echo -n "Just symlink? [y/n] > "
-    read is_symlink
+  # Currently just symlink since I'm not yet uploading it
+  echo -n "Just symlink? [y/n] > "
+  read is_symlink
 
-    if [ "${is_symlink}" == "y" ]; then
-        echo "Just doing some symlinks for now . . ."
-        symlink_dotfiles
-    fi
+  if [ "${is_symlink}" == "y" ]; then
+      echo "Just doing some symlinks for now . . ."
+      symlink_dotfiles
+  fi
 }
 
 main
