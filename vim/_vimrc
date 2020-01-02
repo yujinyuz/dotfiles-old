@@ -68,7 +68,7 @@ set nobackup
 set nowritebackup
 
 "" Use system clipboard
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 "" Disable neovim frmo setting cursor style
 set guicursor=
@@ -86,7 +86,7 @@ set path=.,**
 set splitright
 
 "" Split below by default
-set splitbelow
+" set splitbelow
 
 "" Hide the -- INSERT --
 "" comment this out when you aren't using lightline.vim
@@ -94,10 +94,15 @@ set noshowmode
 
 
 "" Show whitespaces
-set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
+" set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
+set list
+set listchars=tab:→\ ,space:·,nbsp:␣,trail:·,precedes:«,extends:»
 
 "" Change leader key
 let mapleader=","
+
+"" Enable elite mode. No arrows!!
+let g:elite_mode=1
 
 "" This fixed my issue with tmux not having the correct color. WTF.
 " set termguicolors
@@ -160,22 +165,21 @@ Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'nelstrom/vim-visual-star-search'
-Plug 'tmsvg/pear-tree'
-Plug 'yggdroot/indentline'
+" Plug 'yggdroot/indentline'
 Plug 'joshdick/onedark.vim'
 Plug 'KeitaNakamura/neodark.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'psliwka/vim-smoothie'
 Plug 'christoomey/vim-tmux-navigator'
-
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'justinmk/vim-dirvish'
 
 
 "" These are plugins that I saw from articles
@@ -184,10 +188,12 @@ Plug 'christoomey/vim-tmux-navigator'
 " Plug 'Konfekt/FastFold'
 " Plug 'iamcco/markdown-preview.nvim'
 " Plug 'junegunn/limelight.vim'
-" Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs' " this doesn't work well. so I'm using pear-tree
+" Plug 'tmsvg/pear-tree'
 " Plug 'tpope/vim-unimpaired'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 call plug#end()
-
 " }}}
 " Autocommands {{{
 "" Get correct comment highlighting
@@ -234,10 +240,10 @@ inoremap <Esc> <NOP>
 
 "" Turn off the arrow keys in normal mode
 "" No vim user uses that
-nnoremap <Up> <nop>
-nnoremap <Down> <nop>
-nnoremap <Left> <nop>
-nnoremap <Right> <nop>
+" nnoremap <Up> <nop>
+" nnoremap <Down> <nop>
+" nnoremap <Left> <nop>
+" nnoremap <Right> <nop>
 
 "" Let's us move around wrapped lines normally
 noremap <silent> j gj
@@ -249,7 +255,9 @@ vnoremap < <gv
 vnoremap > >gv
 
 "" Blackhole deletes
+"" Usage: <leader>d then d again to delete line
 nnoremap <leader>d "_d
+
 
 "" Backspace faster switching to alternate file
 nnoremap <BS> :buffer#<CR>
@@ -271,7 +279,29 @@ nnoremap ++ :Files<CR>
 
 
 "" Clear search highlight via return
-nnoremap <CR> :noh<CR><CR>
+" nnoremap <CR> :noh<CR><CR>
+
+"" Clear search highlight
+nnoremap <silent> <leader>, :noh<CR>
+
+" That awful mixed mode with the half-tabs-are-spaces:
+" Source: https://vim.fandom.com/wiki/Converting_tabs_to_spaces
+" Execute :retab so convert the tabs to spaces
+map \M <Esc>:set noexpandtab tabstop=8 softtabstop=4 shiftwidth=4<CR>
+" Mini tabs, small "m":
+map \m <Esc>:set expandtab tabstop=2 shiftwidth=2<CR>
+" Think "little tabs" and "big tabs":
+map \t <Esc>:set expandtab tabstop=4 shiftwidth=4<CR>
+map \T <Esc>:set expandtab tabstop=8 shiftwidth=8<CR>
+
+
+"" Disable arrow movements. Resize splits panes instead
+if get(g:, 'elite_mode')
+  nnoremap <Up> :resize +2<CR>
+  nnoremap <Down> :resize -2<CR>
+  nnoremap <Left> :vertical resize +2<CR>
+  nnoremap <Right> :vertical resize -2<CR>
+endif
 
 "" Cancel search using escape
 
@@ -297,20 +327,34 @@ colorscheme onedark
 let g:coc_global_extensions = [
   \ 'coc-python',
   \ 'coc-emmet',
-  \ 'coc-json'
+  \ 'coc-json',
+  \ 'coc-tsserver',
+  \ 'coc-pairs',
+  \ 'coc-explorer'
   \ ]
 " }}}
 
 " lightline {{{
-let g:lightline = {'colorscheme': 'one'}
+let g:lightline = {
+  \ 'colorscheme': 'one',
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'gitbranch', 'readonly', 'filename', 'modified'] ]
+  \ },
+  \ 'component_function': {
+  \   'gitbranch': 'fugitive#head'
+  \ },
+  \ }
 " }}}
 
 " NERDTree {{{
 let g:nerdtree_tabs_open_on_console_startup=0
-map <C-n> :NERDTreeToggle<CR>
+" map <C-n> :NERDTreeToggle<CR>
+map <C-n> :CocCommand explorer<CR>
 " }}}
 
 " indentLine {{{
+let g:indentLine_char = '┊'
 let g:indentLine_leadingSpaceChar = '·'
 let g:indentLine_leadingSpaceEnabled = 1
 " }}}
@@ -324,6 +368,18 @@ let g:pear_tree_map_special_keys = 0
 
 " fzf.vim {{{
 let g:fzf_tags_command = 'ctags -R'
+" }}}
+
+" netrw (default) {{{
+" let g:netrw_banner = 0
+" let g:netrw_liststyle = 3
+" let g:netrw_browse_split = 4
+" let g:netrw_altv = 1
+" let g:netrw_winsize = 25
+" augroup ProjectDrawer
+"   autocmd!
+"   autocmd VimEnter * :Vexplore
+" augroup END
 " }}}
 
 " End Plugins Custom Settings }}}
@@ -346,7 +402,8 @@ endif
 " documentation
 
 " You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
+" set updatetime=300
+set updatetime=100
 
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
@@ -466,3 +523,8 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " End }}}
 
+" Auto resize Vim splits to active split
+" set winwidth=95
+" set winheight=5
+" set winminheight=5
+" set winheight=999
