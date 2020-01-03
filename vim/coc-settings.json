@@ -1,4 +1,6 @@
 {
     "python.jediEnabled": false,
-    "python.venvFolders": ["envs", ".pyenv", ".virtualenvs"]
+    "python.venvFolders": ["envs", ".pyenv", ".virtualenvs"],
+    "emmet.includeLanguages": {"javascript": "javascriptreact"},
+    "explorer.icon.enableNerdfont": true
 }

@@ -29,7 +29,7 @@ function symlink_dotfiles() {
   create_symlink "${__dir}/git/_gitignoreglobal" "${HOME}/.gitignoreglobal"
   create_symlink "${__dir}/tmux/_tmux.conf" "${HOME}/.tmux.conf"
   create_symlink "${__dir}/vim/_vimrc" "${HOME}/.vimrc"
-  create_symlink "${__dir}/vim/coc-settings.json" "${HOME}/.vim/coc-settings.json"
+  create_symlink "${__dir}/vim/coc-settings.json" "${HOME}/.config/nvim/coc-settings.json"
   create_symlink "${__dir}/zsh/_zshrc" "${HOME}/.zshrc"
   create_symlink "${__dir}/zsh/aliases.zsh" "${HOME}/.aliases.zsh"
 }

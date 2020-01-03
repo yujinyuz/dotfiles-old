@@ -16,6 +16,7 @@
   co = checkout
   br = branch
   cm = commit
+	d = difftool
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -35,3 +36,9 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[difftool "vimdiff"]
+	cmd = vimdiff \"$LOCAL\" \"$REMOTE\"
