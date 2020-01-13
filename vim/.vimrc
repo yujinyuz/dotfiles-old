@@ -23,9 +23,9 @@ set smartcase                   " ... unless they contain at least one capital l
 
 "" Turn on relative numbers
 set relativenumber
-" I think we don't need this anymore since there is a line number indicator on
-" the bottom right side of the editor
-" set number
+
+"" Show current line number
+set number
 
 "" Show matching parenthesis
 set showmatch
@@ -38,13 +38,12 @@ set wildmenu
 "" Redraw only when needed
 set lazyredraw
 
-
 "" Draw a ruler on the right side
 set colorcolumn=90
 
 "" Create new line when text is over 79 chars
 "" change this if we have problems in editing existing code base
-set textwidth=79
+" set textwidth=79
 
 "" Hide buffer
 set hidden
@@ -92,6 +91,8 @@ set splitright
 "" comment this out when you aren't using lightline.vim
 set noshowmode
 
+"" Alwayts show tabs
+set showtabline=2
 
 "" Show whitespaces
 " set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
@@ -108,7 +109,7 @@ let g:elite_mode=1
 " set termguicolors
 
 "" Enable syntax highlighting
-syntax on
+" syntax on
 
 "" NeoVim Enabled Defaults {{{
 "" Just uncomment the lines with `set` to when not using neovim
@@ -170,7 +171,6 @@ Plug 'ryanoasis/vim-devicons'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'nelstrom/vim-visual-star-search'
-" Plug 'yggdroot/indentline'
 Plug 'joshdick/onedark.vim'
 Plug 'KeitaNakamura/neodark.vim'
 Plug 'tpope/vim-surround'
@@ -179,9 +179,8 @@ Plug 'psliwka/vim-smoothie'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-Plug 'justinmk/vim-dirvish'
-
-
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'mhinz/vim-startify'
 "" These are plugins that I saw from articles
 "" that I don't need right now but might need later
 
@@ -193,6 +192,9 @@ Plug 'justinmk/vim-dirvish'
 " Plug 'tpope/vim-unimpaired'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
+" Plug 'yggdroot/indentline'
+" Plug 'justinmk/vim-dirvish'
+" Plug 'tpope/vim-vinegar'
 call plug#end()
 " }}}
 " Autocommands {{{
@@ -201,6 +203,9 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 
 "" Remove whitespace on save
 autocmd BufWritePost * :%s/\s\+$//e
+
+"" autopairs disable
+autocmd FileType markdown let b:coc_pairs_disabled = ['`']
 
 " autocmd BufEnter \.* set filetype=sh
 " autocmd BufEnter .vimrc set filetype=vim
@@ -226,13 +231,14 @@ nnoremap <leader>qq :qa!<CR>
 nnoremap <leader>ev :vsplit ~/.vimrc<CR>
 
 "" source vimrc file
-nnoremap <leader>sv :source ~/.vimrc<CR>
+nnoremap <leader>sv :source %<CR>
 
 "" Used for navigating to different split panes
-nnoremap <C-J> <C-W>j
-nnoremap <C-K> <C-W>k
-nnoremap <C-H> <C-W>h
-nnoremap <C-L> <C-W>l
+"" Commented out since vim-tmux-navigator handles this for us
+" nnoremap <C-J> <C-W>j
+" nnoremap <C-K> <C-W>k
+" nnoremap <C-H> <C-W>h
+" nnoremap <C-L> <C-W>l
 
 "" Map jk to Escape because it's too far away
 inoremap jk <Esc>
@@ -282,7 +288,19 @@ nnoremap ++ :Files<CR>
 " nnoremap <CR> :noh<CR><CR>
 
 "" Clear search highlight
-nnoremap <silent> <leader>, :noh<CR>
+nnoremap <silent> <leader>l :noh<CR>
+
+nmap ghp <Plug>(GitGutterPreviewHunk)
+nmap -- :tabedit %<CR>:Gdiff<CR>
+
+"" Use Alt-jk for moving lines
+"" Note: iTerm2 > Profiles > Keys > Left Option > Esc+
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
 
 " That awful mixed mode with the half-tabs-are-spaces:
 " Source: https://vim.fandom.com/wiki/Converting_tabs_to_spaces
@@ -303,23 +321,37 @@ if get(g:, 'elite_mode')
   nnoremap <Right> :vertical resize -2<CR>
 endif
 
-"" Cancel search using escape
-
-"" It seems that when trying to remap the escape key
-"" Opening `vim` defaults to replace mode.
-"" Commenting out this line in the mean time
-"" nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
+"" Open definition in new tab
+map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+map <leader><space> :CocCommand <CR>
+nnoremap <leader>nf :NERDTreeFind<CR>
 
 " End Custom Key Mappings }}}
 " Plugins Custom Settings {{{
 
 " onedark.vim {{{
 " let g:airline_theme='onedark'
-let g:onedark_terminal_italics=1
-let g:onedark_termcolors=256
+let g:onedark_terminal_italics = 1
+" let g:onedark_hide_endofbuffer = 1
 
 " Defining colorscheme here after setting
 " g:onedark_terminal_italics=1
+
+" 24-bit (true-color) mode {{{
+
+"" From https://github.com/joshdick/onedark.vim#installation
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check
+"and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (has("nvim"))
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+if (has("termguicolors"))
+  set termguicolors
+endif
+" }}}
+syntax on
 colorscheme onedark
 "" }}}
 
@@ -329,30 +361,41 @@ let g:coc_global_extensions = [
   \ 'coc-emmet',
   \ 'coc-json',
   \ 'coc-tsserver',
-  \ 'coc-pairs',
-  \ 'coc-explorer'
+  \ 'coc-go',
+  \ 'coc-pairs'
   \ ]
 " }}}
 
 " lightline {{{
+function! CocCurrentFunction()
+  return get(b:, 'coc_current_function', '')
+endfunction
+
 let g:lightline = {
-  \ 'colorscheme': 'one',
+  \ 'colorscheme': 'onedark',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitbranch', 'readonly', 'filename', 'modified'] ]
+  \             [ 'gitbranch', 'currentfunction', 'readonly', 'filename', 'modified', 'cocstatus'] ]
   \ },
   \ 'component_function': {
-  \   'gitbranch': 'fugitive#head'
+  \   'gitbranch': 'fugitive#head',
+  \   'cocstatus': 'coc#status',
+  \   'currentfunction': 'CocCurrentFunction'
   \ },
   \ }
 " }}}
 
 " NERDTree {{{
-let g:nerdtree_tabs_open_on_console_startup=0
-" map <C-n> :NERDTreeToggle<CR>
-map <C-n> :CocCommand explorer<CR>
+let g:nerdtree_tabs_open_on_console_startup = 0
+let NERDTreeNaturalSort = 1
+map <silent> <C-n> :NERDTreeToggle<CR>
+" map <C-n> :CocCommand explorer<CR>
 " }}}
 
+" After a re-source, fix syntax matching issues (concealing brackets):
+if exists('g:loaded_webdevicons')
+  call webdevicons#refresh()
+endif
 " indentLine {{{
 let g:indentLine_char = '┊'
 let g:indentLine_leadingSpaceChar = '·'
@@ -371,32 +414,46 @@ let g:fzf_tags_command = 'ctags -R'
 " }}}
 
 " netrw (default) {{{
-" let g:netrw_banner = 0
-" let g:netrw_liststyle = 3
-" let g:netrw_browse_split = 4
-" let g:netrw_altv = 1
-" let g:netrw_winsize = 25
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 20
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+
+let g:NetrwIsOpen=0
+function! ToggleNetrw()
+  if g:NetrwIsOpen
+      let i = bufnr("$")
+      while (i >= 1)
+          if (getbufvar(i, "&filetype") == "netrw")
+              silent exe "bwipeout " . i
+          endif
+          let i-=1
+      endwhile
+      let g:NetrwIsOpen=0
+  else
+      let g:NetrwIsOpen=1
+      silent Lexplore
+  endif
+endfunction
+" map <silent> <C-n> :call ToggleNetrw()<CR>
 " augroup ProjectDrawer
 "   autocmd!
-"   autocmd VimEnter * :Vexplore
+"   autocmd VimEnter * :Lexplore
 " augroup END
 " }}}
 
-" End Plugins Custom Settings }}}
-" 24-bit (true-color) mode {{{
-
-"" From https://github.com/joshdick/onedark.vim#installation
-"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
-"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check
-"and use tmux's 24-bit color support
-"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (has("nvim"))
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
-if (has("termguicolors"))
-  set termguicolors
-endif
+"" dirvish {{{
+" let g:loaded_netrwPlugin = 1
+" let g:dirvish_mode = 1
+" command! -nargs=? -complete=dir Explore Dirvish <args>
+" command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
+" command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
 " }}}
+
+" End Plugins Custom Settings }}}
+
 " coc.vim settings from documentation {{{
 " I don't understand most of this part but we can always check the
 " documentation
@@ -429,9 +486,14 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
 " Or use `complete_info` if your vim support it, like:
-" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+" https://github.com/neoclide/coc-pairs/issues/13#issuecomment-478752764
+inoremap <silent> <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
+
+" make coc-pairs work okay???
+" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -523,8 +585,25 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " End }}}
 
-" Auto resize Vim splits to active split
-" set winwidth=95
-" set winheight=5
-" set winminheight=5
-" set winheight=999
+"" Abbreviations for a better vim-life
+cnoreabbrev W w
+cnoreabbrev W! w!
+cnoreabbrev Q q
+cnoreabbrev Q! q!
+
+
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+  set grepprg=rg\ --vimgrep
+  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+endif
+
+function! s:DiffWithSaved()
+  let filetype=&ft
+  diffthis
+  vnew | r # | normal! 1Gdd
+  diffthis
+  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+command! DiffSaved call s:DiffWithSaved()
+
