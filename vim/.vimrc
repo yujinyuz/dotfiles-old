@@ -28,7 +28,7 @@ set relativenumber
 set number
 
 "" Show matching parenthesis
-set showmatch
+" set showmatch
 
 "" Visual autocomplete for command menu
 "" triggered when pressing tab while in the
@@ -55,7 +55,8 @@ set t_BE=
 set signcolumn=yes
 
 "" Prefer zsh for shell-related tasks
-set shell=/usr/local/bin/zsh
+" set shell=/usr/local/bin/zsh
+set shell=/usr/local/bin/fish
 
 "" Group folds with '{{{,}}}'
 set foldmethod=marker
@@ -92,18 +93,22 @@ set splitright
 set noshowmode
 
 "" Alwayts show tabs
-set showtabline=2
+" set showtabline=2
 
 "" Show whitespaces
 " set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
 set list
 set listchars=tab:→\ ,space:·,nbsp:␣,trail:·,precedes:«,extends:»
 
+set conceallevel=3
+
 "" Change leader key
 let mapleader=","
 
 "" Enable elite mode. No arrows!!
 let g:elite_mode=1
+
+let g:python3_host_prog = '~/.pyenv/versions/3.8.0/envs/nvim/bin/python3'
 
 "" This fixed my issue with tmux not having the correct color. WTF.
 " set termguicolors
@@ -162,7 +167,7 @@ let g:elite_mode=1
 " End General }}}
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
-Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
+Plug 'preservim/nerdtree' " {'on': 'NERDTreeToggle'}
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
@@ -207,25 +212,20 @@ autocmd BufWritePost * :%s/\s\+$//e
 "" autopairs disable
 autocmd FileType markdown let b:coc_pairs_disabled = ['`']
 
-" autocmd BufEnter \.* set filetype=sh
-" autocmd BufEnter .vimrc set filetype=vim
-
-"" Turn on hybrid numbers
-" augroup numbertoggle
-"   autocmd!
-"   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-"   autocmd BufLeave,FocusLost,InsertEnter * set number
-" augroup END
 " End Autocommands }}}
 " Custom Key Mappings {{{
 
 "" write file
 nmap <leader>w :w!<CR>
 
+
 "" quit vim
 "" mapping to <leader>q only is slow
 "" might be because of the coc.vim qf mapping
-nnoremap <leader>qq :qa!<CR>
+nnoremap <leader>qa :qa!<CR>
+
+"" quit current file
+nmap <leader>qq :q!<CR>
 
 "" edit vimrc file
 nnoremap <leader>ev :vsplit ~/.vimrc<CR>
@@ -315,15 +315,15 @@ map \T <Esc>:set expandtab tabstop=8 shiftwidth=8<CR>
 
 "" Disable arrow movements. Resize splits panes instead
 if get(g:, 'elite_mode')
-  nnoremap <Up> :resize +2<CR>
-  nnoremap <Down> :resize -2<CR>
-  nnoremap <Left> :vertical resize +2<CR>
-  nnoremap <Right> :vertical resize -2<CR>
+  " nnoremap <Up> :resize +2<CR>
+  " nnoremap <Down> :resize -2<CR>
+  " nnoremap <Left> :vertical resize +2<CR>
+  " nnoremap <Right> :vertical resize -2<CR>
 endif
 
 "" Open definition in new tab
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
-map <leader><space> :CocCommand <CR>
+" map <leader><space> :CocCommand <CR>
 nnoremap <leader>nf :NERDTreeFind<CR>
 
 " End Custom Key Mappings }}}
@@ -362,7 +362,10 @@ let g:coc_global_extensions = [
   \ 'coc-json',
   \ 'coc-tsserver',
   \ 'coc-go',
-  \ 'coc-pairs'
+  \ 'coc-pairs',
+  \ 'coc-yaml',
+  \ 'coc-html',
+  \ 'coc-tabnine',
   \ ]
 " }}}
 
@@ -393,7 +396,7 @@ map <silent> <C-n> :NERDTreeToggle<CR>
 " }}}
 
 " After a re-source, fix syntax matching issues (concealing brackets):
-if exists('g:loaded_webdevicons')
+if exists('g:loaded_webdevicons') && exists('g:NERDTree')
   call webdevicons#refresh()
 endif
 " indentLine {{{
@@ -453,7 +456,23 @@ endfunction
 " }}}
 
 " End Plugins Custom Settings }}}
+" User-Defined Functinos {{{
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+  set grepprg=rg\ --vimgrep
+  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+endif
 
+function! s:DiffWithSaved()
+  let filetype=&ft
+  diffthis
+  vnew | r # | normal! 1Gdd
+  diffthis
+  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+
+command! DiffSaved call s:DiffWithSaved()
+" }}}
 " coc.vim settings from documentation {{{
 " I don't understand most of this part but we can always check the
 " documentation
@@ -584,26 +603,11 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " End }}}
-
-"" Abbreviations for a better vim-life
+" Abbreviations for a better vim-life {{{
 cnoreabbrev W w
 cnoreabbrev W! w!
 cnoreabbrev Q q
 cnoreabbrev Q! q!
-
-
-if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-  set grepprg=rg\ --vimgrep
-  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-endif
-
-function! s:DiffWithSaved()
-  let filetype=&ft
-  diffthis
-  vnew | r # | normal! 1Gdd
-  diffthis
-  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
-endfunction
-command! DiffSaved call s:DiffWithSaved()
-
+cnoreabbrev Wq wq
+cnoreabbrev wQ wq
+" }}}

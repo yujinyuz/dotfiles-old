@@ -1,6 +1,20 @@
 {
-    "python.jediEnabled": false,
-    "python.venvFolders": ["envs", ".pyenv", ".virtualenvs"],
-    "emmet.includeLanguages": {"javascript": "javascriptreact"},
-    "explorer.icon.enableNerdfont": true
+  "python.jediEnabled": false,
+  "python.venvFolders": ["envs", ".pyenv", ".virtualenvs"],
+  "python.linting.enabled": true,
+  "emmet.includeLanguages": { "javascript": "javascriptreact" },
+  "explorer.icon.enableNerdfont": true,
+  "json.enable": true,
+  "json.format.enable": true,
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "usePlaceholders": true
+      }
+    }
+  },
+  "pairs.enableBackspace": true,
 }

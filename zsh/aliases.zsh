@@ -5,6 +5,11 @@ killport() {
   fi
 }
 
+tnew() {
+  tmux new -s $1 \; split-window -v -p 20 \; split-window -h \
+}
+
+
 alias ping1="ping sgp-1.valve.net"
 alias pingml="ping 222.127.12.131"
 alias youtubedl-video="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4' --external-downloader aria2c"
@@ -31,6 +36,12 @@ alias ll="exa -lahF --git"
 alias vim="nvim"
 alias vi="nvim"
 alias t="tmux"
-alias tn="tmux new -s" # <session_name>
+# alias tn="tmux new -s" # <session_name>
+alias tn="tmux new-session -A -s main"
 alias ta="tmux a -t" # <session_name>
-alias tkall="tmux kill-session -a"
+alias tkillsess="tmux kill-session -t"
+alias tkillserver="tmux kill-server"
+alias ppath="echo $PATH | tr -s ':' '\n'"
+alias cclip="pbcopy < /dev/null"
+alias mux="tmuxinator"
+# alias tnew="tmux new-session \; split-window -v -p 25 \; split-window -h \;"

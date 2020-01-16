@@ -12,7 +12,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="jpro"
+ZSH_THEME="jpro-minimal"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -37,7 +37,7 @@ CASE_SENSITIVE="true"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -117,10 +117,19 @@ eval "$(pyenv init -)"
 export PYENV_VIRTUALENVWRAPPER_PREFER_PYENV="true"
 export WORKON_HOME=$HOME/.virtualenvs
 export PYENV_ROOT="$(pyenv root)"
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 pyenv virtualenvwrapper_lazy
 
 # Rbenv
 eval "$(rbenv init -)"
+
+# Goenv
+# https://github.com/syndbg/goenv/issues/72
+export GOENV_ROOT="$HOME/.goenv"
+export PATH="$GOENV_ROOT/bin:$PATH"
+eval "$(goenv init -)"
+export PATH="$GOROOT/bin:$PATH"
+export PATH="$PATH:$GOPATH/bin"
 
 # NVM
 # export NVM_DIR="$HOME/.nvm"
@@ -169,7 +178,7 @@ export KEYTIMEOUT=1
 # --follow: Follow symlinks
 # --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 export FZF_DEFAULT_COMMAND='rg --files --hidden --ignore-global'
-export FZF_DEFAULT_OPTS='--height 40% --border --preview "bat --style=numbers --color=always {} | head -500"'
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --preview "bat --style=numbers --color=always {} | head -500"'
 
 
 # Lazy load nvm only when needed
@@ -177,3 +186,4 @@ export FZF_DEFAULT_OPTS='--height 40% --border --preview "bat --style=numbers --
 
 # Useful list of bash aliases
 [ -f ~/.aliases.zsh ] && source ~/.aliases.zsh
+fpath+=${ZDOTDIR:-~}/.zsh_functions
