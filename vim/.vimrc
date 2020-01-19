@@ -28,18 +28,22 @@ set relativenumber
 set number
 
 "" Show matching parenthesis
-" set showmatch
+set showmatch
+
+"" How many tenths of a second to blink when matching brakcets
+set matchtime=2
 
 "" Visual autocomplete for command menu
 "" triggered when pressing tab while in the
 "" execute command mode `:`
 set wildmenu
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 
 "" Redraw only when needed
 set lazyredraw
 
 "" Draw a ruler on the right side
-set colorcolumn=90
+" set colorcolumn=80
 
 "" Create new line when text is over 79 chars
 "" change this if we have problems in editing existing code base
@@ -90,7 +94,7 @@ set splitright
 
 "" Hide the -- INSERT --
 "" comment this out when you aren't using lightline.vim
-set noshowmode
+" set noshowmode
 
 "" Alwayts show tabs
 " set showtabline=2
@@ -99,6 +103,13 @@ set noshowmode
 " set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
 set list
 set listchars=tab:→\ ,space:·,nbsp:␣,trail:·,precedes:«,extends:»
+
+
+" Apply background up to 80 columns only
+let &colorcolumn=join(range(81,999),",")
+
+" Show indicator when line is wrapped
+let &showbreak="↳ "
 
 set conceallevel=3
 
@@ -180,7 +191,6 @@ Plug 'joshdick/onedark.vim'
 Plug 'KeitaNakamura/neodark.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'psliwka/vim-smoothie'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
@@ -195,6 +205,7 @@ Plug 'mhinz/vim-startify'
 " Plug 'jiangmiao/auto-pairs' " this doesn't work well. so I'm using pear-tree
 " Plug 'tmsvg/pear-tree'
 " Plug 'tpope/vim-unimpaired'
+" Plug 'psliwka/vim-smoothie'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 " Plug 'yggdroot/indentline'
@@ -212,12 +223,18 @@ autocmd BufWritePost * :%s/\s\+$//e
 "" autopairs disable
 autocmd FileType markdown let b:coc_pairs_disabled = ['`']
 
+" Hide statusline when using fzf
+autocmd! FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+" Return to last edit position when opening files (You want this!)
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
 " End Autocommands }}}
 " Custom Key Mappings {{{
 
 "" write file
 nmap <leader>w :w!<CR>
-
 
 "" quit vim
 "" mapping to <leader>q only is slow
@@ -235,10 +252,13 @@ nnoremap <leader>sv :source %<CR>
 
 "" Used for navigating to different split panes
 "" Commented out since vim-tmux-navigator handles this for us
-" nnoremap <C-J> <C-W>j
-" nnoremap <C-K> <C-W>k
-" nnoremap <C-H> <C-W>h
-" nnoremap <C-L> <C-W>l
+
+if !get(g:, 'loaded_tmux_navigator', 0)
+  nnoremap <C-J> <C-W>j
+  nnoremap <C-K> <C-W>k
+  nnoremap <C-H> <C-W>h
+  nnoremap <C-L> <C-W>l
+endif
 
 "" Map jk to Escape because it's too far away
 inoremap jk <Esc>
@@ -274,6 +294,13 @@ nnoremap ,b :buffer *
 "" List all buffers then choose number to go to buffer
 nnoremap gb :ls<CR>:b
 
+"" Tab management
+map <leader>tn :tabnew<CR>
+map <leader>to :tabonly<CR>
+map <leader>tc :tabclose<CR>
+map <leader>tm :tabmove<CR>
+
+
 "" Command-line like forward-search
 cnoremap <C-k> <Up>
 "" Command-line like reverse-search
@@ -283,24 +310,23 @@ cnoremap <C-j> <Down>
 "" Use CtrlP when Cmd-P is not available
 nnoremap ++ :Files<CR>
 
-
-"" Clear search highlight via return
-" nnoremap <CR> :noh<CR><CR>
-
 "" Clear search highlight
 nnoremap <silent> <leader>l :noh<CR>
 
 nmap ghp <Plug>(GitGutterPreviewHunk)
-nmap -- :tabedit %<CR>:Gdiff<CR>
 
 "" Use Alt-jk for moving lines
 "" Note: iTerm2 > Profiles > Keys > Left Option > Esc+
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
+" nnoremap <A-j> :m .+1<CR>==
+" nnoremap <A-k> :m .-2<CR>==
+" inoremap <A-j> <Esc>:m .+1<CR>==gi
+" inoremap <A-k> <Esc>:m .-2<CR>==gi
+" vnoremap <A-j> :m '>+1<CR>gv=gv
+" vnoremap <A-k> :m '<-2<CR>gv=gv
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 " That awful mixed mode with the half-tabs-are-spaces:
 " Source: https://vim.fandom.com/wiki/Converting_tabs_to_spaces
@@ -320,6 +346,8 @@ if get(g:, 'elite_mode')
   " nnoremap <Left> :vertical resize +2<CR>
   " nnoremap <Right> :vertical resize -2<CR>
 endif
+
+nnoremap <Space>f :Rg<CR>
 
 "" Open definition in new tab
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
@@ -399,11 +427,6 @@ map <silent> <C-n> :NERDTreeToggle<CR>
 if exists('g:loaded_webdevicons') && exists('g:NERDTree')
   call webdevicons#refresh()
 endif
-" indentLine {{{
-let g:indentLine_char = '┊'
-let g:indentLine_leadingSpaceChar = '·'
-let g:indentLine_leadingSpaceEnabled = 1
-" }}}
 
 " pear-tree - auto pairing {{{
 
@@ -414,6 +437,25 @@ let g:pear_tree_map_special_keys = 0
 
 " fzf.vim {{{
 let g:fzf_tags_command = 'ctags -R'
+
+" Rg with preview window
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
+
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 " }}}
 
 " netrw (default) {{{
@@ -457,12 +499,8 @@ endfunction
 
 " End Plugins Custom Settings }}}
 " User-Defined Functinos {{{
-if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-  set grepprg=rg\ --vimgrep
-  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-endif
 
+" Current file to unsaved version
 function! s:DiffWithSaved()
   let filetype=&ft
   diffthis
@@ -582,7 +620,7 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline+=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Using CocList
 " Show all diagnostics
@@ -611,3 +649,4 @@ cnoreabbrev Q! q!
 cnoreabbrev Wq wq
 cnoreabbrev wQ wq
 " }}}
+
