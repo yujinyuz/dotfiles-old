@@ -1,6 +1,6 @@
 {
   "python.jediEnabled": false,
-  "python.venvFolders": ["envs", ".pyenv", ".virtualenvs"],
+  "python.venvFolders": ["envs", ".pyenv"],
   "python.linting.enabled": true,
   "emmet.includeLanguages": { "javascript": "javascriptreact" },
   "explorer.icon.enableNerdfont": true,
@@ -16,5 +16,5 @@
       }
     }
   },
-  "pairs.enableBackspace": true,
+  "pairs.enableBackspace": true
 }
