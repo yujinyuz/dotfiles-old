@@ -63,7 +63,7 @@ set signcolumn=yes
 set shell=/usr/local/bin/fish
 
 "" Group folds with '{{{,}}}'
-set foldmethod=marker
+" set foldmethod=marker
 
 "" Disable annoying swap files
 set noswapfile
@@ -218,7 +218,7 @@ call plug#end()
 "" Get correct comment highlighting
 augroup FixCommentHighlighting
   autocmd FileType json syntax match Comment +\/\/.\+$+
-augroup END 
+augroup END
 
 "" Remove whitespace on save
 augroup RemoveTrailingWhiteSpace
@@ -686,3 +686,5 @@ cnoreabbrev Q! q!
 cnoreabbrev Wq wq
 cnoreabbrev wQ wq
 " }}}
+
+" vim:filetype=vim sw=4 foldmethod=marker tw=78 expandtab:
