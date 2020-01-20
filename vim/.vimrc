@@ -272,8 +272,24 @@ inoremap <Esc> <NOP>
 " nnoremap <Right> <nop>
 
 "" Let's us move around wrapped lines normally
-noremap <silent> j gj
-noremap <silent> k gk
+nnoremap <silent> j gj
+nnoremap <silent> k gk
+vnoremap j gj
+vnoremap k gk
+
+"" Move to beginning / end of lines
+nnoremap & g&
+nnoremap $ g$
+nnoremap 0 g0
+
+"" Auto center on search match
+nnoremap n nzz
+nnoremap N Nzz
+
+" Copy/paste and move cursor to end of last operated text or end of putted text
+vnoremap <silent> y y`]
+vnoremap <silent> p p`]
+nnoremap <silent> p p`]
 
 "" Stay in visual mode when indenting. You will never have to run
 "" gv after performing an indentation
