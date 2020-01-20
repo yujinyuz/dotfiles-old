@@ -294,7 +294,6 @@ vnoremap j gj
 vnoremap k gk
 
 "" Move to beginning / end of lines
-nnoremap & g&
 nnoremap $ g$
 nnoremap 0 g0
 
