@@ -214,21 +214,37 @@ Plug 'mhinz/vim-startify'
 call plug#end()
 " }}}
 " Autocommands {{{
+
 "" Get correct comment highlighting
-autocmd FileType json syntax match Comment +\/\/.\+$+
+augroup FixCommentHighlighting
+  autocmd FileType json syntax match Comment +\/\/.\+$+
+augroup END 
 
 "" Remove whitespace on save
-autocmd BufWritePost * :%s/\s\+$//e
+augroup RemoveTrailingWhiteSpace
+  autocmd BufWritePost * :%s/\s\+$//e
+augroup END
 
 "" autopairs disable
 autocmd FileType markdown let b:coc_pairs_disabled = ['`']
 
 " Hide statusline when using fzf
-autocmd! FileType fzf set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+augroup HideStatusLineInFZF
+  autocmd! Filetype fzf set laststatus=0 noshowmode noruler
+  autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+augroup END
 
 " Return to last edit position when opening files (You want this!)
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+augroup ReturnToLastEditPosition
+  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+augroup END
+
+"" Toggle highlight when entering in insert / normal mode
+augroup ToggleHighlight
+  autocmd InsertEnter * :setlocal nohlsearch
+  autocmd InsertLeave * :setlocal hlsearch
+augroup END
+
 
 " End Autocommands }}}
 " Custom Key Mappings {{{
