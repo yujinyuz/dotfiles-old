@@ -104,9 +104,9 @@ set splitright
 set list
 set listchars=tab:→\ ,space:·,nbsp:␣,trail:·,precedes:«,extends:»
 
-
-" Apply background up to 80 columns only
-let &colorcolumn=join(range(81,999),",")
+" Why this? Because we swapped the values of onedark normal and column.
+" See onedark.vim custom plugin settings
+let &colorcolumn=join(range(1,80),",")
 
 " Show indicator when line is wrapped
 let &showbreak="↳ "
@@ -361,6 +361,10 @@ nnoremap <leader>nf :NERDTreeFind<CR>
 " let g:airline_theme='onedark'
 let g:onedark_terminal_italics = 1
 " let g:onedark_hide_endofbuffer = 1
+let g:onedark_color_overrides = {
+  \ "black": {"gui": "#2C323C", "cterm": "236", "cterm16": "8"},
+  \ "cursor_grey": {"gui": "#282C34", "cterm": "235", "cterm16": "0"}
+  \ }
 
 " Defining colorscheme here after setting
 " g:onedark_terminal_italics=1
