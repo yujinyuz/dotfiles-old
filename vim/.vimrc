@@ -424,6 +424,7 @@ let g:coc_global_extensions = [
   \ 'coc-python',
   \ 'coc-emmet',
   \ 'coc-json',
+  \ 'coc-sql',
   \ 'coc-tsserver',
   \ 'coc-go',
   \ 'coc-pairs',
