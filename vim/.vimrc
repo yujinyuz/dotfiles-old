@@ -74,8 +74,8 @@ set nowritebackup
 "" Use system clipboard
 set clipboard=unnamedplus
 
-"" Disable neovim frmo setting cursor style
-set guicursor=
+"" Disable neovim from setting cursor style
+" set guicursor=
 
 "" Only need 1 line for cmd
 set cmdheight=1
@@ -365,7 +365,7 @@ let g:onedark_color_overrides = {
   \ "black": {"gui": "#2C323C", "cterm": "236", "cterm16": "8"},
   \ "cursor_grey": {"gui": "#282C34", "cterm": "235", "cterm16": "0"}
   \ }
-
+autocmd Filetype nerdtree setlocal colorcolumn=""
 " Defining colorscheme here after setting
 " g:onedark_terminal_italics=1
 
@@ -653,4 +653,3 @@ cnoreabbrev Q! q!
 cnoreabbrev Wq wq
 cnoreabbrev wQ wq
 " }}}
-
