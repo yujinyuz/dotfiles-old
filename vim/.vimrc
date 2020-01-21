@@ -107,6 +107,7 @@ set listchars=tab:→\ ,space:·,nbsp:␣,trail:·,precedes:«,extends:»
 " Why this? Because we swapped the values of onedark normal and column.
 " See onedark.vim custom plugin settings
 " let &colorcolumn=join(range(1,80),",")
+set colorcolumn=80,90,120
 
 " Show indicator when line is wrapped
 let &showbreak="↳ "
@@ -473,6 +474,7 @@ let g:pear_tree_map_special_keys = 0
 
 " fzf.vim {{{
 let g:fzf_tags_command = 'ctags -R'
+let $FZF_DEFAULT_COMMAND='rg --files --hidden --ignore-global'
 
 " Rg with preview window
 command! -bang -nargs=* Rg
