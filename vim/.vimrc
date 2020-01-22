@@ -109,6 +109,8 @@ set listchars=tab:→\ ,space:·,nbsp:␣,trail:·,precedes:«,extends:»
 " let &colorcolumn=join(range(1,80),",")
 set colorcolumn=80,90,120
 
+" Show 3 more lines below when scrolling
+set scrolljump=3
 " Show indicator when line is wrapped
 let &showbreak="↳ "
 
