@@ -197,6 +197,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'mhinz/vim-startify'
+Plug 'alvan/vim-closetag'
+
 "" These are plugins that I saw from articles
 "" that I don't need right now but might need later
 
