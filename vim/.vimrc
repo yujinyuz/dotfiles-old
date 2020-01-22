@@ -202,6 +202,8 @@ Plug 'mhinz/vim-startify'
 Plug 'alvan/vim-closetag'
 Plug 'liuchengxu/eleline.vim'
 
+" Warning: This plugin will kill your bad habits
+Plug 'takac/vim-hardtime'
 "" These are plugins that I saw from articles
 "" that I don't need right now but might need later
 
@@ -544,6 +546,10 @@ endfunction
 " command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
 " }}}
 
+" hardtime.vim {{{
+let g:hardtime_default_on = 1
+let g:hardtime_ignore_buffer_patterns = ["NERD.*"]
+" }}}
 " End Plugins Custom Settings }}}
 " User-Defined Functinos {{{
 
