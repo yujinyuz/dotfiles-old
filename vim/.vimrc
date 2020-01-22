@@ -183,7 +183,7 @@ Plug 'preservim/nerdtree' " {'on': 'NERDTreeToggle'}
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
@@ -198,6 +198,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'mhinz/vim-startify'
 Plug 'alvan/vim-closetag'
+Plug 'liuchengxu/eleline.vim'
 
 "" These are plugins that I saw from articles
 "" that I don't need right now but might need later
@@ -232,10 +233,10 @@ augroup END
 autocmd FileType markdown let b:coc_pairs_disabled = ['`']
 
 " Hide statusline when using fzf
-augroup HideStatusLineInFZF
-  autocmd! Filetype fzf set laststatus=0 noshowmode noruler
-  autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-augroup END
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+            \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
 
 " Return to last edit position when opening files (You want this!)
 augroup ReturnToLastEditPosition
@@ -455,6 +456,10 @@ let g:lightline = {
   \ }
 " }}}
 
+" eleline {{{
+let g:eleline_powerline_fonts = 1
+" }}}
+
 " NERDTree {{{
 let g:nerdtree_tabs_open_on_console_startup = 0
 let NERDTreeNaturalSort = 1
@@ -660,7 +665,7 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
-set statusline+=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline+=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Using CocList
 " Show all diagnostics
