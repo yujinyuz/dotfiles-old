@@ -20,3 +20,7 @@ temp/
 
 # vim stuffs
 .vim/
+
+node_modules
+
+.git/
