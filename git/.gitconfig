@@ -44,4 +44,4 @@
 [difftool "vimdiff"]
 	cmd = vimdiff \"$LOCAL\" \"$REMOTE\"
 [merge]
-	conflictStyle = diff3
+	conflictStyle = merge
