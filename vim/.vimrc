@@ -201,7 +201,8 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'mhinz/vim-startify'
 Plug 'alvan/vim-closetag'
 Plug 'liuchengxu/eleline.vim'
-
+Plug 'turbio/bracey.vim'
+Plug 'psliwka/vim-smoothie'
 " Warning: This plugin will kill your bad habits
 Plug 'takac/vim-hardtime'
 "" These are plugins that I saw from articles
@@ -213,7 +214,6 @@ Plug 'takac/vim-hardtime'
 " Plug 'jiangmiao/auto-pairs' " this doesn't work well. so I'm using pear-tree
 " Plug 'tmsvg/pear-tree'
 " Plug 'tpope/vim-unimpaired'
-" Plug 'psliwka/vim-smoothie'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 " Plug 'yggdroot/indentline'
