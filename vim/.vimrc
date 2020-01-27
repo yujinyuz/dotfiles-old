@@ -253,6 +253,9 @@ augroup ToggleHighlight
   autocmd InsertLeave * :setlocal hlsearch
 augroup END
 
+augroup SpaceToTabs
+  autocmd FileType make setlocal noexpandtab tabstop=4 shiftwidth=4
+augroup END
 
 " End Autocommands }}}
 " Custom Key Mappings {{{
