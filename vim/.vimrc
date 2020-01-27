@@ -308,6 +308,9 @@ vnoremap k gk
 nnoremap $ g$
 nnoremap 0 g0
 
+"" Yank to end of line
+nnoremap Y y$
+
 "" Auto center on search match
 nnoremap n nzz
 nnoremap N Nzz
