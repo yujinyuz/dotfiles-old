@@ -203,6 +203,8 @@ Plug 'alvan/vim-closetag'
 Plug 'liuchengxu/eleline.vim'
 Plug 'turbio/bracey.vim'
 Plug 'psliwka/vim-smoothie'
+Plug 'wellle/tmux-complete.vim'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 " Warning: This plugin will kill your bad habits
 Plug 'takac/vim-hardtime'
 "" These are plugins that I saw from articles
