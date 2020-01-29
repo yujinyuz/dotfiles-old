@@ -444,9 +444,9 @@ let g:coc_global_extensions = [
   \ 'coc-go',
   \ 'coc-pairs',
   \ 'coc-yaml',
-  \ 'coc-html',
-  \ 'coc-tabnine',
+  \ 'coc-html'
   \ ]
+" coc-tabnine
 " }}}
 
 " lightline {{{
@@ -479,6 +479,10 @@ map <silent> <C-n> :NERDTreeToggle<CR>
 " map <C-n> :CocCommand explorer<CR>
 " }}}
 
+" closetag.vim {{{
+let g:closetag_filenames = '*.html,*.js'
+let g:closetag_emptyTags_caseSensitive = 1
+" }}}
 " After a re-source, fix syntax matching issues (concealing brackets):
 if exists('g:loaded_webdevicons') && exists('g:NERDTree')
   call webdevicons#refresh()
