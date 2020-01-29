@@ -4,7 +4,6 @@
   "python.linting.enabled": true,
   "python.sortImports.path": "/Users/eugene/.pyenv/versions/nvim/bin/isort",
   "emmet.includeLanguages": { "javascript": "javascriptreact" },
-  "explorer.icon.enableNerdfont": true,
   "json.enable": true,
   "json.format.enable": true,
   "languageserver": {
