@@ -556,6 +556,15 @@ endfunction
 let g:hardtime_default_on = 1
 let g:hardtime_ignore_buffer_patterns = ["NERD.*"]
 " }}}
+
+" tmux-navigator {{{
+" Disabling tmux-navigator defaults since we are using the <C-\>
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+" }}}
 " End Plugins Custom Settings }}}
 " User-Defined Functinos {{{
 
