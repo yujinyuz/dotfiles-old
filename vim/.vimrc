@@ -207,6 +207,7 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 " Warning: This plugin will kill your bad habits
 Plug 'takac/vim-hardtime'
+Plug 'luochen1990/rainbow'
 "" These are plugins that I saw from articles
 "" that I don't need right now but might need later
 
@@ -517,6 +518,10 @@ command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+" }}}
+
+" rainbow {{{
+let g:rainbow_active = 1
 " }}}
 
 " netrw (default) {{{
