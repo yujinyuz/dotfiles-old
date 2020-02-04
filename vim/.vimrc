@@ -753,4 +753,4 @@ cnoreabbrev Wq wq
 cnoreabbrev wQ wq
 " }}}
 
-" vim:filetype=vim sw=4 foldmethod=marker tw=78 expandtab:
+" vim:filetype=vim sw=2 foldmethod=marker tw=78 expandtab:
