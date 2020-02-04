@@ -116,6 +116,9 @@ let &showbreak="↳ "
 
 set conceallevel=3
 
+" Disable soft wrapping
+set nowrap
+
 "" Change leader key
 let mapleader=","
 
