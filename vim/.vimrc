@@ -261,6 +261,7 @@ augroup SpaceToTabs
   autocmd FileType make setlocal noexpandtab tabstop=4 shiftwidth=4
 augroup END
 
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 " End Autocommands }}}
 " Custom Key Mappings {{{
 
