@@ -261,7 +261,8 @@ augroup CustomFileSettings
   autocmd FileType json syntax match Comment +\/\/.\+$+
 
   " Enable local spell and disable backticks on coc-pairs
-  autocmd BufRead,BufNewFile *.md setlocal spell let b:coc_pairs_disabled = ['`']
+  autocmd BufRead,BufNewFile *.md setlocal spell
+  autocmd BufRead,BufNewFile *.md let b:coc_pairs_disabled = ['`']
 augroup END
 
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
