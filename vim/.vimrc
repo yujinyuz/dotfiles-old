@@ -208,6 +208,7 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 " Warning: This plugin will kill your bad habits
 Plug 'takac/vim-hardtime'
 Plug 'luochen1990/rainbow'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 "" These are plugins that I saw from articles
 "" that I don't need right now but might need later
 
