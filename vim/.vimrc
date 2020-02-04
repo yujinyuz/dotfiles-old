@@ -394,7 +394,7 @@ if get(g:, 'elite_mode')
   " nnoremap <Right> :vertical resize -2<CR>
 endif
 
-nnoremap <Space>f :Rg<CR>
+nnoremap <leader>f :Rg<CR>
 
 "" Open definition in new tab
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
