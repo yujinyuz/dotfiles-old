@@ -10,6 +10,9 @@ I've installed the following via homebrew:
 * ripgrep
 * fzf
 * neovim
+* bat
+* diff-so-fancy
+
 
 ## Installation Notes
 
