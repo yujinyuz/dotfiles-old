@@ -50,3 +50,5 @@
   cmd = vimdiff \"$LOCAL\" \"$REMOTE\"
 [merge]
   conflictStyle = merge
+[fetch]
+  prune = true
