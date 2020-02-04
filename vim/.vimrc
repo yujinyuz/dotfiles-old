@@ -333,7 +333,7 @@ nnoremap <leader>d "_d
 
 
 "" Backspace faster switching to alternate file
-nnoremap <BS> :buffer#<CR>
+nnoremap <BS> :buffer#<CR><C-g>
 
 "" Faster buffer navigation
 nnoremap ,b :buffer *
