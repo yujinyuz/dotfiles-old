@@ -309,9 +309,6 @@ nnoremap <silent> k gk
 vnoremap j gj
 vnoremap k gk
 
-"" Move to beginning / end of lines
-nnoremap $ g$
-nnoremap 0 g0
 
 "" Yank to end of line
 nnoremap Y y$
