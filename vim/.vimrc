@@ -119,6 +119,9 @@ set conceallevel=3
 " Disable soft wrapping
 set nowrap
 
+" Highlight current line under cursor
+set cursorline
+
 "" Change leader key
 let mapleader=","
 
