@@ -233,24 +233,15 @@ call plug#end()
 " }}}
 " Autocommands {{{
 
-"" Get correct comment highlighting
-augroup FixCommentHighlighting
-  autocmd FileType json syntax match Comment +\/\/.\+$+
-augroup END
-
 "" Remove whitespace on save
 augroup RemoveTrailingWhiteSpace
   autocmd BufWritePost * :%s/\s\+$//e
 augroup END
 
-"" autopairs disable
-autocmd FileType markdown let b:coc_pairs_disabled = ['`']
-
 " Hide statusline when using fzf
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
             \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-
 
 " Return to last edit position when opening files (You want this!)
 augroup ReturnToLastEditPosition
@@ -263,8 +254,14 @@ augroup ToggleHighlight
   autocmd InsertLeave * :setlocal hlsearch
 augroup END
 
-augroup SpaceToTabs
+augroup CustomFileSettings
+  autocmd!
   autocmd FileType make setlocal noexpandtab tabstop=4 shiftwidth=4
+  " Get correct comment highlighting
+  autocmd FileType json syntax match Comment +\/\/.\+$+
+
+  " Enable local spell and disable backticks on coc-pairs
+  autocmd BufRead,BufNewFile *.md setlocal spell let b:coc_pairs_disabled = ['`']
 augroup END
 
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
