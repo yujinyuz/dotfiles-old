@@ -505,6 +505,11 @@ command! -bang -nargs=* Rg
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
+command! -bang -nargs=* Rge
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --fixed-strings '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
+
 function! RipgrepFzf(query, fullscreen)
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))
