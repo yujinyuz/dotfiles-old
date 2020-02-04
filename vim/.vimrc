@@ -407,6 +407,9 @@ map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 " map <leader><space> :CocCommand <CR>
 nnoremap <leader>nf :NERDTreeFind<CR>
 
+" Find and Replace highlighted line
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
 " End Custom Key Mappings }}}
 " Plugins Custom Settings {{{
 
