@@ -533,6 +533,11 @@ command! -bang -nargs=? -complete=dir Files
 
 " rainbow {{{
 let g:rainbow_active = 1
+let g:rainbow_conf = {
+  \  'separately': {
+  \    'nerdtree': 0,
+  \   }
+  \ }
 " }}}
 
 " netrw (default) {{{
