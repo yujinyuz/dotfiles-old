@@ -24,6 +24,8 @@
   ap = add --patch
   ; Works like --force but warns you when your local is not up to date
   pf = push --force-with-lease
+  staged = diff --cached
+  wc = whatchanged
 [filter "lfs"]
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
