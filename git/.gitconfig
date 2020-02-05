@@ -22,6 +22,7 @@
   ci = commit -v
   aa = add --all
   ap = add --patch
+  ; Works like --force but warns you when your local is not up to date
   pf = push --force-with-lease
 [filter "lfs"]
   clean = git-lfs clean -- %f
