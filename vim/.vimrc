@@ -484,6 +484,30 @@ let g:eleline_powerline_fonts = 1
 let g:nerdtree_tabs_open_on_console_startup = 0
 let NERDTreeNaturalSort = 1
 map <silent> <C-n> :NERDTreeToggle<CR>
+
+let NERDTreeQuitOnOpen = 0
+let NERDTreeShowHidden=1
+let NERDChristmasTree=1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeWinSize = 25
+let g:NERDTreeDirArrowExpandable = '▷'
+let g:NERDTreeDirArrowCollapsible = '▼'
+let NERDTreeAutoCenter=1
+let g:NERDTreeIndicatorMapCustom =
+\ {
+\ "modified"  : "✹",
+\ "staged"    : "✚",
+\ "untracked" : "✭",
+\ "renamed"   : "➜",
+\ "unmerged"  : "═",
+\ "deleted"   : "✖",
+\ "dirty"     : "✗",
+\ "clean"     : "✔︎",
+\ 'ignored'   : '☒',
+\ "unknown"   : "?"
+\ }
+
+
 " map <C-n> :CocCommand explorer<CR>
 " }}}
 
