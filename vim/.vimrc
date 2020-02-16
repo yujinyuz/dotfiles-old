@@ -545,20 +545,6 @@ let g:pear_tree_map_special_keys = 0
 let g:fzf_tags_command = 'ctags -R'
 let $FZF_DEFAULT_COMMAND='rg --files --hidden --ignore-global'
 let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
-let g:fzf_colors =
-\ { 'fg':      ['bg', 'Normal'],
-\ 'bg':      ['bg', 'Normal'],
-\ 'hl':      ['fg', 'Comment'],
-\ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-\ 'bg+':     ['fg', 'CursorLine', 'CursorColumn'],
-\ 'hl+':     ['fg', 'Statement'],
-\ 'info':    ['fg', 'PreProc'],
-\ 'border':  ['fg', 'Ignore'],
-\ 'prompt':  ['fg', 'Conditional'],
-\ 'pointer': ['fg', 'Exception'],
-\ 'marker':  ['fg', 'Keyword'],
-\ 'spinner': ['fg', 'Label'],
-\ 'header':  ['fg', 'Comment'] }
 
 function! CreateCenteredFloatingWindow()
     let width = float2nr(&columns * 0.6)
