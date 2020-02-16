@@ -97,7 +97,7 @@ set splitright
 " set noshowmode
 
 "" Alwayts show tabs
-" set showtabline=2
+set showtabline=2
 
 "" Show whitespaces
 " set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
