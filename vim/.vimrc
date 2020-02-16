@@ -215,6 +215,7 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'takac/vim-hardtime'
 Plug 'luochen1990/rainbow'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'vimwiki/vimwiki'
 "" These are plugins that I saw from articles
 "" that I don't need right now but might need later
 
