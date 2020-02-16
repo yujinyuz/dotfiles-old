@@ -124,6 +124,7 @@ set cursorline
 
 "" Change leader key
 let mapleader=","
+let localleader='\'
 
 "" Enable elite mode. No arrows!!
 let g:elite_mode=1
