@@ -515,10 +515,24 @@ let g:NERDTreeIndicatorMapCustom =
 let g:closetag_filenames = '*.html,*.js'
 let g:closetag_emptyTags_caseSensitive = 1
 " }}}
+
+" vim-devicons {{{
 " After a re-source, fix syntax matching issues (concealing brackets):
 if exists('g:loaded_webdevicons') && exists('g:NERDTree')
   call webdevicons#refresh()
 endif
+let g:webdevicons_enable = 1
+let g:webdevicons_enable_denite = 1
+let g:webdevicons_enable_nerdtree = 1
+let g:WebDevIconsUnicodeDecorateFileNodes = 1
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
+let g:webdevicons_enable_airline_statusline = 1
+let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
+let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
+" let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ''
+" let g:DevIconsDefaultFolderOpenSymbol = ''
+" }}}
 
 " pear-tree - auto pairing {{{
 
