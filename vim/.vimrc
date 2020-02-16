@@ -544,6 +544,44 @@ let g:pear_tree_map_special_keys = 0
 " fzf.vim {{{
 let g:fzf_tags_command = 'ctags -R'
 let $FZF_DEFAULT_COMMAND='rg --files --hidden --ignore-global'
+let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
+let g:fzf_colors =
+\ { 'fg':      ['bg', 'Normal'],
+\ 'bg':      ['bg', 'Normal'],
+\ 'hl':      ['fg', 'Comment'],
+\ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+\ 'bg+':     ['fg', 'CursorLine', 'CursorColumn'],
+\ 'hl+':     ['fg', 'Statement'],
+\ 'info':    ['fg', 'PreProc'],
+\ 'border':  ['fg', 'Ignore'],
+\ 'prompt':  ['fg', 'Conditional'],
+\ 'pointer': ['fg', 'Exception'],
+\ 'marker':  ['fg', 'Keyword'],
+\ 'spinner': ['fg', 'Label'],
+\ 'header':  ['fg', 'Comment'] }
+
+function! CreateCenteredFloatingWindow()
+    let width = float2nr(&columns * 0.6)
+    let height = float2nr(&lines * 0.6)
+    let top = ((&lines - height) / 2) - 1
+    let left = (&columns - width) / 2
+    let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal'}
+
+    let top = "╭" . repeat("─", width - 2) . "╮"
+    let mid = "│" . repeat(" ", width - 2) . "│"
+    let bot = "╰" . repeat("─", width - 2) . "╯"
+    let lines = [top] + repeat([mid], height - 2) + [bot]
+    let s:buf = nvim_create_buf(v:false, v:true)
+    call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
+    call nvim_open_win(s:buf, v:true, opts)
+    set winhl=Normal:Floating
+    let opts.row += 1
+    let opts.height -= 2
+    let opts.col += 2
+    let opts.width -= 4
+    call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+    autocmd BufWipeout <buffer> exe 'bwipeout '.s:buf
+endfunction
 
 " Rg with preview window
 command! -bang -nargs=* Rg
