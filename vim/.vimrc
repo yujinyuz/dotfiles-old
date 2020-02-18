@@ -188,7 +188,7 @@ let g:python3_host_prog = '~/.pyenv/versions/3.8.0/envs/nvim/bin/python3'
 " End General }}}
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
-Plug 'preservim/nerdtree' " {'on': 'NERDTreeToggle'}
+Plug 'preservim/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
