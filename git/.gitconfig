@@ -31,6 +31,7 @@
   filelog = log -u
   fl = log -u
   dl = !git ll -1
+  ctags = !.git/hooks/ctags
 [filter "lfs"]
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
