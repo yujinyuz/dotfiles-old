@@ -37,7 +37,10 @@ set matchtime=2
 "" triggered when pressing tab while in the
 "" execute command mode `:`
 set wildmenu
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+" set wildmode=list:longest,list:full
+
+" Disabled wildignore since it conflicts with tags
+" set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 
 "" Redraw only when needed
 set lazyredraw
