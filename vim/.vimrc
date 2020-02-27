@@ -61,9 +61,8 @@ set t_BE=
 "" Always show signcolumns
 set signcolumn=yes
 
-"" Prefer zsh for shell-related tasks
-" set shell=/usr/local/bin/zsh
-set shell=/usr/local/bin/fish
+"" Prefer sh for shell-related tasks
+set shell=/bin/sh
 
 "" Group folds with '{{{,}}}'
 " set foldmethod=marker
