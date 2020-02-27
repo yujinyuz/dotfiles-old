@@ -516,7 +516,7 @@ let g:NERDTreeIndicatorMapCustom =
 " }}}
 
 " closetag.vim {{{
-let g:closetag_filenames = '*.html,*.js'
+let g:closetag_filenames = '*.html,*.js,*.erb'
 let g:closetag_emptyTags_caseSensitive = 1
 " }}}
 
