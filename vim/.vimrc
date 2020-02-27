@@ -179,11 +179,9 @@ let g:python3_host_prog = '~/.pyenv/versions/3.8.0/envs/nvim/bin/python3'
 "" ID Tags relative to current file and directory
 " set tags=./tags;,tags;
 
-
+set tags^=.git/tags
 " Enable ruler
 " set ruler
-
-
 
 "" End NeoVim Enabled Defaults }}}
 
