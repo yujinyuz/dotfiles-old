@@ -393,6 +393,7 @@ map \m <Esc>:set expandtab tabstop=2 shiftwidth=2<CR>
 map \t <Esc>:set expandtab tabstop=4 shiftwidth=4<CR>
 map \T <Esc>:set expandtab tabstop=8 shiftwidth=8<CR>
 
+nmap <localleader>b :TagbarToggle<CR>
 
 "" Disable arrow movements. Resize splits panes instead
 if get(g:, 'elite_mode')
