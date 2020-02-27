@@ -15,7 +15,6 @@ tmp/
 temp/
 
 .DS_Store
-.DS_Store/
 
 # vim stuffs
 .vim/
