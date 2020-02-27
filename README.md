@@ -19,3 +19,9 @@ I've installed the following via homebrew:
 ```
 ./install.sh
 ```
+
+Updating `Brewfile`:
+
+```
+brew bundle dump --describe --force
+```
