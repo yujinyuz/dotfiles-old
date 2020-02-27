@@ -547,7 +547,8 @@ let g:pear_tree_map_special_keys = 0
 
 " fzf.vim {{{
 let g:fzf_tags_command = 'ctags -R'
-let $FZF_DEFAULT_COMMAND='rg --files --hidden --ignore-global'
+" let $FZF_DEFAULT_COMMAND='rg --files --hidden --ignore-global'
+let $FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules'
 let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
 
 function! CreateCenteredFloatingWindow()
