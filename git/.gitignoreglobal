@@ -2,7 +2,6 @@
 tags
 .rbenv-gemsets
 .ruby-version
-Gemfile.lock
 
 # python stuffs
 .python-version
