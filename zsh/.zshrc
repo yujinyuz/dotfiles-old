@@ -118,7 +118,6 @@ export PYENV_VIRTUALENVWRAPPER_PREFER_PYENV="true"
 export WORKON_HOME=$HOME/.virtualenvs
 export PYENV_ROOT="$(pyenv root)"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-pyenv virtualenvwrapper_lazy
 
 # Rbenv
 eval "$(rbenv init -)"
