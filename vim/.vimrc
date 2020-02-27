@@ -103,7 +103,7 @@ set showtabline=2
 
 "" Show whitespaces
 " set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
-set list
+" set list
 set listchars=tab:→\ ,space:·,nbsp:␣,trail:·,precedes:«,extends:»
 
 " Why this? Because we swapped the values of onedark normal and column.
