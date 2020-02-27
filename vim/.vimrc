@@ -197,14 +197,14 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'joshdick/onedark.vim'
-Plug 'KeitaNakamura/neodark.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-endwise'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'mhinz/vim-startify'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go'}
+" Plug 'mhinz/vim-startify'
 Plug 'alvan/vim-closetag'
 Plug 'liuchengxu/eleline.vim'
 Plug 'turbio/bracey.vim'
@@ -212,10 +212,11 @@ Plug 'psliwka/vim-smoothie'
 Plug 'wellle/tmux-complete.vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 " Warning: This plugin will kill your bad habits
-Plug 'takac/vim-hardtime'
+" Plug 'takac/vim-hardtime'
 Plug 'luochen1990/rainbow'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vimwiki/vimwiki'
+Plug 'majutsushi/tagbar'
 "" These are plugins that I saw from articles
 "" that I don't need right now but might need later
 
