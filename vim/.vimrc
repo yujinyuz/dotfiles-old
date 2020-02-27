@@ -122,7 +122,7 @@ set conceallevel=3
 set nowrap
 
 " Highlight current line under cursor
-set cursorline
+" set cursorline
 
 "" Change leader key
 let mapleader=","
