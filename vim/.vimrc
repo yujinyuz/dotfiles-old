@@ -242,8 +242,8 @@ augroup END
 
 " Hide statusline when using fzf
 autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noshowmode noruler
-            \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+autocmd  FileType fzf set laststatus=0 noshowmode noruler nonumber norelativenumber
+            \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler number relativenumber
 
 " Return to last edit position when opening files (You want this!)
 augroup ReturnToLastEditPosition
