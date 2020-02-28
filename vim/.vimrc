@@ -189,6 +189,7 @@ set tags^=.git/tags
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
 Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
@@ -214,7 +215,6 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 " Warning: This plugin will kill your bad habits
 " Plug 'takac/vim-hardtime'
 Plug 'luochen1990/rainbow'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vimwiki/vimwiki'
 Plug 'majutsushi/tagbar'
 "" These are plugins that I saw from articles
