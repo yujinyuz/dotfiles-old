@@ -32,14 +32,10 @@ brew "ffmpeg"
 brew "fish"
 # Framework for layout and rendering of i18n text
 brew "pango"
-# Command-line outline and bitmap font editor/converter
-brew "fontforge"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # Toolkit for image loading and pixel buffer manipulation
 brew "gdk-pixbuf"
-# This library is for the GeoIP Legacy format (dat)
-brew "geoip"
 # Git extension for versioning large files
 brew "git-lfs"
 # GNU Pretty Good Privacy (PGP) package
@@ -90,8 +86,6 @@ brew "tldr"
 brew "tmux"
 # Manage complex tmux sessions easily
 brew "tmuxinator"
-# Display directories as trees (with optional color/HTML output)
-brew "tree"
 # Google's JavaScript engine
 brew "v8"
 # Executes a program periodically, showing output fullscreen
