@@ -480,7 +480,7 @@ let g:closetag_emptyTags_caseSensitive = 1
 
 " vim-devicons {{{
 " After a re-source, fix syntax matching issues (concealing brackets):
-if exists('g:loaded_webdevicons') && exists('g:NERDTree')
+if exists('g:loaded_webdevicons')
   call webdevicons#refresh()
 endif
 let g:webdevicons_enable = 1
