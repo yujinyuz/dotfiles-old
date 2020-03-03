@@ -237,21 +237,27 @@ call plug#end()
 
 "" Remove whitespace on save
 augroup RemoveTrailingWhiteSpace
+  autocmd!
   autocmd BufWritePost * :%s/\s\+$//e
 augroup END
 
 " Hide statusline when using fzf
-autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noshowmode noruler nonumber norelativenumber
-            \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler number relativenumber
+augroup FZFFiletypes
+  autocmd!
+  autocmd! FileType fzf
+  autocmd  FileType fzf set laststatus=0 noshowmode noruler nonumber norelativenumber
+              \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler number relativenumber
+augroup END
 
 " Return to last edit position when opening files (You want this!)
 augroup ReturnToLastEditPosition
+  autocmd!
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 augroup END
 
 "" Toggle highlight when entering in insert / normal mode
 augroup ToggleHighlight
+  autocmd!
   autocmd InsertEnter * :setlocal nohlsearch
   autocmd InsertLeave * :setlocal hlsearch
 augroup END
@@ -269,7 +275,10 @@ augroup CustomFileSettings
   autocmd FileType javascript let b:coc_pairs_disabled = ['<', '>']
 augroup END
 
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+augroup EndAutocomplete
+  autocmd!
+  autocmd CompleteDone * if pumvisible() == 0 | pclose | endif
+augroup END
 " End Autocommands }}}
 " Custom Key Mappings {{{
 
