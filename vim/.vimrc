@@ -582,6 +582,10 @@ let g:gitgutter_sign_modified_removed = '▋'
 let g:gitgutter_preview_win_floating = 0
 " }}}
 
+" endwise {{{
+let g:endwise_no_mappings = 1
+" }}}
+
 " End Plugins Custom Settings }}}
 " User-Defined Functinos {{{
 
