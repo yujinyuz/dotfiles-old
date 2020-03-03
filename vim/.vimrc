@@ -341,7 +341,7 @@ nnoremap <leader>d "_d
 
 
 "" Backspace faster switching to alternate file
-nnoremap <BS> :buffer#<CR><C-g>
+nnoremap <BS> :buffer#<CR>:echo bufnr('%') . ': ' . expand('%:p')<CR>
 
 "" Faster buffer navigation
 nnoremap ,b :buffer *
