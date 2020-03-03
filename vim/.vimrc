@@ -414,6 +414,23 @@ nnoremap <leader>nf :NERDTreeFind<CR>
 " Find and Replace highlighted line
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
+" Togglewrap
+nnoremap <localleader>\ :call ToggleWrap()<CR>
+
+" Search and replace one by one until EOF
+noremap <leader>s "sy:ZZWrap .,$s/<C-r>s//gc<Left><Left><Left>
+
+" Visually select pasted or yanked text
+nnoremap gV `[v`]
+
+" Access file name data
+cnoremap \fp <C-R>=expand("%:p:h")<CR>
+tnoremap \fp <C-R>=expand("%:p:h")<CR>
+inoremap \fp <C-R>=expand("%:p:h")<CR>
+cnoremap \fn <C-R>=expand("%:t:r")<CR>
+tnoremap \fn <C-R>=expand("%:t:r")<CR>
+noremap \fn <C-R>=expand("%:t:r")<CR>
+
 " End Custom Key Mappings }}}
 " Plugins Custom Settings {{{
 
@@ -599,6 +616,22 @@ function! s:DiffWithSaved() abort
 endfunction
 
 command! DiffSaved call s:DiffWithSaved()
+
+function! ToggleWrap() abort
+  if (&wrap == 1)
+    setlocal nowrap colorcolumn=80,90,120
+  else
+    setlocal wrap colorcolumn=80
+  endif
+endfunction
+
+function! CtagPython()
+    !ctags -R --fields=+l --languages=python --python-kinds=-i -f ./tags $(python3 -c "import os, sys; print(' '.join('{}'.format(d) for d in sys.path if os.path.isdir(d)))")
+    echo getcwd()
+endfunction
+
+" Substitue selected text starting from cursor up to EOF
+command! -nargs=* -complete=command ZZWrap let &scrolloff=999 | exec <q-args> | let &so=0
 " }}}
 " coc.vim settings from documentation {{{
 " I don't understand most of this part but we can always check the
