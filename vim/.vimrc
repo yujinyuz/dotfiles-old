@@ -423,13 +423,16 @@ noremap <leader>s "sy:ZZWrap .,$s/<C-r>s//gc<Left><Left><Left>
 " Visually select pasted or yanked text
 nnoremap gV `[v`]
 
-" Access file name data
+" Access file name data fp = filepath; fn = filename
 cnoremap \fp <C-R>=expand("%:p:h")<CR>
-tnoremap \fp <C-R>=expand("%:p:h")<CR>
 inoremap \fp <C-R>=expand("%:p:h")<CR>
 cnoremap \fn <C-R>=expand("%:t:r")<CR>
-tnoremap \fn <C-R>=expand("%:t:r")<CR>
 noremap \fn <C-R>=expand("%:t:r")<CR>
+
+" Date
+cnoremap \dt <C-R>=strftime("%b %d, %Y")<CR>
+tnoremap \dt <C-R>=strftime("%b %d, %Y")<CR>
+inoremap \dt <C-R>=strftime("%b %d, %Y")<CR>
 
 " End Custom Key Mappings }}}
 " Plugins Custom Settings {{{
