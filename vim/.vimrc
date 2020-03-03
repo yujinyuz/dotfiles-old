@@ -452,25 +452,6 @@ let g:coc_global_extensions = [
 " coc-tabnine
 " }}}
 
-" lightline {{{
-function! CocCurrentFunction()
-  return get(b:, 'coc_current_function', '')
-endfunction
-
-let g:lightline = {
-  \ 'colorscheme': 'onedark',
-  \ 'active': {
-  \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitbranch', 'currentfunction', 'readonly', 'filename', 'modified', 'cocstatus'] ]
-  \ },
-  \ 'component_function': {
-  \   'gitbranch': 'fugitive#head',
-  \   'cocstatus': 'coc#status',
-  \   'currentfunction': 'CocCurrentFunction'
-  \ },
-  \ }
-" }}}
-
 " eleline {{{
 let g:eleline_powerline_fonts = 1
 " }}}
@@ -529,13 +510,6 @@ let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 " let g:DevIconsDefaultFolderOpenSymbol = ''
 " }}}
 
-" pear-tree - auto pairing {{{
-
-"" Disable the mappings since it ruins our mappings
-"" Especially <ESC>, <BS> and <CR>
-let g:pear_tree_map_special_keys = 0
-" }}}
-
 " fzf.vim {{{
 let g:fzf_tags_command = 'ctags -R'
 " let $FZF_DEFAULT_COMMAND='rg --files --hidden --ignore-global'
@@ -571,12 +545,7 @@ command! -bang -nargs=* Rg
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
-command! -bang -nargs=* Rge
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --fixed-strings '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview(), <bang>0)
-
-function! RipgrepFzf(query, fullscreen)
+function! RipgrepFzf(query, fullscreen) abort
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))
   let reload_command = printf(command_fmt, '{q}')
@@ -597,45 +566,6 @@ let g:rainbow_conf = {
   \    'nerdtree': 0,
   \   }
   \ }
-" }}}
-
-" netrw (default) {{{
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 20
-let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
-
-let g:NetrwIsOpen=0
-function! ToggleNetrw()
-  if g:NetrwIsOpen
-      let i = bufnr("$")
-      while (i >= 1)
-          if (getbufvar(i, "&filetype") == "netrw")
-              silent exe "bwipeout " . i
-          endif
-          let i-=1
-      endwhile
-      let g:NetrwIsOpen=0
-  else
-      let g:NetrwIsOpen=1
-      silent Lexplore
-  endif
-endfunction
-" map <silent> <C-n> :call ToggleNetrw()<CR>
-" augroup ProjectDrawer
-"   autocmd!
-"   autocmd VimEnter * :Lexplore
-" augroup END
-" }}}
-
-"" dirvish {{{
-" let g:loaded_netrwPlugin = 1
-" let g:dirvish_mode = 1
-" command! -nargs=? -complete=dir Explore Dirvish <args>
-" command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
-" command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
 " }}}
 
 " hardtime.vim {{{
@@ -705,17 +635,9 @@ endfunction
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
-
-" Or use `complete_info` if your vim support it, like:
-" https://github.com/neoclide/coc-pairs/issues/13#issuecomment-478752764
-" inoremap <silent> <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
-
-" make coc-pairs work okay???
-" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
+" Make CoC and endwise compatible
+inoremap <expr> <Plug>CustomCocCR pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
+imap <CR> <Plug>CustomCocCR<Plug>DiscretionaryEnd
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -737,12 +659,6 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
 
 " Remap for format selected region
 xmap <leader>F  <Plug>(coc-format-selected)
@@ -771,10 +687,6 @@ xmap af <Plug>(coc-funcobj-a)
 omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
-" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-" nmap <silent> <C-d> <Plug>(coc-range-select)
-" xmap <silent> <C-d> <Plug>(coc-range-select)
-
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')
 
@@ -783,9 +695,6 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Add status line support, for integration with other plugin, checkout `:h coc-status`
-" set statusline+=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Using CocList
 " Show all diagnostics
