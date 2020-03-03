@@ -363,7 +363,7 @@ cnoremap <C-j> <Down>
 
 "" Map CmdP for FZF File Search
 "" Use CtrlP when Cmd-P is not available
-nnoremap ++ :Files<CR>
+nnoremap <silent> ++ :Files<CR>
 
 "" Clear search highlight
 nnoremap <silent> <leader>l :noh<CR>
