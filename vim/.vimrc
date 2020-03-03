@@ -429,10 +429,11 @@ inoremap \fp <C-R>=expand("%:p:h")<CR>
 cnoremap \fn <C-R>=expand("%:t:r")<CR>
 noremap \fn <C-R>=expand("%:t:r")<CR>
 
-" Date
+" Date and datetime formatted
 cnoremap \dt <C-R>=strftime("%b %d, %Y")<CR>
-tnoremap \dt <C-R>=strftime("%b %d, %Y")<CR>
 inoremap \dt <C-R>=strftime("%b %d, %Y")<CR>
+cnoremap \tn <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
+inoremap \tn <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 
 " End Custom Key Mappings }}}
 " Plugins Custom Settings {{{
