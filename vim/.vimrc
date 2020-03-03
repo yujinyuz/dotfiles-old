@@ -398,10 +398,10 @@ nmap gtb :TagbarToggle<CR>
 
 "" Disable arrow movements. Resize splits panes instead
 if get(g:, 'elite_mode')
-  " nnoremap <Up> :resize +2<CR>
-  " nnoremap <Down> :resize -2<CR>
-  " nnoremap <Left> :vertical resize +2<CR>
-  " nnoremap <Right> :vertical resize -2<CR>
+  nnoremap <Up> :resize +2<CR>
+  nnoremap <Down> :resize -2<CR>
+  nnoremap <Left> :vertical resize +2<CR>
+  nnoremap <Right> :vertical resize -5<CR>
 endif
 
 nnoremap <leader>f :Rg<CR>
