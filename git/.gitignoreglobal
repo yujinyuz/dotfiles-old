@@ -5,7 +5,7 @@ tags
 
 # python stuffs
 .python-version
-*.pyc
+*.py[co]
 
 # .vscode stuffs
 .vscode/
@@ -18,6 +18,7 @@ temp/
 
 # vim stuffs
 .vim/
+Session.vim
 
 node_modules
 
