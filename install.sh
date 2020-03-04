@@ -30,13 +30,19 @@ function symlink_dotfiles() {
   create_symlink "${__dir}/tmux/.tmux.conf" "${HOME}/.tmux.conf"
   create_symlink "${__dir}/vim/.vimrc" "${HOME}/.vimrc"
   create_symlink "${__dir}/vim/coc-settings.json" "${HOME}/.config/nvim/coc-settings.json"
-  create_symlink "${__dir}/zsh/.zshrc" "${HOME}/.zshrc"
-  create_symlink "${__dir}/zsh/aliases.zsh" "${HOME}/.aliases.zsh"
+  # create_symlink "${__dir}/zsh/.zshrc" "${HOME}/.zshrc"
+  # create_symlink "${__dir}/zsh/aliases.zsh" "${HOME}/.aliases.zsh"
+  create_symlink "${__dir}/git/.gitmessage" "${HOME}/.gitmessage"
+  create_symlink "${__dir}/extras/.alacritty.gruvbox.yml" "${HOME}/.alacritty.yml"
+  create_symlink "${__dir}/extras/.ctags" "${HOME}/.ctags"
+  create_symlink "${__dir}/extras/.gemrc" "${HOME}/.gemrc"
+  create_symlink "${__dir}/extras/.irbrc" "${HOME}/.irbrc"
 }
 
 function main() {
   # Currently just symlink since I'm not yet uploading it
   echo "Symlinking dotfiles..."
+  symlink_dotfiles
 }
 
 main
