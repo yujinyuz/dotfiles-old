@@ -20,7 +20,7 @@ I've installed the following via homebrew:
 ./install.sh
 ```
 
-## Updating Brefile
+## Updating Brewfile
 
 ```
 brew bundle dump --describe --force
@@ -31,6 +31,6 @@ brew bundle dump --describe --force
 $ brew install ncurses
 $ /usr/local/opt/ncurses/bin/infocmp tmux-256color > ~/tmux-256color.info
 $ tic -xe tmux-256color tmux-256color.info
-# This creates a complied entry in ~/.terminfo
+# This creates a compiled entry in ~/.terminfo
 $ infocmp tmux-256color | head
 ```
