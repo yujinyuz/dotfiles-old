@@ -1,0 +1,87 @@
+# background_opacity: 0.95
+# env:
+#   TERM: tmux-256color
+alt_send_esc: true
+window:
+  padding:
+    x: 3
+    y: 3
+  startup_mode:
+    Maximized
+    # Windowed
+    # Fullscreen
+    # SimpleFullscreen
+  decorations:
+    buttonless
+    # none
+    # full
+font:
+  size: 13
+  normal:
+    family: FiraMono Nerd Font Mono
+    style: Regular
+  # bold:
+    # family: Operator Mono Lig
+  # italic:
+    # family: Operator Mono Lig
+# Colors (Gruvbox dark)
+colors:
+  # Default colors
+  primary:
+    # hard contrast: background = '0x1d2021'
+    background: '0x282828'
+    # soft contrast: background = '0x32302f'
+    foreground: '0xebdbb2'
+
+  # Normal colors
+  normal:
+    black:   '0x282828'
+    red:     '0xcc241d'
+    green:   '0x98971a'
+    yellow:  '0xd79921'
+    blue:    '0x458588'
+    magenta: '0xb16286'
+    cyan:    '0x689d6a'
+    white:   '0xa89984'
+
+  # Bright colors
+  bright:
+    black:   '0x928374'
+    red:     '0xfb4934'
+    green:   '0xb8bb26'
+    yellow:  '0xfabd2f'
+    blue:    '0x83a598'
+    magenta: '0xd3869b'
+    cyan:    '0x8ec07c'
+    white:   '0xebdbb2'
+
+  cursor:
+    cursor: '0xffffff'
+# cursor:
+  # style: Underline
+# shell:
+  # program: /usr/local/bin/fish
+  # args:
+    # - --login
+
+key_bindings:
+  - { key: C,        mods: Alt,     chars: "\x1bc"                       }
+  - { key: J,        mods: Alt,     chars: "\x1bj"                       }
+  - { key: K,        mods: Alt,     chars: "\x1bk"                       }
+  - { key: H,        mods: Alt,     chars: "\x1bh"                       }
+  - { key: L,        mods: Alt,     chars: "\x1bl"                       }
+  - { key: P,        mods: Command, chars: "++"                          }
+  - { key: Slash,    mods: Command, chars: "gcc\x1b"                     }
+  - { key: W,        mods: Command, action: None                         }
+  - { key: Key1, mods: Alt, chars: "\x1b0" }
+  - { key: Key1, mods: Alt, chars: "\x1b1" }
+  - { key: Key2, mods: Alt, chars: "\x1b2" }
+  - { key: Key3, mods: Alt, chars: "\x1b3" }
+  - { key: Key4, mods: Alt, chars: "\x1b4" }
+  - { key: Key5, mods: Alt, chars: "\x1b5" }
+  - { key: Key6, mods: Alt, chars: "\x1b6" }
+  - { key: Key7, mods: Alt, chars: "\x1b7" }
+  - { key: Key8, mods: Alt, chars: "\x1b8" }
+  - { key: Key9, mods: Alt, chars: "\x1b9" }
+  - { key: F,    mods: Alt, chars: "\x1bf" }
+  - { key: B,    mods: Alt, chars: "\x1bb" }
