@@ -494,7 +494,11 @@ let g:coc_global_extensions = [
   \ 'coc-go',
   \ 'coc-pairs',
   \ 'coc-yaml',
-  \ 'coc-html'
+  \ 'coc-html',
+  \ 'coc-css',
+  \ 'coc-cssmodules',
+  \ 'coc-yank',
+  \ 'coc-snippets'
   \ ]
 " coc-tabnine
 " }}}
