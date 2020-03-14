@@ -131,7 +131,7 @@ let localleader='\'
 "" Enable elite mode. No arrows!!
 let g:elite_mode=1
 
-let g:python3_host_prog = '~/.pyenv/versions/3.8.0/envs/nvim/bin/python3'
+let g:python3_host_prog = '~/.pyenv/versions/3.8.1/envs/nvim/bin/python3'
 
 "" This fixed my issue with tmux not having the correct color. WTF.
 " set termguicolors
