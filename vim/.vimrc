@@ -348,6 +348,11 @@ nnoremap <silent> p p`]
 "" gv after performing an indentation
 vnoremap < <gv
 vnoremap > >gv
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+nnoremap <S-Tab> <<
+nnoremap <Tab> >>
 
 "" Blackhole deletes
 "" Usage: <leader>d then d again to delete line
