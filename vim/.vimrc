@@ -481,7 +481,7 @@ if (has("termguicolors"))
 endif
 " }}}
 syntax on
-colorscheme onedark
+colorscheme gruvbox-material
 "" }}}
 
 " coc.vim {{{
