@@ -202,12 +202,13 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-repeat'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go'}
 " Plug 'mhinz/vim-startify'
 Plug 'alvan/vim-closetag'
-Plug 'liuchengxu/eleline.vim'
+Plug 'yujinyuz/eleline.vim'
 Plug 'turbio/bracey.vim'
 Plug 'psliwka/vim-smoothie'
 Plug 'wellle/tmux-complete.vim'
@@ -216,7 +217,12 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 " Plug 'takac/vim-hardtime'
 Plug 'luochen1990/rainbow'
 Plug 'vimwiki/vimwiki'
-Plug 'majutsushi/tagbar'
+Plug 'honza/vim-snippets'
+Plug 'Chiel92/vim-autoformat'
+Plug 'liuchengxu/vista.vim'
+Plug 'sainnhe/gruvbox-material'
+Plug 'ludovicchabant/vim-gutentags'
+
 "" These are plugins that I saw from articles
 "" that I don't need right now but might need later
 
