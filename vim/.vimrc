@@ -276,9 +276,8 @@ augroup CustomFileSettings
 
   " Enable local spell and disable backticks on coc-pairs
   autocmd BufRead,BufNewFile *.md setlocal spell
-  autocmd BufRead,BufNewFile *.md let b:coc_pairs_disabled = ['`']
-  autocmd FileType eruby let b:coc_pairs_disabled = ['<', '>']
-  autocmd FileType javascript let b:coc_pairs_disabled = ['<', '>']
+  autocmd FileType eruby let b:coc_pairs_disabled = ['<']
+  autocmd FileType javascript let b:coc_pairs_disabled = ['<']
 augroup END
 
 augroup EndAutocomplete
