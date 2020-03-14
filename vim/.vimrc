@@ -500,7 +500,6 @@ let g:coc_global_extensions = [
   \ 'coc-yank',
   \ 'coc-snippets'
   \ ]
-" coc-tabnine
 " }}}
 
 " eleline {{{
@@ -577,10 +576,11 @@ function! CreateCenteredFloatingWindow()
 endfunction
 
 " Rg with preview window
+" https://github.com/junegunn/fzf.vim/issues/714#issuecomment-428802659
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview(), <bang>0)
+  \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'down'), <bang>0)
 
 function! RipgrepFzf(query, fullscreen) abort
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
@@ -593,7 +593,7 @@ endfunction
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}, 'down'), <bang>0)
 
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
