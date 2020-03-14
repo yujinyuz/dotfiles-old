@@ -16,5 +16,6 @@
       }
     }
   },
-  "pairs.enableBackspace": true
+  "pairs.enableBackspace": true,
+  "yank.enableCompletion": false,
 }

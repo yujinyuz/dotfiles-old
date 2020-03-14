@@ -7,6 +7,7 @@
   excludesfile = ~/.gitignoreglobal
 [commit]
   template = ~/.gitmessage
+  verbose = true
 [alias]
   st = status
   co = checkout
