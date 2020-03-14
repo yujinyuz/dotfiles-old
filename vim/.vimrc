@@ -443,6 +443,9 @@ nnoremap <localleader>\ :call ToggleWrap()<CR>
 " Search and replace one by one until EOF
 noremap <leader>s "sy:ZZWrap .,$s/<C-r>s//gc<Left><Left><Left>
 
+" Disable annoying Ex mode
+nnoremap Q <NOP>
+
 " Visually select pasted or yanked text
 nnoremap gV `[v`]
 
