@@ -325,11 +325,6 @@ inoremap <Esc> <NOP>
 " nnoremap <Left> <nop>
 " nnoremap <Right> <nop>
 
-"" Let's us move around wrapped lines normally
-nnoremap <silent> j gj
-nnoremap <silent> k gk
-vnoremap j gj
-vnoremap k gk
 
 
 "" Yank to end of line
@@ -431,7 +426,6 @@ nnoremap <leader>f :Rg<CR>
 
 "" Open definition in new tab
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
-" map <leader><space> :CocCommand <CR>
 nnoremap <leader>nf :NERDTreeFind<CR>
 
 " Find and Replace highlighted line
@@ -652,10 +646,20 @@ endfunction
 command! DiffSaved call s:DiffWithSaved()
 
 function! ToggleWrap() abort
-  if (&wrap == 1)
-    setlocal nowrap colorcolumn=80,90,120
+  if &wrap
+    echo "Wrap OFF"
+    setlocal nowrap
+    silent! unmap <buffer> j
+    silent! unmap <buffer> k
+    silent! unmap <buffer> $
+    silent! unmap <buffer> 0
   else
-    setlocal wrap colorcolumn=80
+    echo "Wrap ON"
+    setlocal wrap linebreak nolist
+    noremap <buffer> <silent> j gj
+    noremap <buffer> <silent> k gk
+    noremap <buffer> <silent> $ g$
+    noremap <buffer> <silent> 0 g0
   endif
 endfunction
 
