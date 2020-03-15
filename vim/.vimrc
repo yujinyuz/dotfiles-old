@@ -108,6 +108,9 @@ set conceallevel=3
 " Disable soft wrapping
 set nowrap
 
+" ID Tags relative to current file and directory
+set tags^=.git/tags
+
 " Highlight current line under cursor
 " set cursorline
 
@@ -118,37 +121,37 @@ let localleader='\'
 " Enable elite mode. No arrows!!
 let g:elite_mode=1
 
-let g:python3_host_prog = '~/.pyenv/versions/3.8.1/envs/nvim/bin/python3'
+let g:python3_host_prog = '~/.pyenv/versions/nvim/bin/python3'
 
-"" NeoVim Enabled Defaults {{{
-"" Just uncomment the lines with `set` to when not using neovim
-"" Autoread file when there are changes
+" NeoVim Enabled Defaults {{{
+" Just uncomment the lines with `set` to when not using neovim
+" Autoread file when there are changes
 " set autoread
 
-"" Helps force plugins to load correctly when it is turned back on
+" Helps force plugins to load correctly when it is turned back on
 " filetype off
 
-"" Load file type plugins + indentation
+" Load file type plugins + indentation
 " filetype plugin indent on
 
-"" backspace through everything in insert mode
+" backspace through everything in insert mode
 " set backspace=indent,eol,start
 
 
-"" Disable annoying bell sound
+" Disable annoying bell sound
 " set belloff=all
 " set visualbell
 
-"" Choose no compatibility with legacy vi
+" Choose no compatibility with legacy vi
 " set nocompatible
 
-"" Use utf-8 file encoding
+" Use utf-8 file encoding
 " set encoding=utf-8
 
-"" Display incomplete commands
+" Display incomplete commands
 " set showcmd
 
-"" Keep info in memory to speed things up
+" Keep info in memory to speed things up
 " set history=10000
 
 " Highlight matches
@@ -157,10 +160,6 @@ let g:python3_host_prog = '~/.pyenv/versions/3.8.1/envs/nvim/bin/python3'
 " Incremental searching
 " set incsearch
 
-"" ID Tags relative to current file and directory
-" set tags=./tags;,tags;
-
-set tags^=.git/tags
 " Enable ruler
 " set ruler
 
@@ -202,8 +201,8 @@ Plug 'liuchengxu/vista.vim'
 Plug 'sainnhe/gruvbox-material'
 Plug 'ludovicchabant/vim-gutentags'
 
-"" These are plugins that I saw from articles
-"" that I don't need right now but might need later
+" These are plugins that I saw from articles
+" that I don't need right now but might need later
 
 " Plug 'Konfekt/FastFold'
 " Plug 'iamcco/markdown-preview.nvim'
@@ -273,10 +272,10 @@ nnoremap <leader>qa :qa!<CR>
 nmap <leader>qq :q!<CR>
 
 " Edit vimrc file
-nnoremap <leader>ev :vsplit ~/.vimrc<CR>
+nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 
 " source vimrc file
-nnoremap <leader>sv :source %<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " Used for navigating to different split panes
 if !get(g:, 'loaded_tmux_navigator', 0)
@@ -289,7 +288,7 @@ endif
 " Map jk to Escape because it's too far away
 inoremap jk <Esc>
 
-" Yank to end of line
+" Make Y work like other upcase commands
 nnoremap Y y$
 
 " Auto center on search match
@@ -347,7 +346,7 @@ nnoremap <silent> ++ :Files<CR>
 nnoremap <silent> <leader>l :noh<CR>
 
 " Have a git hunk preview that can be modified
-nnoremap ghp <Plug>(GitGutterPreviewHunk)
+noremap ghp <Plug>(GitGutterPreviewHunk)
 
 " Use Alt-jk for moving lines
 " Note: iTerm2 > Profiles > Keys > Left Option > Esc+
@@ -377,7 +376,7 @@ if get(g:, 'elite_mode')
   nnoremap <Up> :resize +2<CR>
   nnoremap <Down> :resize -2<CR>
   nnoremap <Left> :vertical resize +2<CR>
-  nnoremap <Right> :vertical resize -5<CR>
+  nnoremap <Right> :vertical resize -2<CR>
 endif
 
 nnoremap <leader>f :Rg<CR>
@@ -424,7 +423,7 @@ if (has('termguicolors'))
 endif
 syntax on
 colorscheme gruvbox-material
-"" }}}
+" }}}
 
 " Plugins custom settings {{{
 
@@ -478,7 +477,6 @@ if exists('g:loaded_webdevicons')
   call webdevicons#refresh()
 endif
 let g:webdevicons_enable = 1
-let g:webdevicons_enable_denite = 1
 let g:webdevicons_enable_nerdtree = 1
 let g:WebDevIconsUnicodeDecorateFileNodes = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
@@ -486,8 +484,6 @@ let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 let g:webdevicons_enable_airline_statusline = 1
 let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
 let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
-" let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ''
-" let g:DevIconsDefaultFolderOpenSymbol = ''
 " }}}
 
 " fzf.vim {{{
@@ -586,7 +582,7 @@ function! s:DiffWithSaved() abort
   diffthis
   exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
 endfunction
-command! DiffSaved call s:DiffWithSaved()
+command! DiffSaved call <SID>DiffWithSaved()
 
 function! s:ToggleWrap() abort
   if &wrap
@@ -605,9 +601,9 @@ function! s:ToggleWrap() abort
     noremap <buffer> <silent> 0 g0
   endif
 endfunction
-command! ToggleWrap call s:ToggleWrap()
+command! ToggleWrap call <SID>ToggleWrap()
 
-function! CtagPython()
+function! CtagPython() abort
     !ctags -R --fields=+l --languages=python --python-kinds=-i -f ./tags $(python3 -c "import os, sys; print(' '.join('{}'.format(d) for d in sys.path if os.path.isdir(d)))")
     echo getcwd()
 endfunction
@@ -620,14 +616,10 @@ command! BufOnly silent! execute "%bd|e#|bd#"
 " }}}
 
 " coc.vim settings from documentation {{{
-" I don't understand most of this part but we can always check the
-" documentation
-
 " You will have bad experience for diagnostic messages when it's default 4000.
-" set updatetime=300
 set updatetime=100
 
-" don't give |ins-completion-menu| messages.
+" Don't give |ins-completion-menu| messages.
 set shortmess+=c
 
 " always show signcolumns
@@ -714,29 +706,28 @@ omap af <Plug>(coc-funcobj-a)
 command! -nargs=0 Format :call CocAction('format')
 
 " Use `:Fold` to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
 " use `:OR` for organize import of current buffer
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> <localleader>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <localleader>a :<C-u>CocList diagnostics<cr>
 " Manage extensions
-nnoremap <silent> <localleader>e  :<C-u>CocList extensions<cr>
+nnoremap <silent> <localleader>e :<C-u>CocList extensions<cr>
 " Show commands
-nnoremap <silent> <localleader>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <localleader>c :<C-u>CocList commands<cr>
 " Find symbol of current document
-nnoremap <silent> <localleader>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <localleader>o :<C-u>CocList outline<cr>
 " Search workspace symbols
-nnoremap <silent> <localleader>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <localleader>s :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <localleader>j  :<C-u>CocNext<CR>
+nnoremap <silent> <localleader>j :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <localleader>k  :<C-u>CocPrev<CR>
+nnoremap <silent> <localleader>k :<C-u>CocPrev<CR>
 " Resume latest coc list
-nnoremap <silent> <localleader>p  :<C-u>CocListResume<CR>
-
+nnoremap <silent> <localleader>p :<C-u>CocListResume<CR>
 " End }}}
 
 " Abbreviations for a better vim-life {{{
