@@ -670,6 +670,10 @@ endfunction
 
 " Substitue selected text starting from cursor up to EOF
 command! -nargs=* -complete=command ZZWrap let &scrolloff=999 | exec <q-args> | let &so=0
+
+" Delete all buffers except current one
+command! BufOnly silent! execute "%bd|e#|bd#"
+
 " }}}
 " coc.vim settings from documentation {{{
 " I don't understand most of this part but we can always check the
