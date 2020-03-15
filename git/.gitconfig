@@ -60,6 +60,8 @@
   cmd = vimdiff \"$LOCAL\" \"$REMOTE\"
 [merge]
   conflictStyle = merge
+	ff = no
+	commit = no
   summary = true
 [fetch]
   prune = true
