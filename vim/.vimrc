@@ -13,109 +13,96 @@
 
 " General {{{
 
-"" Whitespace
+" Whitespace
 set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
 set expandtab                   " use spaces, not tabs (optional)
 
-"" Searching
+" Searching
 set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
 
-"" Turn on relative numbers
+" Turn on relative numbers
 set relativenumber
 
-"" Show current line number
+" Show current line number
 set number
 
-"" Show matching parenthesis
+" Show matching parenthesis
 set showmatch
 
-"" How many tenths of a second to blink when matching brakcets
+" How many tenths of a second to blink when matching brakcets
 set matchtime=2
 
-"" Visual autocomplete for command menu
-"" triggered when pressing tab while in the
-"" execute command mode `:`
+" Visual autocomplete for command menu
+" triggered when pressing tab while in the
+" execute command mode `:`
 set wildmenu
 " set wildmode=list:longest,list:full
 
 " Disabled wildignore since it conflicts with tags
 " set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 
-"" Redraw only when needed
+" Redraw only when needed
 set lazyredraw
 
-"" Draw a ruler on the right side
-" set colorcolumn=80
-
-"" Create new line when text is over 79 chars
-"" change this if we have problems in editing existing code base
-" set textwidth=79
-
-"" Hide buffer
+" Hide buffer
 set hidden
 
-"" Fix paste bug [200~ when remapping jk to escape
+" Fix paste bug [200~ when remapping jk to escape
 set t_BE=
 
-"" Always show signcolumns
+" Always show signcolumns
 set signcolumn=yes
 
-"" Prefer sh for shell-related tasks
+" Prefer sh for shell-related tasks
 set shell=/bin/sh
 
-"" Group folds with '{{{,}}}'
-" set foldmethod=marker
-
-"" Disable annoying swap files
+" Disable annoying swap files
 set noswapfile
-"" No backups
-set nobackup
-set nowritebackup
 
-"" Use system clipboard
+" No backups
+set nobackup nowritebackup
+
+" Use system clipboard
 set clipboard=unnamedplus
 
-"" Disable neovim from setting cursor style
+" Disable neovim from setting cursor style
 " set guicursor=
 
-"" Only need 1 line for cmd
+" Only need 1 line for cmd
 set cmdheight=1
 
-"" Let vim set the title
+" Let vim set the title
 set title
 
-"" Search relative to current file and directory
+" Search relative to current file and directory
 set path=.,**
 
-"" Split right by default
+" Split right by default
 set splitright
 
-"" Split below by default
+" Split below by default
 " set splitbelow
 
-"" Hide the -- INSERT --
-"" comment this out when you aren't using lightline.vim
+" Hide the -- INSERT --
+" comment this out when you aren't using lightline.vim
 " set noshowmode
 
-"" Alwayts show tabs
+" Alwayts show tabs
 set showtabline=2
 
-"" Show whitespaces
-" set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
+" Show whitespaces
 " set list
 set listchars=tab:→\ ,space:·,nbsp:␣,trail:·,precedes:«,extends:»
 
-" Why this? Because we swapped the values of onedark normal and column.
-" See onedark.vim custom plugin settings
-" let &colorcolumn=join(range(1,80),",")
+" Show line column
 set colorcolumn=80,90,120
 
 " Show 3 more lines below when scrolling
 set scrolljump=3
-" Show indicator when line is wrapped
-let &showbreak="↳ "
 
+" Show indicator when line is wrapped
+let &showbreak='↳ '
 set conceallevel=3
 
 " Disable soft wrapping
@@ -124,20 +111,14 @@ set nowrap
 " Highlight current line under cursor
 " set cursorline
 
-"" Change leader key
-let mapleader=" "
+" Change leader key
+let mapleader=' '
 let localleader='\'
 
-"" Enable elite mode. No arrows!!
+" Enable elite mode. No arrows!!
 let g:elite_mode=1
 
 let g:python3_host_prog = '~/.pyenv/versions/3.8.1/envs/nvim/bin/python3'
-
-"" This fixed my issue with tmux not having the correct color. WTF.
-" set termguicolors
-
-"" Enable syntax highlighting
-" syntax on
 
 "" NeoVim Enabled Defaults {{{
 "" Just uncomment the lines with `set` to when not using neovim
@@ -186,6 +167,7 @@ set tags^=.git/tags
 "" End NeoVim Enabled Defaults }}}
 
 " End General }}}
+
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
 Plug 'preservim/nerdtree'
@@ -206,15 +188,12 @@ Plug 'tpope/vim-repeat'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go'}
-" Plug 'mhinz/vim-startify'
 Plug 'alvan/vim-closetag'
 Plug 'yujinyuz/eleline.vim'
 Plug 'turbio/bracey.vim'
 Plug 'psliwka/vim-smoothie'
 Plug 'wellle/tmux-complete.vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
-" Warning: This plugin will kill your bad habits
-" Plug 'takac/vim-hardtime'
 Plug 'luochen1990/rainbow'
 Plug 'vimwiki/vimwiki'
 Plug 'honza/vim-snippets'
@@ -229,19 +208,15 @@ Plug 'ludovicchabant/vim-gutentags'
 " Plug 'Konfekt/FastFold'
 " Plug 'iamcco/markdown-preview.nvim'
 " Plug 'junegunn/limelight.vim'
-" Plug 'jiangmiao/auto-pairs' " this doesn't work well. so I'm using pear-tree
+" Plug 'jiangmiao/auto-pairs'
 " Plug 'tmsvg/pear-tree'
-" Plug 'tpope/vim-unimpaired'
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
 " Plug 'yggdroot/indentline'
-" Plug 'justinmk/vim-dirvish'
-" Plug 'tpope/vim-vinegar'
 call plug#end()
 " }}}
+
 " Autocommands {{{
 
-"" Remove whitespace on save
+" Remove whitespace on save
 augroup RemoveTrailingWhiteSpace
   autocmd!
   autocmd BufWritePost * :%s/\s\+$//e
@@ -261,7 +236,7 @@ augroup ReturnToLastEditPosition
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 augroup END
 
-"" Toggle highlight when entering in insert / normal mode
+" Toggle highlight when entering in insert / normal mode
 augroup ToggleHighlight
   autocmd!
   autocmd InsertEnter * :setlocal nohlsearch
@@ -285,28 +260,25 @@ augroup EndAutocomplete
   autocmd CompleteDone * if pumvisible() == 0 | pclose | endif
 augroup END
 " End Autocommands }}}
+
 " Custom Key Mappings {{{
 
-"" write file
+" Write file
 nmap <leader>w :w!<CR>
 
-"" quit vim
-"" mapping to <leader>q only is slow
-"" might be because of the coc.vim qf mapping
+" Quit vim
 nnoremap <leader>qa :qa!<CR>
 
-"" quit current file
+" Quit current file
 nmap <leader>qq :q!<CR>
 
-"" edit vimrc file
+" Edit vimrc file
 nnoremap <leader>ev :vsplit ~/.vimrc<CR>
 
-"" source vimrc file
+" source vimrc file
 nnoremap <leader>sv :source %<CR>
 
-"" Used for navigating to different split panes
-"" Commented out since vim-tmux-navigator handles this for us
-
+" Used for navigating to different split panes
 if !get(g:, 'loaded_tmux_navigator', 0)
   nnoremap <C-J> <C-W>j
   nnoremap <C-K> <C-W>k
@@ -314,23 +286,13 @@ if !get(g:, 'loaded_tmux_navigator', 0)
   nnoremap <C-L> <C-W>l
 endif
 
-"" Map jk to Escape because it's too far away
+" Map jk to Escape because it's too far away
 inoremap jk <Esc>
-inoremap <Esc> <NOP>
 
-"" Turn off the arrow keys in normal mode
-"" No vim user uses that
-" nnoremap <Up> <nop>
-" nnoremap <Down> <nop>
-" nnoremap <Left> <nop>
-" nnoremap <Right> <nop>
-
-
-
-"" Yank to end of line
+" Yank to end of line
 nnoremap Y y$
 
-"" Auto center on search match
+" Auto center on search match
 nnoremap n nzz
 nnoremap N Nzz
 
@@ -339,59 +301,56 @@ vnoremap <silent> y y`]
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
 
-"" Stay in visual mode when indenting. You will never have to run
-"" gv after performing an indentation
+" Stay in visual mode when indenting. You will never have to run
+" gv after performing an indentation
 vnoremap < <gv
 vnoremap > >gv
+
+" So I don't have to press `>` twice in normal mode
+nnoremap > >>gv
+nnoremap < <<gv
+
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 
 nnoremap <S-Tab> <<
 nnoremap <Tab> >>
 
-"" Blackhole deletes
-"" Usage: <leader>d then d again to delete line
+" Blackhole deletes
 nnoremap <leader>d "_d
 
-
-"" Backspace faster switching to alternate file
+" Backspace faster switching to alternate file
 nnoremap <BS> :buffer#<CR>:echo bufnr('%') . ': ' . expand('%:p')<CR>
 
-"" Faster buffer navigation
+" Faster buffer navigation
 nnoremap ,b :buffer *
 
-"" List all buffers then choose number to go to buffer
+" List all buffers then choose number to go to buffer
 nnoremap gb :ls<CR>:b
 
-"" Tab management
+" Tab management
 map <leader>tn :tabnew<CR>
 map <leader>to :tabonly<CR>
 map <leader>tc :tabclose<CR>
 map <leader>tm :tabmove<CR>
 
-
-"" Command-line like forward-search
+" Command-line like forward/reverse search
 cnoremap <C-k> <Up>
-"" Command-line like reverse-search
 cnoremap <C-j> <Down>
 
-"" Map CmdP for FZF File Search
-"" Use CtrlP when Cmd-P is not available
+" Map CmdP for FZF File Search
+" Use CtrlP when Cmd-P is not available
+" nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> ++ :Files<CR>
 
-"" Clear search highlight
+" Clear search highlight
 nnoremap <silent> <leader>l :noh<CR>
 
-nmap ghp <Plug>(GitGutterPreviewHunk)
+" Have a git hunk preview that can be modified
+nnoremap ghp <Plug>(GitGutterPreviewHunk)
 
-"" Use Alt-jk for moving lines
-"" Note: iTerm2 > Profiles > Keys > Left Option > Esc+
-" nnoremap <A-j> :m .+1<CR>==
-" nnoremap <A-k> :m .-2<CR>==
-" inoremap <A-j> <Esc>:m .+1<CR>==gi
-" inoremap <A-k> <Esc>:m .-2<CR>==gi
-" vnoremap <A-j> :m '>+1<CR>gv=gv
-" vnoremap <A-k> :m '<-2<CR>gv=gv
+" Use Alt-jk for moving lines
+" Note: iTerm2 > Profiles > Keys > Left Option > Esc+
 nmap <M-j> mz:m+<cr>`z
 nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
@@ -413,7 +372,6 @@ nmap <localleader>b :Vista!!<CR>
 " Rg current word
 nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
 
-
 "" Disable arrow movements. Resize splits panes instead
 if get(g:, 'elite_mode')
   nnoremap <Up> :resize +2<CR>
@@ -424,18 +382,18 @@ endif
 
 nnoremap <leader>f :Rg<CR>
 
-"" Open definition in new tab
+" Open definition in new tab
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 nnoremap <leader>nf :NERDTreeFind<CR>
 
 " Find and Replace highlighted line
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
-" Togglewrap
-nnoremap <localleader>\ :call ToggleWrap()<CR>
-
-" Search and replace one by one until EOF
+" Find and replace with confirmation until EOF
 noremap <leader>s "sy:ZZWrap .,$s/<C-r>s//gc<Left><Left><Left>
+
+" Togglewrap
+nnoremap <localleader>\ :ToggleWrap<CR>
 
 " Disable annoying Ex mode
 nnoremap Q <NOP>
@@ -456,27 +414,19 @@ cnoremap \tn <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 inoremap \tn <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 
 " End Custom Key Mappings }}}
-" Plugins Custom Settings {{{
 
-" onedark.vim {{{
-
-" 24-bit (true-color) mode {{{
-
-"" From https://github.com/joshdick/onedark.vim#installation
-"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
-"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check
-"and use tmux's 24-bit color support
-"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (has("nvim"))
+" Colorscheme {{{
+if (has('nvim'))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
-if (has("termguicolors"))
+if (has('termguicolors'))
   set termguicolors
 endif
-" }}}
 syntax on
 colorscheme gruvbox-material
 "" }}}
+
+" Plugins custom settings {{{
 
 " coc.vim {{{
 let g:coc_global_extensions = [
@@ -546,16 +496,56 @@ let g:fzf_tags_command = 'ctags -R'
 let $FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules'
 let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
 
-function! CreateCenteredFloatingWindow()
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+" }}}
+
+" rainbow {{{
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+  \  'separately': {
+  \    'nerdtree': 0,
+  \   }
+  \ }
+" }}}
+
+" tmux-navigator {{{
+" Disabling tmux-navigator defaults since we are using the <C-\>
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+" }}}
+
+" vim-gitgutter {{{
+let g:gitgutter_sign_added = '▎'
+let g:gitgutter_sign_modified = '▎'
+let g:gitgutter_sign_removed = '▏'
+let g:gitgutter_sign_removed_first_line = '▔'
+let g:gitgutter_sign_modified_removed = '▋'
+let g:gitgutter_preview_win_floating = 0
+" }}}
+
+" endwise {{{
+let g:endwise_no_mappings = 1
+" }}}
+
+" End Plugins Custom Settings }}}
+
+" User-Defined Functinos {{{
+function! CreateCenteredFloatingWindow() abort
     let width = float2nr(&columns * 0.6)
     let height = float2nr(&lines * 0.6)
     let top = ((&lines - height) / 2) - 1
     let left = (&columns - width) / 2
     let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal'}
 
-    let top = "╭" . repeat("─", width - 2) . "╮"
-    let mid = "│" . repeat(" ", width - 2) . "│"
-    let bot = "╰" . repeat("─", width - 2) . "╯"
+    let top = '╭' . repeat('─', width - 2) . '╮'
+    let mid = '│' . repeat(' ', width - 2) . '│'
+    let bot = '╰' . repeat('─', width - 2) . '╯'
     let lines = [top] + repeat([mid], height - 2) + [bot]
     let s:buf = nvim_create_buf(v:false, v:true)
     call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
@@ -583,56 +573,10 @@ function! RipgrepFzf(query, fullscreen) abort
   let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
-
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}, 'down'), <bang>0)
-
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
-" }}}
-
-" rainbow {{{
-let g:rainbow_active = 1
-let g:rainbow_conf = {
-  \  'separately': {
-  \    'nerdtree': 0,
-  \   }
-  \ }
-" }}}
-
-" hardtime.vim {{{
-let g:hardtime_default_on = 1
-let g:hardtime_ignore_buffer_patterns = ["NERD.*"]
-" }}}
-
-" tmux-navigator {{{
-" Disabling tmux-navigator defaults since we are using the <C-\>
-let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
-" }}}
-
-" vim-gitgutter {{{
-let g:gitgutter_sign_added = '▎'
-let g:gitgutter_sign_modified = '▎'
-let g:gitgutter_sign_removed = '▏'
-let g:gitgutter_sign_removed_first_line = '▔'
-let g:gitgutter_sign_modified_removed = '▋'
-let g:gitgutter_preview_win_floating = 0
-" }}}
-
-" endwise {{{
-let g:endwise_no_mappings = 1
-" }}}
-
-" End Plugins Custom Settings }}}
-" User-Defined Functinos {{{
 
 " Current file to unsaved version
 function! s:DiffWithSaved() abort
@@ -642,10 +586,9 @@ function! s:DiffWithSaved() abort
   diffthis
   exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
 endfunction
-
 command! DiffSaved call s:DiffWithSaved()
 
-function! ToggleWrap() abort
+function! s:ToggleWrap() abort
   if &wrap
     echo "Wrap OFF"
     setlocal nowrap
@@ -662,6 +605,7 @@ function! ToggleWrap() abort
     noremap <buffer> <silent> 0 g0
   endif
 endfunction
+command! ToggleWrap call s:ToggleWrap()
 
 function! CtagPython()
     !ctags -R --fields=+l --languages=python --python-kinds=-i -f ./tags $(python3 -c "import os, sys; print(' '.join('{}'.format(d) for d in sys.path if os.path.isdir(d)))")
@@ -673,8 +617,8 @@ command! -nargs=* -complete=command ZZWrap let &scrolloff=999 | exec <q-args> | 
 
 " Delete all buffers except current one
 command! BufOnly silent! execute "%bd|e#|bd#"
-
 " }}}
+
 " coc.vim settings from documentation {{{
 " I don't understand most of this part but we can always check the
 " documentation
@@ -722,9 +666,9 @@ nmap <silent> <leader>cn <Plug>(coc-rename)
 
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
+
 " Use <C-j> for select text for visual placeholder of snippet.
 vmap <C-j> <Plug>(coc-snippets-select)
-
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -794,6 +738,7 @@ nnoremap <silent> <localleader>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <localleader>p  :<C-u>CocListResume<CR>
 
 " End }}}
+
 " Abbreviations for a better vim-life {{{
 cnoreabbrev W w
 cnoreabbrev W! w!
