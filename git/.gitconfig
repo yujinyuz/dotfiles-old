@@ -60,8 +60,8 @@
   cmd = vimdiff \"$LOCAL\" \"$REMOTE\"
 [merge]
   conflictStyle = merge
-	ff = no
-	commit = no
+  ff = no
+  commit = no
   summary = true
 [fetch]
   prune = true
@@ -69,3 +69,5 @@
   path = ~/.gitconfig.local
 [init]
   templatedir = ~/.git_template
+[pull]
+  rebase = true
