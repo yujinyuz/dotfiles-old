@@ -200,6 +200,8 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'liuchengxu/vista.vim'
 Plug 'sainnhe/gruvbox-material'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-entire'
 
 " These are plugins that I saw from articles
 " that I don't need right now but might need later
