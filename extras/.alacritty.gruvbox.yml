@@ -12,9 +12,9 @@ window:
     # Fullscreen
     # SimpleFullscreen
   decorations:
-    buttonless
+    # buttonless
     # none
-    # full
+    full
 font:
   size: 13
   normal:
