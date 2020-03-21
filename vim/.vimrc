@@ -585,6 +585,7 @@ function! s:ToggleWrap() abort
   if &wrap
     echo "Wrap OFF"
     setlocal nowrap
+    setlocal colorcolumn=80,90,120
     silent! unmap <buffer> j
     silent! unmap <buffer> k
     silent! unmap <buffer> $
@@ -592,6 +593,7 @@ function! s:ToggleWrap() abort
   else
     echo "Wrap ON"
     setlocal wrap linebreak nolist
+    setlocal colorcolumn=
     noremap <buffer> <silent> j gj
     noremap <buffer> <silent> k gk
     noremap <buffer> <silent> $ g$
