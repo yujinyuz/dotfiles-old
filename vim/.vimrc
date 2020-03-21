@@ -308,14 +308,8 @@ vnoremap < <gv
 vnoremap > >gv
 
 " So I don't have to press `>` twice in normal mode
-nnoremap > >>gv
-nnoremap < <<gv
-
-vnoremap <Tab> >gv
-vnoremap <S-Tab> <gv
-
-nnoremap <S-Tab> <<
-nnoremap <Tab> >>
+nnoremap > >>
+nnoremap < <<
 
 " Blackhole deletes
 nnoremap <leader>d "_d
