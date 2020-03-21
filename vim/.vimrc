@@ -362,7 +362,7 @@ map \t <Esc>:set expandtab tabstop=4 shiftwidth=4<CR>
 map \T <Esc>:set expandtab tabstop=8 shiftwidth=8<CR>
 
 " Vista tags
-nmap <localleader>b :Vista!!<CR>
+nmap \b :Vista!!<CR>
 
 " Rg current word
 nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
@@ -385,10 +385,10 @@ nnoremap <leader>nf :NERDTreeFind<CR>
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
 " Find and replace with confirmation until EOF
-noremap <leader>s "sy:ZZWrap .,$s/<C-r>s//gc<Left><Left><Left>
+noremap <leader>rc "sy:ZZWrap .,$s/<C-r>s//gc<Left><Left><Left>
 
 " Togglewrap
-nnoremap <localleader>\ :ToggleWrap<CR>
+noremap \\ :ToggleWrap<CR>
 
 " Disable annoying Ex mode
 nnoremap Q <NOP>
