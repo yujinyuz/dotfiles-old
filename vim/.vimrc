@@ -200,6 +200,8 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'liuchengxu/vista.vim'
 Plug 'sainnhe/gruvbox-material'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-entire'
 
 " These are plugins that I saw from articles
 " that I don't need right now but might need later
@@ -306,14 +308,8 @@ vnoremap < <gv
 vnoremap > >gv
 
 " So I don't have to press `>` twice in normal mode
-nnoremap > >>gv
-nnoremap < <<gv
-
-vnoremap <Tab> >gv
-vnoremap <S-Tab> <gv
-
-nnoremap <S-Tab> <<
-nnoremap <Tab> >>
+nnoremap > >>
+nnoremap < <<
 
 " Blackhole deletes
 nnoremap <leader>d "_d
@@ -322,7 +318,7 @@ nnoremap <leader>d "_d
 nnoremap <BS> :buffer#<CR>:echo bufnr('%') . ': ' . expand('%:p')<CR>
 
 " Faster buffer navigation
-nnoremap ,b :buffer *
+nnoremap <leader>b :buffer *
 
 " List all buffers then choose number to go to buffer
 nnoremap gb :ls<CR>:b
@@ -366,7 +362,7 @@ map \t <Esc>:set expandtab tabstop=4 shiftwidth=4<CR>
 map \T <Esc>:set expandtab tabstop=8 shiftwidth=8<CR>
 
 " Vista tags
-nmap <localleader>b :Vista!!<CR>
+nmap \b :Vista!!<CR>
 
 " Rg current word
 nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
@@ -389,10 +385,10 @@ nnoremap <leader>nf :NERDTreeFind<CR>
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
 " Find and replace with confirmation until EOF
-noremap <leader>s "sy:ZZWrap .,$s/<C-r>s//gc<Left><Left><Left>
+noremap <leader>rc "sy:ZZWrap .,$s/<C-r>s//gc<Left><Left><Left>
 
 " Togglewrap
-nnoremap <localleader>\ :ToggleWrap<CR>
+noremap \\ :ToggleWrap<CR>
 
 " Disable annoying Ex mode
 nnoremap Q <NOP>
@@ -490,6 +486,7 @@ let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 let g:fzf_tags_command = 'ctags -R'
 " let $FZF_DEFAULT_COMMAND='rg --files --hidden --ignore-global'
 let $FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules'
+let g:fzf_preview_window = 'down:1'
 let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
 
 imap <c-x><c-k> <plug>(fzf-complete-word)
@@ -567,7 +564,7 @@ function! RipgrepFzf(query, fullscreen) abort
   let initial_command = printf(command_fmt, shellescape(a:query))
   let reload_command = printf(command_fmt, '{q}')
   let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec, 'down'), a:fullscreen)
 endfunction
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
@@ -588,6 +585,7 @@ function! s:ToggleWrap() abort
   if &wrap
     echo "Wrap OFF"
     setlocal nowrap
+    setlocal colorcolumn=80,90,120
     silent! unmap <buffer> j
     silent! unmap <buffer> k
     silent! unmap <buffer> $
@@ -595,6 +593,7 @@ function! s:ToggleWrap() abort
   else
     echo "Wrap ON"
     setlocal wrap linebreak nolist
+    setlocal colorcolumn=
     noremap <buffer> <silent> j gj
     noremap <buffer> <silent> k gk
     noremap <buffer> <silent> $ g$
@@ -713,21 +712,21 @@ command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> <localleader>a :<C-u>CocList diagnostics<cr>
+nnoremap <silent> \a :<C-u>CocList diagnostics<cr>
 " Manage extensions
-nnoremap <silent> <localleader>e :<C-u>CocList extensions<cr>
+nnoremap <silent> \e :<C-u>CocList extensions<cr>
 " Show commands
-nnoremap <silent> <localleader>c :<C-u>CocList commands<cr>
+nnoremap <silent> \c :<C-u>CocList commands<cr>
 " Find symbol of current document
-nnoremap <silent> <localleader>o :<C-u>CocList outline<cr>
+nnoremap <silent> \o :<C-u>CocList outline<cr>
 " Search workspace symbols
-nnoremap <silent> <localleader>s :<C-u>CocList -I symbols<cr>
+nnoremap <silent> \s :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <localleader>j :<C-u>CocNext<CR>
+nnoremap <silent> \j :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <localleader>k :<C-u>CocPrev<CR>
+nnoremap <silent> \k :<C-u>CocPrev<CR>
 " Resume latest coc list
-nnoremap <silent> <localleader>p :<C-u>CocListResume<CR>
+nnoremap <silent> \p :<C-u>CocListResume<CR>
 " End }}}
 
 " Abbreviations for a better vim-life {{{
