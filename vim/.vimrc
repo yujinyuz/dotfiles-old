@@ -712,21 +712,21 @@ command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> <localleader>a :<C-u>CocList diagnostics<cr>
+nnoremap <silent> \a :<C-u>CocList diagnostics<cr>
 " Manage extensions
-nnoremap <silent> <localleader>e :<C-u>CocList extensions<cr>
+nnoremap <silent> \e :<C-u>CocList extensions<cr>
 " Show commands
-nnoremap <silent> <localleader>c :<C-u>CocList commands<cr>
+nnoremap <silent> \c :<C-u>CocList commands<cr>
 " Find symbol of current document
-nnoremap <silent> <localleader>o :<C-u>CocList outline<cr>
+nnoremap <silent> \o :<C-u>CocList outline<cr>
 " Search workspace symbols
-nnoremap <silent> <localleader>s :<C-u>CocList -I symbols<cr>
+nnoremap <silent> \s :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <localleader>j :<C-u>CocNext<CR>
+nnoremap <silent> \j :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <localleader>k :<C-u>CocPrev<CR>
+nnoremap <silent> \k :<C-u>CocPrev<CR>
 " Resume latest coc list
-nnoremap <silent> <localleader>p :<C-u>CocListResume<CR>
+nnoremap <silent> \p :<C-u>CocListResume<CR>
 " End }}}
 
 " Abbreviations for a better vim-life {{{
