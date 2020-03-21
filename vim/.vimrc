@@ -318,7 +318,7 @@ nnoremap <leader>d "_d
 nnoremap <BS> :buffer#<CR>:echo bufnr('%') . ': ' . expand('%:p')<CR>
 
 " Faster buffer navigation
-nnoremap ,b :buffer *
+nnoremap <leader>b :buffer *
 
 " List all buffers then choose number to go to buffer
 nnoremap gb :ls<CR>:b
