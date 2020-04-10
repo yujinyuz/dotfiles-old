@@ -1,5 +1,6 @@
 {
-  "python.jediEnabled": false,
+  "python.jediEnabled": true,
+  "python.jediPath": "~/.pyenv/versions/nvim/lib/python3.7/site-packages",
   "python.venvFolders": ["envs", ".pyenv"],
   "python.linting.enabled": true,
   "python.sortImports.path": "/Users/eugene/.pyenv/versions/nvim/bin/isort",
@@ -18,4 +19,6 @@
   },
   "pairs.enableBackspace": true,
   "yank.enableCompletion": false,
+  "diagnostic.displayByAle": false,
+  "suggest.autoTrigger": "always"
 }

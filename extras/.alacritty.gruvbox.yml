@@ -18,7 +18,7 @@ window:
 font:
   size: 13
   normal:
-    family: FiraMono Nerd Font Mono
+    family: JetBrainsMono Nerd Font Mono
     style: Regular
   # bold:
     # family: Operator Mono Lig
@@ -57,13 +57,7 @@ colors:
     white:   '0xebdbb2'
 
   cursor:
-    cursor: '0xffffff'
-# cursor:
-  # style: Underline
-# shell:
-  # program: /usr/local/bin/fish
-  # args:
-    # - --login
+    cursor: '0xfbfbfb'
 
 key_bindings:
   - { key: C,        mods: Alt,                  chars: "\x1bc"                       }
