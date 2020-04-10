@@ -98,8 +98,8 @@ set listchars=tab:→\ ,space:·,nbsp:␣,trail:·,precedes:«,extends:»
 " Show line column
 set colorcolumn=80,90,120
 
-" Show 3 more lines below when scrolling
-set scrolljump=3
+" Show 3 more lines below/above when scrolling
+set scrolloff=3
 
 " Show indicator when line is wrapped
 let &showbreak='↳ '
@@ -109,7 +109,10 @@ set conceallevel=3
 set nowrap
 
 " ID Tags relative to current file and directory
-set tags^=.git/tags
+" set tags^=.git/tags
+
+" Show highlight when doing :%s/foo/bar
+set inccommand=nosplit
 
 " Highlight current line under cursor
 " set cursorline
@@ -175,22 +178,22 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'morhetz/gruvbox'
+Plug 'sainnhe/gruvbox-material'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'nelstrom/vim-visual-star-search'
-Plug 'joshdick/onedark.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-obsession'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go'}
 Plug 'alvan/vim-closetag'
 Plug 'yujinyuz/eleline.vim'
-Plug 'turbio/bracey.vim'
-Plug 'psliwka/vim-smoothie'
 Plug 'wellle/tmux-complete.vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'luochen1990/rainbow'
@@ -198,10 +201,25 @@ Plug 'vimwiki/vimwiki'
 Plug 'honza/vim-snippets'
 Plug 'Chiel92/vim-autoformat'
 Plug 'liuchengxu/vista.vim'
-Plug 'sainnhe/gruvbox-material'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
+Plug 'wakatime/vim-wakatime'
+Plug 'mbbill/undotree'
+Plug 'antoinemadec/coc-fzf'
+
+Plug 'dense-analysis/ale'
+let g:ale_disable_lsp = 1
+let g:ale_linters = {
+  \ 'python': ['flake8']
+  \ }
+let g:ale_fixers = {'*': [], 'python': ['autopep8', 'isort']}
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+let g:ale_fix_on_save = 1
+let g:ale_lint_on_save = 1
+
+" Plug 'styled-components/vim-styled-components', { 'branch': 'main', 'for': 'javascript'}
 
 " These are plugins that I saw from articles
 " that I don't need right now but might need later
