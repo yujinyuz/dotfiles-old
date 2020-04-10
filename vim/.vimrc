@@ -278,7 +278,7 @@ augroup END
 
 augroup EndAutocomplete
   autocmd!
-  autocmd CompleteDone * if pumvisible() == 0 | pclose | endif
+  autocmd CompleteDone * if pumvisible() == 0 | silent! pclose | endif
 augroup END
 " End Autocommands }}}
 
