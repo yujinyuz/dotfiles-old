@@ -355,7 +355,7 @@ cnoremap <C-j> <Down>
 
 " Map CmdP for FZF File Search
 " Use CtrlP when Cmd-P is not available
-" nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> ++ :Files<CR>
 
 " Clear search highlight
@@ -425,6 +425,8 @@ noremap \fn <C-R>=expand("%:t:r")<CR>
 " Date and datetime formatted
 cnoremap \dt <C-R>=strftime("%b %d, %Y")<CR>
 inoremap \dt <C-R>=strftime("%b %d, %Y")<CR>
+cnoremap \dT <C-R>=strftime("%m-%d-%Y")<CR>
+
 cnoremap \tn <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 inoremap \tn <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 
