@@ -432,13 +432,7 @@ inoremap \tn <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 
 " End Custom Key Mappings }}}
 
-" Colorscheme {{{
-if (has('nvim'))
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
-if (has('termguicolors'))
-  set termguicolors
-endif
+set termguicolors
 syntax on
 colorscheme gruvbox-material
 " }}}
