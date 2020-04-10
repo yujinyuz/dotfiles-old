@@ -208,8 +208,6 @@ Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
 Plug 'wakatime/vim-wakatime'
 Plug 'mbbill/undotree'
-Plug 'antoinemadec/coc-fzf'
-
 Plug 'dense-analysis/ale'
 let g:ale_disable_lsp = 1
 let g:ale_linters = {
@@ -760,13 +758,13 @@ command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> \a :<C-u>CocFzfList diagnostics<cr>
+nnoremap <silent> \a :<C-u>CocList diagnostics<cr>
 " Manage extensions
-nnoremap <silent> \e :<C-u>CocFzfList extensions<cr>
+nnoremap <silent> \e :<C-u>CocList extensions<cr>
 " Show commands
-nnoremap <silent> \c :<C-u>CocFzfList commands<cr>
+nnoremap <silent> \c :<C-u>CocList commands<cr>
 " Find symbol of current document
-nnoremap <silent> \o :<C-u>CocFzfList outline<cr>
+nnoremap <silent> \o :<C-u>CocList outline<cr>
 " Search workspace symbols
 nnoremap <silent> \s :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
