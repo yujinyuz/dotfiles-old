@@ -762,6 +762,7 @@ cnoreabbrev Q q
 cnoreabbrev Q! q!
 cnoreabbrev Wq wq
 cnoreabbrev wQ wq
+cnoreabbrev Set set
 " }}}
 
 " vim:filetype=vim sw=2 foldmethod=marker tw=78 expandtab:
