@@ -503,7 +503,12 @@ let g:fzf_tags_command = 'ctags -R'
 " let $FZF_DEFAULT_COMMAND='rg --files --hidden --ignore-global'
 let $FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules'
 let g:fzf_preview_window = 'down:1'
-let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
+let g:fzf_layout = { 'window': { 'width': 0.6, 'height': 0.6 } }
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'below split',
+  \ 'ctrl-v': 'vsplit'
+  \ }
 
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
@@ -728,13 +733,13 @@ command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> \a :<C-u>CocList diagnostics<cr>
+nnoremap <silent> \a :<C-u>CocFzfList diagnostics<cr>
 " Manage extensions
-nnoremap <silent> \e :<C-u>CocList extensions<cr>
+nnoremap <silent> \e :<C-u>CocFzfList extensions<cr>
 " Show commands
-nnoremap <silent> \c :<C-u>CocList commands<cr>
+nnoremap <silent> \c :<C-u>CocFzfList commands<cr>
 " Find symbol of current document
-nnoremap <silent> \o :<C-u>CocList outline<cr>
+nnoremap <silent> \o :<C-u>CocFzfList outline<cr>
 " Search workspace symbols
 nnoremap <silent> \s :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
