@@ -452,6 +452,11 @@ nnoremap <C-]> g<C-]>
 set termguicolors
 syntax on
 colorscheme gruvbox-material
+
+" Make vim transparent so it adapts the background color of the
+" terminal
+hi Normal guibg=NONE ctermbg=NONE
+
 " }}}
 
 " Plugins custom settings {{{
