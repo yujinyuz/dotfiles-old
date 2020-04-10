@@ -547,6 +547,11 @@ let g:gitgutter_preview_win_floating = 0
 let g:endwise_no_mappings = 1
 " }}}
 
+" polyglot.vim {{{
+let g:vim_markdown_new_list_item_indent = 0
+let g:vim_markdown_auto_insert_bullets = 1
+" }}}
+
 " End Plugins Custom Settings }}}
 
 " User-Defined Functinos {{{
