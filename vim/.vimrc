@@ -430,6 +430,23 @@ cnoremap \dT <C-R>=strftime("%m-%d-%Y")<CR>
 cnoremap \tn <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 inoremap \tn <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 
+" For faster navigation
+nnoremap <leader>j 10j
+nnoremap <leader>k 10k
+nnoremap <C-y> 3<C-y>
+nnoremap <C-e> 3<C-e>
+
+" Easily move around windows
+nmap <Space><Space> <C-w>w
+
+" For easier splitting of files
+nmap ss :split<Return><C-w>w
+nmap sv :vsplit<Return><C-w>w
+
+" Jump to first tag if only one exists
+" else, let us choose which tag to jump to
+nnoremap <C-]> g<C-]>
+
 " End Custom Key Mappings }}}
 
 set termguicolors
