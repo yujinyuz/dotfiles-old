@@ -531,15 +531,12 @@ command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}, 'down'), <bang>0)
 
-" Current file to unsaved version
-function! s:DiffWithSaved() abort
-  let filetype=&ft
-  diffthis
-  vnew | r # | normal! 1Gdd
-  diffthis
-  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
-endfunction
-command! DiffSaved call <SID>DiffWithSaved()
+
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+
+command! DiffSaved setlocal nosplitright | vert new | set bt=nofile | r # | 0d_
+                  \ | diffthis | wincmd p | diffthis | setlocal splitright
 
 function! s:ToggleWrap() abort
   if &wrap
