@@ -198,8 +198,6 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'luochen1990/rainbow'
 Plug 'vimwiki/vimwiki'
-let g:vimwiki_list = [{'path': '~/vimwiki/',
-                    \ 'syntax': 'markdown', 'ext': '.md'}]
 Plug 'honza/vim-snippets'
 Plug 'Chiel92/vim-autoformat'
 Plug 'liuchengxu/vista.vim'
@@ -209,17 +207,6 @@ Plug 'kana/vim-textobj-entire'
 Plug 'wakatime/vim-wakatime'
 Plug 'mbbill/undotree'
 Plug 'dense-analysis/ale'
-let g:ale_disable_lsp = 1
-let g:ale_linters = {
-  \ 'python': ['flake8']
-  \ }
-let g:ale_fixers = {'*': [], 'python': ['autopep8', 'isort']}
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 0
-let g:ale_fix_on_save = 1
-let g:ale_lint_on_save = 1
-
-" Plug 'styled-components/vim-styled-components', { 'branch': 'main', 'for': 'javascript'}
 
 " These are plugins that I saw from articles
 " that I don't need right now but might need later
