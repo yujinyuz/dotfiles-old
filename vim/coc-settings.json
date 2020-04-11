@@ -5,6 +5,8 @@
   "python.linting.enabled": true,
   "python.sortImports.path": "/Users/eugene/.pyenv/versions/nvim/bin/isort",
   "emmet.includeLanguages": { "javascript": "javascriptreact" },
+  "eslint.enable": true,
+  "eslint.autoFixOnSave": true,
   "json.enable": true,
   "json.format.enable": true,
   "languageserver": {
