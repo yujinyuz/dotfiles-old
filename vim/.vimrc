@@ -220,53 +220,6 @@ Plug 'dense-analysis/ale'
 call plug#end()
 " }}}
 
-" Autocommands {{{
-
-" Remove whitespace on save
-augroup RemoveTrailingWhiteSpace
-  autocmd!
-  autocmd BufWritePost * :%s/\s\+$//e
-augroup END
-
-" Hide statusline when using fzf
-augroup FZFFiletypes
-  autocmd!
-  autocmd! FileType fzf
-  autocmd  FileType fzf set laststatus=0 noshowmode noruler nonumber norelativenumber
-              \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler number relativenumber
-augroup END
-
-" Return to last edit position when opening files (You want this!)
-augroup ReturnToLastEditPosition
-  autocmd!
-  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-augroup END
-
-" Toggle highlight when entering in insert / normal mode
-augroup ToggleHighlight
-  autocmd!
-  autocmd InsertEnter * :setlocal nohlsearch
-  autocmd InsertLeave * :setlocal hlsearch
-augroup END
-
-augroup CustomFileSettings
-  autocmd!
-  autocmd FileType make setlocal noexpandtab tabstop=4 shiftwidth=4
-  " Get correct comment highlighting
-  autocmd FileType json syntax match Comment +\/\/.\+$+
-
-  " Enable local spell and disable backticks on coc-pairs
-  autocmd BufRead,BufNewFile *.md setlocal spell
-  autocmd FileType eruby,javascript,htmldjango,html let b:coc_pairs_disabled = ['<']
-  autocmd FileType sql setlocal commentstring=--\ %s
-augroup END
-
-augroup EndAutocomplete
-  autocmd!
-  autocmd CompleteDone * if pumvisible() == 0 | silent! pclose | endif
-augroup END
-" End Autocommands }}}
-
 " Custom Key Mappings {{{
 
 " Write file
@@ -434,6 +387,7 @@ nnoremap <C-]> g<C-]>
 
 " End Custom Key Mappings }}}
 
+" Colors {{{
 set termguicolors
 syntax on
 colorscheme gruvbox-material
@@ -441,7 +395,6 @@ colorscheme gruvbox-material
 " Make vim transparent so it adapts the background color of the
 " terminal
 hi Normal guibg=NONE ctermbg=NONE
-
 " }}}
 
 " Plugins custom settings {{{
@@ -554,36 +507,9 @@ let g:gitgutter_preview_win_floating = 0
 let g:endwise_no_mappings = 1
 " }}}
 
-" polyglot.vim {{{
-let g:vim_markdown_new_list_item_indent = 0
-let g:vim_markdown_auto_insert_bullets = 1
-" }}}
-
 " End Plugins Custom Settings }}}
 
 " User-Defined Functinos {{{
-function! CreateCenteredFloatingWindow() abort
-    let width = float2nr(&columns * 0.6)
-    let height = float2nr(&lines * 0.6)
-    let top = ((&lines - height) / 2) - 1
-    let left = (&columns - width) / 2
-    let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal'}
-
-    let top = '╭' . repeat('─', width - 2) . '╮'
-    let mid = '│' . repeat(' ', width - 2) . '│'
-    let bot = '╰' . repeat('─', width - 2) . '╯'
-    let lines = [top] + repeat([mid], height - 2) + [bot]
-    let s:buf = nvim_create_buf(v:false, v:true)
-    call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
-    call nvim_open_win(s:buf, v:true, opts)
-    set winhl=Normal:Floating
-    let opts.row += 1
-    let opts.height -= 2
-    let opts.col += 2
-    let opts.width -= 4
-    call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
-    autocmd BufWipeout <buffer> exe 'bwipeout '.s:buf
-endfunction
 
 " Rg with preview window
 " https://github.com/junegunn/fzf.vim/issues/714#issuecomment-428802659
