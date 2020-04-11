@@ -625,8 +625,8 @@ function! s:show_documentation()
 endfunction
 
 " Remap for format selected region
-xmap <leader>cf  <Plug>(coc-format-selected)
-nmap <leader>cf  <Plug>(coc-format-selected)
+xmap <leader>cf <Plug>(coc-format-selected)
+nmap <leader>cf <Plug>(coc-format-selected)
 
 augroup CocGroup
   autocmd!
@@ -639,13 +639,13 @@ augroup CocGroup
 augroup end
 
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap <leader>a <Plug>(coc-codeaction-selected)
+nmap <leader>a <Plug>(coc-codeaction-selected)
 
 " Remap for do codeAction of current line
-nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>ac <Plug>(coc-codeaction)
 " Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <leader>qf <Plug>(coc-fix-current)
 
 " Create mappings for function text object, requires document symbols feature of languageserver.
 xmap if <Plug>(coc-funcobj-i)
@@ -681,14 +681,4 @@ nnoremap <silent> \k :<C-u>CocPrev<CR>
 nnoremap <silent> \p :<C-u>CocListResume<CR>
 " End }}}
 
-" Abbreviations for a better vim-life {{{
-cnoreabbrev W w
-cnoreabbrev W! w!
-cnoreabbrev Q q
-cnoreabbrev Q! q!
-cnoreabbrev Wq wq
-cnoreabbrev wQ wq
-cnoreabbrev Set set
-" }}}
-
-" vim:filetype=vim sw=2 foldmethod=marker tw=78 expandtab:
+" vim:filetype=vim sw=2 foldmethod=marker tw=78 expandtab
