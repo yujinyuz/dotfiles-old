@@ -425,7 +425,7 @@ let g:eleline_powerline_fonts = 1
 " NERDTree {{{
 let g:nerdtree_tabs_open_on_console_startup = 0
 let NERDTreeNaturalSort = 1
-map <silent> <C-n> :NERDTreeToggle<CR>
+nnoremap <silent> <C-n> :NERDTreeToggle<CR>
 
 let NERDTreeQuitOnOpen = 0
 let g:NERDTreeMinimalUI = 1
@@ -561,11 +561,6 @@ function! s:ToggleWrap() abort
   endif
 endfunction
 command! ToggleWrap call <SID>ToggleWrap()
-
-function! CtagPython() abort
-    !ctags -R --fields=+l --languages=python --python-kinds=-i -f ./tags $(python3 -c "import os, sys; print(' '.join('{}'.format(d) for d in sys.path if os.path.isdir(d)))")
-    echo getcwd()
-endfunction
 
 " Substitue selected text starting from cursor up to EOF
 command! -nargs=* -complete=command ZZWrap let &scrolloff=999 | exec <q-args> | let &so=0
