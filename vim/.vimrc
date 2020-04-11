@@ -413,7 +413,8 @@ let g:coc_global_extensions = [
   \ 'coc-css',
   \ 'coc-cssmodules',
   \ 'coc-yank',
-  \ 'coc-snippets'
+  \ 'coc-snippets',
+  \ 'coc-eslint'
   \ ]
 " }}}
 
