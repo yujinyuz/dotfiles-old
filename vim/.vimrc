@@ -593,6 +593,7 @@ endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 
 " Make CoC and endwise compatible
+" https://github.com/tpope/vim-endwise/issues/22#issuecomment-554685904
 inoremap <expr> <Plug>CustomCocCR pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
 imap <CR> <Plug>CustomCocCR<Plug>DiscretionaryEnd
 
