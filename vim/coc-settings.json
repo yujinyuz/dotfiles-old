@@ -21,6 +21,10 @@
   },
   "pairs.enableBackspace": true,
   "yank.enableCompletion": false,
-  "diagnostic.displayByAle": false,
-  "suggest.autoTrigger": "always"
+  "list.nextKeymap": "<C-n>",
+  "list.previousKeymap": "<C-p>",
+  "list.maxHeight": 15,
+  "list.insertMappings": {
+    "<C-c>": "do:exit"
+  },
 }
