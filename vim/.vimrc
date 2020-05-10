@@ -109,20 +109,23 @@ set conceallevel=3
 set nowrap
 
 " ID Tags relative to current file and directory
-" set tags^=.git/tags
+set tags^=.git/tags
 
 " Show highlight when doing :%s/foo/bar
-set inccommand=nosplit
+set inccommand=split
+
+" Enable mouse coz why not?
+set mouse=nicr
 
 " Highlight current line under cursor
 " set cursorline
 
 " Change leader key
-let mapleader=' '
-let localleader='\'
+let mapleader = ' '
+let localleader = '\'
 
 " Enable elite mode. No arrows!!
-let g:elite_mode=1
+let g:elite_mode = 1
 
 let g:python3_host_prog = '~/.pyenv/versions/nvim/bin/python3'
 
@@ -172,17 +175,16 @@ let g:python3_host_prog = '~/.pyenv/versions/nvim/bin/python3'
 
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
-Plug 'preservim/nerdtree'
+Plug 'preservim/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'morhetz/gruvbox'
-Plug 'sainnhe/gruvbox-material'
+Plug 'joshdick/onedark.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'nelstrom/vim-visual-star-search'
+Plug 'junegunn/vim-slash'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -191,15 +193,16 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-obsession'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'airblade/vim-gitgutter'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go'}
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go'}
 Plug 'alvan/vim-closetag'
-Plug 'yujinyuz/eleline.vim'
+Plug 'yujinyuz/jinyuzline.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'luochen1990/rainbow'
-Plug 'vimwiki/vimwiki'
+Plug 'fcpg/vim-waikiki'
+  let g:waikiki_roots = ['~/vimwiki']
+  let g:waikiki_default_maps = 1
 Plug 'honza/vim-snippets'
-Plug 'Chiel92/vim-autoformat'
 Plug 'liuchengxu/vista.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'kana/vim-textobj-user'
@@ -207,6 +210,12 @@ Plug 'kana/vim-textobj-entire'
 Plug 'wakatime/vim-wakatime'
 Plug 'mbbill/undotree'
 Plug 'dense-analysis/ale'
+if has('timers')
+  " Blink 2 times with 50ms interval
+  noremap <expr> <plug>(slash-after) slash#blink(2, 50)
+  noremap <plug>(slash-after) zz
+endif
+Plug 'majutsushi/tagbar'
 
 " These are plugins that I saw from articles
 " that I don't need right now but might need later
@@ -252,8 +261,8 @@ inoremap jk <Esc>
 nnoremap Y y$
 
 " Auto center on search match
-nnoremap n nzz
-nnoremap N Nzz
+" nnoremap n nzz
+" nnoremap N Nzz
 
 " Copy/paste and move cursor to end of last operated text or end of putted text
 vnoremap <silent> y y`]
@@ -276,7 +285,10 @@ nnoremap <leader>d "_d
 nnoremap <BS> :buffer#<CR>:echo bufnr('%') . ': ' . expand('%:p')<CR>
 
 " Faster buffer navigation
-nnoremap <leader>b :buffer *
+nnoremap <leader>b :Buffers<CR>
+
+" Search files in the root of current buffer
+nnoremap <leader>g :Files %:p:h<cr>
 
 " List all buffers then choose number to go to buffer
 nnoremap gb :ls<CR>:b
@@ -300,7 +312,7 @@ nnoremap <silent> ++ :Files<CR>
 nnoremap <silent> <leader>l :noh<CR>
 
 " Have a git hunk preview that can be modified
-noremap ghp <Plug>(GitGutterPreviewHunk)
+nmap ghp <Plug>(GitGutterPreviewHunk)
 
 " Use Alt-jk for moving lines
 " Note: iTerm2 > Profiles > Keys > Left Option > Esc+
@@ -320,7 +332,9 @@ map \t <Esc>:set expandtab tabstop=4 shiftwidth=4<CR>
 map \T <Esc>:set expandtab tabstop=8 shiftwidth=8<CR>
 
 " Vista tags
-nmap \b :Vista!!<CR>
+" nmap \b :Vista!!<CR>
+nmap \b :TagbarToggle<CR>
+
 
 " Rg current word
 nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
@@ -390,7 +404,7 @@ nnoremap <C-]> g<C-]>
 " Colors {{{
 set termguicolors
 syntax on
-colorscheme gruvbox-material
+colorscheme onedark
 
 " Make vim transparent so it adapts the background color of the
 " terminal
@@ -428,6 +442,7 @@ let NERDTreeNaturalSort = 1
 nnoremap <silent> <C-n> :NERDTreeToggle<CR>
 
 let NERDTreeQuitOnOpen = 0
+let NERDTreeIgnore = ['__pycache__', 'node_modules']
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeWinSize = 25
 let NERDTreeAutoCenter = 1

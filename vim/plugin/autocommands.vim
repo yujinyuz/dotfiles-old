@@ -5,13 +5,6 @@ augroup ReturnToLastEditPosition
     \| exe "normal! g'\"" | endif
 augroup END
 
-" Toggle highlight when entering in insert / normal mode
-augroup ToggleHighlight
-  autocmd!
-  autocmd InsertEnter * :setlocal nohlsearch
-  autocmd InsertLeave * :setlocal hlsearch
-augroup END
-
 " https://github.com/neoclide/coc.nvim/wiki/Completion-with-sources
 augroup EndAutocomplete
   autocmd!

@@ -14,5 +14,11 @@ let g:ale_echo_msg_warning_str = 'W'
 " https://github.com/dense-analysis/ale/issues/249
 " highlight clear ALEErrorSign
 " highlight clear ALEWarningSign
-hi link ALEErrorSign    Error
-hi link ALEWarningSign  Warning
+" hi link ALEErrorSign    Error
+" hi link ALEWarningSign  Warning
+
+highlight ALEErrorSign ctermfg=9 ctermbg=15 guifg=#C30500 guibg=NONE
+highlight ALEWarningSign ctermfg=11 ctermbg=15 guifg=#ED6237 guibg=NONE
+
+" hi link ALEErrorSign GruvboxYellow
+" hi link ALEWarningSign GruvboxRed
