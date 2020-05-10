@@ -18,7 +18,7 @@ window:
 font:
   size: 13
   normal:
-    family: JetBrainsMono Nerd Font Mono
+    family: FiraMono Nerd Font Mono
     style: Regular
   # bold:
     # family: Operator Mono Lig
@@ -67,7 +67,6 @@ key_bindings:
   - { key: L,        mods: Alt,                  chars: "\x1bl"                       }
   - { key: P,        mods: Command,              chars: "++"                          }
   - { key: Slash,    mods: Command,              chars: "gcc\x1b"                     }
-  - { key: W,        mods: Command,              action: None                         }
   - { key: Key1,     mods: Alt,                  chars: "\x1b0"                       }
   - { key: Key1,     mods: Alt,                  chars: "\x1b1"                       }
   - { key: Key2,     mods: Alt,                  chars: "\x1b2"                       }
