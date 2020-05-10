@@ -109,20 +109,23 @@ set conceallevel=3
 set nowrap
 
 " ID Tags relative to current file and directory
-" set tags^=.git/tags
+set tags^=.git/tags
 
 " Show highlight when doing :%s/foo/bar
-set inccommand=nosplit
+set inccommand=split
+
+" Enable mouse coz why not?
+set mouse=nicr
 
 " Highlight current line under cursor
 " set cursorline
 
 " Change leader key
-let mapleader=' '
-let localleader='\'
+let mapleader = ' '
+let localleader = '\'
 
 " Enable elite mode. No arrows!!
-let g:elite_mode=1
+let g:elite_mode = 1
 
 let g:python3_host_prog = '~/.pyenv/versions/nvim/bin/python3'
 
@@ -258,8 +261,8 @@ inoremap jk <Esc>
 nnoremap Y y$
 
 " Auto center on search match
-nnoremap n nzz
-nnoremap N Nzz
+" nnoremap n nzz
+" nnoremap N Nzz
 
 " Copy/paste and move cursor to end of last operated text or end of putted text
 vnoremap <silent> y y`]
@@ -282,7 +285,10 @@ nnoremap <leader>d "_d
 nnoremap <BS> :buffer#<CR>:echo bufnr('%') . ': ' . expand('%:p')<CR>
 
 " Faster buffer navigation
-nnoremap <leader>b :buffer *
+nnoremap <leader>b :Buffers<CR>
+
+" Search files in the root of current buffer
+nnoremap <leader>g :Files %:p:h<cr>
 
 " List all buffers then choose number to go to buffer
 nnoremap gb :ls<CR>:b
@@ -306,7 +312,7 @@ nnoremap <silent> ++ :Files<CR>
 nnoremap <silent> <leader>l :noh<CR>
 
 " Have a git hunk preview that can be modified
-noremap ghp <Plug>(GitGutterPreviewHunk)
+nmap ghp <Plug>(GitGutterPreviewHunk)
 
 " Use Alt-jk for moving lines
 " Note: iTerm2 > Profiles > Keys > Left Option > Esc+
@@ -326,7 +332,9 @@ map \t <Esc>:set expandtab tabstop=4 shiftwidth=4<CR>
 map \T <Esc>:set expandtab tabstop=8 shiftwidth=8<CR>
 
 " Vista tags
-nmap \b :Vista!!<CR>
+" nmap \b :Vista!!<CR>
+nmap \b :TagbarToggle<CR>
+
 
 " Rg current word
 nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
@@ -396,7 +404,7 @@ nnoremap <C-]> g<C-]>
 " Colors {{{
 set termguicolors
 syntax on
-colorscheme gruvbox-material
+colorscheme onedark
 
 " Make vim transparent so it adapts the background color of the
 " terminal
@@ -434,6 +442,7 @@ let NERDTreeNaturalSort = 1
 nnoremap <silent> <C-n> :NERDTreeToggle<CR>
 
 let NERDTreeQuitOnOpen = 0
+let NERDTreeIgnore = ['__pycache__', 'node_modules']
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeWinSize = 25
 let NERDTreeAutoCenter = 1
