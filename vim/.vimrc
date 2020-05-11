@@ -127,7 +127,7 @@ let localleader = '\'
 " Enable elite mode. No arrows!!
 let g:elite_mode = 1
 
-let g:python3_host_prog = '~/.pyenv/versions/nvim/bin/python3'
+let g:python3_host_prog = '/usr/local/var/pyenv/versions/nvim/bin/python3'
 
 " NeoVim Enabled Defaults {{{
 " Just uncomment the lines with `set` to when not using neovim
@@ -476,8 +476,6 @@ let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 
 " fzf.vim {{{
 let g:fzf_tags_command = 'ctags -R'
-" let $FZF_DEFAULT_COMMAND='rg --files --hidden --ignore-global'
-let $FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules'
 let g:fzf_preview_window = 'down:1'
 let g:fzf_layout = { 'window': { 'width': 0.6, 'height': 0.6 } }
 let g:fzf_action = {
