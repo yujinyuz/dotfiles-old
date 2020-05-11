@@ -127,7 +127,7 @@ let localleader = '\'
 " Enable elite mode. No arrows!!
 let g:elite_mode = 1
 
-let g:python3_host_prog = '~/.pyenv/versions/nvim/bin/python3'
+let g:python3_host_prog = '/usr/local/var/pyenv/versions/nvim/bin/python3'
 
 " NeoVim Enabled Defaults {{{
 " Just uncomment the lines with `set` to when not using neovim
