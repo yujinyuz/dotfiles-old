@@ -23,7 +23,7 @@
   pf = push --force-with-lease
   staged = diff --cached
   wc = whatchanged
-  lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+  lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
   ll = log --pretty=format:\"%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]\" --decorate --numstat
   lnc = log --pretty=format:\"%h %s [%cn]\"
   lds = log --pretty=format:\"%C(yellow)%h %ad%Cred%d %Creset%s%Cblue [%cn]\" --decorate --date=short
@@ -33,8 +33,13 @@
   fl = log -u
   dl = !git ll -1
   ctags = !.git/hooks/ctags
-  pu = push
+  p = push
   pup = "!git push -u origin $(git rev-parse --abbrev-ref HEAD)"
+  unstage = "restore --staged ."
+  unpushed = "cherry -v"
+  cleanstate = "!git clean -f && git restore ."
+  renamebranch = branch -m
+  cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
 [filter "lfs"]
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
@@ -70,6 +75,9 @@
 [include]
   path = ~/.gitconfig.local
 [init]
-  templatedir = ~/.git_template
+  ; templatedir = ~/.git_template
 [pull]
   rebase = true
+[push]
+  ; https://stackoverflow.com/a/26438076/3788603
+  followTags = true
