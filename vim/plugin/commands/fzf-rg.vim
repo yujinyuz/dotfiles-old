@@ -7,7 +7,7 @@
 let g:rg_command = 'rg --column --line-number --no-heading --color=always --smart-case '
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   b:rg_command.shellescape(<q-args>), 1,
+  \   g:rg_command.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview({'options': '--delimiter : --nth 4.. --prompt "AllFiles> "'}, 'down'), <bang>0)
 
 command! -bang -nargs=* RgWeb
