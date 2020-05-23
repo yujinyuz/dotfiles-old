@@ -10,6 +10,7 @@
 "   Author: yujinyuz
 "   GitHub: https://github.com/yujinyuz
 "   Repository URL: https://github.com/yujinyuz/dotfiles
+"   Desc: Collection of dotfiles gathered across different dotfiles repos
 
 " General {{{
 
@@ -117,12 +118,28 @@ set inccommand=split
 " Enable mouse coz why not?
 set mouse=nicr
 
+" Syntax coloring lines that are too long just slows down the world
+set synmaxcol=512
+
+" No vertical split bar
+highlight VertSplit cterm=NONE
+set fillchars=vert:\
+
+" Don't wait too long for key sequences
+set timeoutlen=300
+
+" Avoid annoying mode switch lag
+set ttimeoutlen=50
+
+" Use rg instead of grep.
+set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+
+
 " Highlight current line under cursor
 " set cursorline
 
 " Change leader key
 let mapleader = ' '
-let localleader = '\'
 
 " Enable elite mode. No arrows!!
 let g:elite_mode = 1
@@ -200,8 +217,6 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'luochen1990/rainbow'
 Plug 'fcpg/vim-waikiki'
-  let g:waikiki_roots = ['~/vimwiki']
-  let g:waikiki_default_maps = 1
 Plug 'honza/vim-snippets'
 Plug 'liuchengxu/vista.vim'
 Plug 'ludovicchabant/vim-gutentags'
@@ -210,40 +225,38 @@ Plug 'kana/vim-textobj-entire'
 Plug 'wakatime/vim-wakatime'
 Plug 'mbbill/undotree'
 Plug 'dense-analysis/ale'
-if has('timers')
-  " Blink 2 times with 50ms interval
-  noremap <expr> <plug>(slash-after) slash#blink(2, 50)
-  noremap <plug>(slash-after) zz
-endif
-Plug 'majutsushi/tagbar'
-
-" These are plugins that I saw from articles
-" that I don't need right now but might need later
-
-" Plug 'Konfekt/FastFold'
-" Plug 'iamcco/markdown-preview.nvim'
-" Plug 'junegunn/limelight.vim'
-" Plug 'jiangmiao/auto-pairs'
-" Plug 'tmsvg/pear-tree'
-" Plug 'yggdroot/indentline'
 call plug#end()
-" }}}
+" End Plugins}}}
 
-" Custom Key Mappings {{{
+" Colors {{{
+set termguicolors
+syntax on
 
-" Write file
+set t_Co=256
+colorscheme onedark
+" colorscheme gruvbox-material
+
+" Make vim transparent so it adapts the background color of the
+" terminal
+hi Normal guibg=NONE ctermbg=NONE
+hi CursorLineNr guibg=NONE ctermbg=NONE
+hi SignColumn guibg=NONE ctermbg=NONE
+" End Colors }}}
+
+" Native Key Mappings {{{
+
+" Writing and quitting
+" w = write
+" qa = quit all
+" qq = quit current
 nmap <leader>w :w!<CR>
-
-" Quit vim
 nnoremap <leader>qa :qa!<CR>
-
-" Quit current file
 nmap <leader>qq :q!<CR>
 
-" Edit vimrc file
+" Editing vimrc
+" ev = edit vimrc
+" sv = source vimrc
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
-
-" source vimrc file
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " Used for navigating to different split panes
@@ -254,15 +267,12 @@ if !get(g:, 'loaded_tmux_navigator', 0)
   nnoremap <C-L> <C-W>l
 endif
 
-" Map jk to Escape because it's too far away
+" Map jk/kj to Escape because it's too far away
 inoremap jk <Esc>
+inoremap kj <Esc>
 
 " Make Y work like other upcase commands
 nnoremap Y y$
-
-" Auto center on search match
-" nnoremap n nzz
-" nnoremap N Nzz
 
 " Copy/paste and move cursor to end of last operated text or end of putted text
 vnoremap <silent> y y`]
@@ -281,38 +291,24 @@ nnoremap < <<
 " Blackhole deletes
 nnoremap <leader>d "_d
 
-" Backspace faster switching to alternate file
+" Buffers
+" <BS> = buffer switch
+" gb = go buffer
 nnoremap <BS> :buffer#<CR>:echo bufnr('%') . ': ' . expand('%:p')<CR>
-
-" Faster buffer navigation
-nnoremap <leader>b :Buffers<CR>
-
-" Search files in the root of current buffer
-nnoremap <leader>g :Files %:p:h<cr>
-
-" List all buffers then choose number to go to buffer
 nnoremap gb :ls<CR>:b
 
 " Tab management
-map <leader>tn :tabnew<CR>
-map <leader>to :tabonly<CR>
-map <leader>tc :tabclose<CR>
-map <leader>tm :tabmove<CR>
+map \tn :tabnew<CR>
+map \to :tabonly<CR>
+map \tc :tabclose<CR>
+map \tm :tabmove<CR>
 
 " Command-line like forward/reverse search
 cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>
 
-" Map CmdP for FZF File Search
-" Use CtrlP when Cmd-P is not available
-nnoremap <silent> <C-p> :Files<CR>
-nnoremap <silent> ++ :Files<CR>
-
 " Clear search highlight
 nnoremap <silent> <leader>l :noh<CR>
-
-" Have a git hunk preview that can be modified
-nmap ghp <Plug>(GitGutterPreviewHunk)
 
 " Use Alt-jk for moving lines
 " Note: iTerm2 > Profiles > Keys > Left Option > Esc+
@@ -321,25 +317,7 @@ nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
-" That awful mixed mode with the half-tabs-are-spaces:
-" Source: https://vim.fandom.com/wiki/Converting_tabs_to_spaces
-" Execute :retab so convert the tabs to spaces
-map \M <Esc>:set noexpandtab tabstop=8 softtabstop=4 shiftwidth=4<CR>
-" Mini tabs, small "m":
-map \m <Esc>:set expandtab tabstop=2 shiftwidth=2<CR>
-" Think "little tabs" and "big tabs":
-map \t <Esc>:set expandtab tabstop=4 shiftwidth=4<CR>
-map \T <Esc>:set expandtab tabstop=8 shiftwidth=8<CR>
-
-" Vista tags
-" nmap \b :Vista!!<CR>
-nmap \b :TagbarToggle<CR>
-
-
-" Rg current word
-nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
-
-"" Disable arrow movements. Resize splits panes instead
+" Disable arrow movements. Resize splits panes instead
 if get(g:, 'elite_mode')
   nnoremap <Up> :resize +2<CR>
   nnoremap <Down> :resize -2<CR>
@@ -347,16 +325,14 @@ if get(g:, 'elite_mode')
   nnoremap <Right> :vertical resize -2<CR>
 endif
 
-nnoremap <leader>f :Rg<CR>
-
 " Open definition in new tab
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
-nnoremap <leader>nf :NERDTreeFind<CR>
 
 " Find and Replace highlighted line
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
 " Find and replace with confirmation until EOF
+" rc = replace current
 noremap <leader>rc "sy:ZZWrap .,$s/<C-r>s//gc<Left><Left><Left>
 
 " Togglewrap
@@ -368,7 +344,9 @@ nnoremap Q <NOP>
 " Visually select pasted or yanked text
 nnoremap gV `[v`]
 
-" Access file name data fp = filepath; fn = filename
+" Access file name data
+" fp = filepath
+" fn = filename
 cnoremap \fp <C-R>=expand("%:p:h")<CR>
 inoremap \fp <C-R>=expand("%:p:h")<CR>
 cnoremap \fn <C-R>=expand("%:t:r")<CR>
@@ -392,26 +370,57 @@ nnoremap <C-e> 3<C-e>
 nmap <Space><Space> <C-w>w
 
 " For easier splitting of files
-nmap ss :split<Return><C-w>w
-nmap sv :vsplit<Return><C-w>w
+nmap ss :split<CR><C-w>w
+nmap sv :vsplit<CR><C-w>w
 
 " Jump to first tag if only one exists
 " else, let us choose which tag to jump to
-nnoremap <C-]> g<C-]>
+nnoremap <C-]> g<C-]>:echo expand('%:p')<CR>
 
-" End Custom Key Mappings }}}
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR><CR>:cw<CR>
 
-" Colors {{{
-set termguicolors
-syntax on
-colorscheme onedark
-
-" Make vim transparent so it adapts the background color of the
-" terminal
-hi Normal guibg=NONE ctermbg=NONE
-" }}}
+" Navigation for quickfix list
+nnoremap <silent> [e :cprevious<CR>
+nnoremap <silent> ]e :cnext<CR>
+nnoremap <silent> \q :cclose<CR>
+" End Native }}}
 
 " Plugins custom settings {{{
+
+" ale {{{
+let g:ale_fixers = {
+\ '*': ['remove_trailing_lines', 'trim_whitespace'],
+\ }
+let g:ale_lint_on_insert_leave = 1
+let g:ale_fix_on_save = 1
+let g:ale_lint_on_save = 1
+let g:ale_sign_error = '◉'
+let g:ale_sign_warning = '⚠'
+let g:ale_on_enter = 0
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+
+" https://github.com/dense-analysis/ale/issues/249
+" highlight clear ALEErrorSign
+" highlight clear ALEWarningSign
+" hi link ALEErrorSign    Error
+" hi link ALEWarningSign  Warning
+highlight ALEErrorSign ctermfg=9 ctermbg=15 guifg=#C30500 guibg=NONE
+highlight ALEWarningSign ctermfg=11 ctermbg=15 guifg=#ED6237 guibg=NONE
+
+" next/previous warnings or errors
+nmap ]c <Plug>(ale_next_wrap)
+nmap [c <Plug>(ale_previous_wrap)
+" }}}
+
+" closetag.vim {{{
+let g:closetag_filenames = '*.html,*.js,*.erb'
+let g:closetag_emptyTags_caseSensitive = 1
+" }}}
 
 " coc.vim {{{
 let g:coc_global_extensions = [
@@ -427,51 +436,13 @@ let g:coc_global_extensions = [
   \ 'coc-css',
   \ 'coc-cssmodules',
   \ 'coc-yank',
-  \ 'coc-snippets',
-  \ 'coc-eslint'
+  \ 'coc-snippets'
   \ ]
+" 'coc-eslint'
 " }}}
 
-" eleline {{{
-let g:eleline_powerline_fonts = 1
-" }}}
-
-" NERDTree {{{
-let g:nerdtree_tabs_open_on_console_startup = 0
-let NERDTreeNaturalSort = 1
-nnoremap <silent> <C-n> :NERDTreeToggle<CR>
-
-let NERDTreeQuitOnOpen = 0
-let NERDTreeIgnore = ['__pycache__', 'node_modules']
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeWinSize = 25
-let NERDTreeAutoCenter = 1
-let g:NERDTreeIndicatorMapCustom =
-\ {"modified"  : "✹", "staged"    : "✚",
-\ "untracked" : "✭", "renamed"   : "➜",
-\ "unmerged"  : "═", "deleted"   : "✖",
-\ "dirty"     : "✗", "clean"     : "✔︎",
-\ "ignored"   : '☒', "unknown"   : "?"}
-" }}}
-
-" closetag.vim {{{
-let g:closetag_filenames = '*.html,*.js,*.erb'
-let g:closetag_emptyTags_caseSensitive = 1
-" }}}
-
-" vim-devicons {{{
-" After a re-source, fix syntax matching issues (concealing brackets):
-if exists('g:loaded_webdevicons')
-  call webdevicons#refresh()
-endif
-let g:webdevicons_enable = 1
-let g:webdevicons_enable_nerdtree = 1
-let g:WebDevIconsUnicodeDecorateFileNodes = 1
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
-let g:webdevicons_enable_airline_statusline = 1
-let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
-let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
+" endwise {{{
+let g:endwise_no_mappings = 1
 " }}}
 
 " fzf.vim {{{
@@ -488,6 +459,42 @@ imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" Use CtrlP when Cmd-P is not available
+nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> ++ :Files<CR>
+" Global search
+nnoremap <leader>f :Rg<CR>
+" Buffers search
+nnoremap <leader>b :Buffers<CR>
+" Search files in the root of current buffer
+nnoremap <leader>g :Files %:p:h<cr>
+" Tags search
+nnoremap <leader>t :Tags<CR>
+nnoremap <leader>T :BTags<CR>
+" }}}
+
+" jinyuzline {{{
+let g:eleline_powerline_fonts = 1
+" }}}
+
+" NERDTree {{{
+let g:nerdtree_tabs_open_on_console_startup = 0
+let NERDTreeNaturalSort = 1
+let NERDTreeQuitOnOpen = 0
+let NERDTreeIgnore = ['__pycache__', 'node_modules']
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeWinSize = 25
+let NERDTreeAutoCenter = 1
+let g:NERDTreeIndicatorMapCustom =
+\ {"modified"  : "✹", "staged"    : "✚",
+\ "untracked" : "✭", "renamed"   : "➜",
+\ "unmerged"  : "═", "deleted"   : "✖",
+\ "dirty"     : "✗", "clean"     : "✔︎",
+\ "ignored"   : '☒', "unknown"   : "?"}
+
+nnoremap <silent> <C-n> :NERDTreeToggle<CR>
+nnoremap <leader>nf :NERDTreeFind<CR>
 " }}}
 
 " rainbow {{{
@@ -508,22 +515,68 @@ nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 " }}}
 
-" vim-gitgutter {{{
-let g:gitgutter_sign_added = '▎'
-let g:gitgutter_sign_modified = '▎'
-let g:gitgutter_sign_removed = '▏'
-let g:gitgutter_sign_removed_first_line = '▔'
-let g:gitgutter_sign_modified_removed = '▋'
-let g:gitgutter_preview_win_floating = 0
+" vim-devicons {{{
+" After a re-source, fix syntax matching issues (concealing brackets):
+if exists('g:loaded_webdevicons')
+  call webdevicons#refresh()
+endif
+let g:webdevicons_enable = 1
+let g:webdevicons_enable_nerdtree = 1
+let g:WebDevIconsUnicodeDecorateFileNodes = 1
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
+let g:webdevicons_enable_airline_statusline = 1
+let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
+let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 " }}}
 
-" endwise {{{
-let g:endwise_no_mappings = 1
+" vim-gitgutter {{{
+" Note: This is a custom setting and not a gitgutter default
+let g:custom_git_gutter_lines = 0
+
+if get(g:, 'custom_git_gutter_lines')
+  let g:gitgutter_sign_added = '▎'
+  let g:gitgutter_sign_modified = '▎'
+  let g:gitgutter_sign_removed = '▏'
+  let g:gitgutter_sign_removed_first_line = '▔'
+  let g:gitgutter_sign_modified_removed = '▋'
+  let g:gitgutter_preview_win_floating = 0
+endif
+
+" Disable gitgutter mappings and use our own
+let g:gitgutter_map_keys = 0
+" hp = hunk preview
+nmap <leader>hp <Plug>(GitGutterPreviewHunk)
+" hs = hunk stage
+nmap <leader>hs <Plug>(GitGutterStageHunk)
+xmap <leader>hs <Plug>(GitGutterStageHunk)
+" hu = hunk undo
+nmap <leader>hu <Plug>(GitGutterUndoHunk)
+xmap <leader>hu <Plug>(GitGutterUndoHunk)
+" Got next/previous hunk
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
+" }}}
+
+" vim-slash {{{
+if has('timers')
+  " Blink 2 times with 50ms interval
+  noremap <expr> <plug>(slash-after) 'zz'.slash#blink(2, 50)
+endif
+" }}}
+
+" vim-waikiki {{{
+let g:waikiki_roots = ['~/vimwiki']
+let g:waikiki_default_maps = 1
+" }}}
+
+" vista.vim {{{
+nmap \b :Vista!!<CR>
 " }}}
 
 " End Plugins Custom Settings }}}
 
-" coc.vim settings from documentation {{{
+" coc.nvim settings from documentation {{{
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=100
 
@@ -559,20 +612,21 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
+" would've been better to remap `coc-definition` and others
+" to start with `g` but I changed it to `<leader>c[char]` so that
+" it would remind me that it's from coc.nvim.
 nmap <silent> <leader>cd <Plug>(coc-definition)
 nmap <silent> <leader>cy <Plug>(coc-type-definition)
 nmap <silent> <leader>ci <Plug>(coc-implementation)
 nmap <silent> <leader>cr <Plug>(coc-references)
 nmap <silent> <leader>cn <Plug>(coc-rename)
+nmap <silent> <leader>ck :call <SID>show_documentation()<CR>
 
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
 
 " Use <C-j> for select text for visual placeholder of snippet.
 vmap <C-j> <Plug>(coc-snippets-select)
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -637,6 +691,6 @@ nnoremap <silent> \j :<C-u>CocNext<CR>
 nnoremap <silent> \k :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> \p :<C-u>CocListResume<CR>
-" End }}}
+" End coc.nvim settings }}}
 
 " vim:filetype=vim sw=2 foldmethod=marker tw=78 expandtab
