@@ -1,88 +1,115 @@
-[user]
-  name = Eugene Oliveros
-  email = eevoliveros@gmail.com
-  signingkey = A05BDF3FF69CA6A8
-[core]
-  pager = diff-so-fancy | less --tabs=4
-  excludesfile = ~/.gitignoreglobal
-[commit]
-  template = ~/.gitmessage
-  verbose = true
 [alias]
-  st = status
-  co = checkout
-  br = branch
-  c = commit
-  cm = commit -m
-  d = difftool
-  branches = for-each-ref --sort=-committerdate --format=\"%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes
-  ci = commit -v
+  ; Amend the currently staged files to the latest commit
+	amend = commit --amend --reuse-message=HEAD
   aa = add --all
   ap = add --patch
-  ; Works like --force but warns you when your local is not up to date
-  pf = push --force-with-lease
-  staged = diff --cached
-  wc = whatchanged
+  br = branch
+  branches = for-each-ref --sort=-committerdate --format=\"%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes
+  c = commit
+  ci = commit -v
+  cleanstate = "!git clean -f && git restore ."
+  cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
+  cm = commit -m
+  co = checkout
+  contributors = shortlog --summary --numbered
+  ctags = !.git/hooks/ctags
+  d = difftool
+  dl = !git ll -1
+  ; Find branches containing commit
+	fb = "!f() { git branch -a --contains $1; }; f"
+  ; Find commits by source code
+  fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+  ; Find commits by commit message
+	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+  ; Find tags containing commit
+	ft = "!f() { git describe --always --contains $1; }; f"
+  filelog = log -u
+  fl = log -u
+  ; Switch to a branch, creating it if necessary
+	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+  ld = log --pretty=format:\"%C(yellow)%h %ad%Cred%d %Creset%s%Cblue [%cn]\" --decorate --date=relative
+  lds = log --pretty=format:\"%C(yellow)%h %ad%Cred%d %Creset%s%Cblue [%cn]\" --decorate --date=short
+  le = log --oneline --decorate
   lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
   ll = log --pretty=format:\"%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]\" --decorate --numstat
   lnc = log --pretty=format:\"%h %s [%cn]\"
-  lds = log --pretty=format:\"%C(yellow)%h %ad%Cred%d %Creset%s%Cblue [%cn]\" --decorate --date=short
-  ld = log --pretty=format:\"%C(yellow)%h %ad%Cred%d %Creset%s%Cblue [%cn]\" --decorate --date=relative
-  le = log --oneline --decorate
-  filelog = log -u
-  fl = log -u
-  dl = !git ll -1
-  ctags = !.git/hooks/ctags
-  contributors = shortlog --summary --numbered
   p = push
+  ; Works like --force but warns you when your local is not up to date
+  pf = push --force-with-lease
   pup = "!git push -u origin $(git rev-parse --abbrev-ref HEAD)"
-  unstage = "restore --staged ."
+  remotes = remote -v
+  rename-branch = branch -m
+  s = status -s
+  st = status
+  staged = diff --cached
   unpushed = "cherry -v"
-  cleanstate = "!git clean -f && git restore ."
-  renamebranch = branch -m
-  cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
-[filter "lfs"]
-  clean = git-lfs clean -- %f
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
-  required = true
+  unstage = "restore --staged ."
+  wc = whatchanged
+[core]
+  excludesfile = ~/.gitignoreglobal
+  pager = diff-so-fancy | less --tabs=4 -RFX
+[commit]
+  template = ~/.gitmessage
+  verbose = true
 [color]
   ui = auto
-[color "diff-highlight"]
-  oldNormal = red bold
-  oldHighlight = red bold 52
-  newNormal = green bold
-  newHighlight = green bold 22
-[color "diff"]
-  meta = 11
-  frag = magenta bold
-  commit = yellow bold
-  old = red bold
-  new = green bold
-  whitespace = red reverse
 [color "branch"]
   current = yellow reverse
   local = yellow
   remote = green
+[color "diff"]
+  commit = yellow bold
+  frag = magenta bold
+  meta = 11
+  new = green bold
+  old = red bold
+  whitespace = red reverse
+[color "diff-highlight"]
+  newHighlight = green bold 22
+  newNormal = green bold
+  oldHighlight = red bold 52
+  oldNormal = red bold
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
 [diff]
   tool = vimdiff
+	# Detect copies as well as renames
+  renames = copies
+[diff "bin"]
+  ; Use `hexdump` to diff binary files
+  textconv = hexdump -v -C
 [difftool]
   prompt = false
 [difftool "vimdiff"]
-  cmd = vimdiff \"$LOCAL\" \"$REMOTE\"
+  cmd = nvim -d $LOCAL $REMOTE -c '$wincmd w' -c 'wincmd J'
+[fetch]
+  prune = true
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  process = git-lfs filter-process
+  required = true
+  smudge = git-lfs smudge -- %f
+[include]
+  path = ~/.gitconfig.local
+[init]
+  templatedir = ~/.git_template
 [merge]
   conflictStyle = merge
   ff = no
   commit = no
   summary = true
-[fetch]
-  prune = true
-[include]
-  path = ~/.gitconfig.local
-[init]
-  ; templatedir = ~/.git_template
+  ; Include summaries of merged commits in newly created merge commit messages
+  log = true
 [pull]
   rebase = true
 [push]
+  ; https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushdefault
+  default = simple
   ; https://stackoverflow.com/a/26438076/3788603
   followTags = true
+[user]
+  email = eevoliveros@gmail.com
+  name = Eugene Oliveros
+  signingkey = A05BDF3FF69CA6A8
