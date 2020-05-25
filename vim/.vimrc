@@ -514,6 +514,10 @@ nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 " }}}
 
+" mbbill/undotree {{{
+nnoremap <leader>u :UndotreeToggle<CR>
+" }}}
+
 " vim-devicons {{{
 " After a re-source, fix syntax matching issues (concealing brackets):
 if exists('g:loaded_webdevicons')
