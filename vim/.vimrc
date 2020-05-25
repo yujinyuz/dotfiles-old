@@ -592,7 +592,7 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " to start with `g` but I changed it to `<leader>c[char]` so that
 " it would remind me that it's from coc.nvim.
 nmap <silent> <leader>cd <Plug>(coc-definition)
-nmap <silent> <leader>cy <Plug>(coc-type-definition)
+nmap <silent> <leader>ct <Plug>(coc-type-definition)
 nmap <silent> <leader>ci <Plug>(coc-implementation)
 nmap <silent> <leader>cr <Plug>(coc-references)
 nmap <silent> <leader>cn <Plug>(coc-rename)
