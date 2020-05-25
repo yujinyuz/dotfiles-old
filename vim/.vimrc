@@ -467,14 +467,19 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> ++ :Files<CR>
 " Global search
-nnoremap <leader>f :Rg<CR>
+nnoremap <leader>f :Rg<Space>
 " Buffers search
 nnoremap <leader>b :Buffers<CR>
 " Search files in the root of current buffer
 nnoremap <leader>g :Files %:p:h<cr>
 " Tags search
-nnoremap <leader>t :Tags<CR>
+" nnoremap <leader>t :Tags<CR>
 nnoremap <leader>T :BTags<CR>
+" }}}
+
+" fugitive {{{
+nnoremap <leader>h :Git difftool<CR>
+
 " }}}
 
 " jinyuzline {{{
