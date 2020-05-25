@@ -209,13 +209,11 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-obsession'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'airblade/vim-gitgutter'
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go'}
 Plug 'alvan/vim-closetag'
 Plug 'yujinyuz/jinyuzline.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'luochen1990/rainbow'
 Plug 'fcpg/vim-waikiki'
 Plug 'honza/vim-snippets'
 Plug 'liuchengxu/vista.vim'
@@ -497,15 +495,6 @@ nnoremap <silent> <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>nf :NERDTreeFind<CR>
 " }}}
 
-" rainbow {{{
-let g:rainbow_active = 1
-let g:rainbow_conf = {
-  \  'separately': {
-  \    'nerdtree': 0,
-  \   }
-  \ }
-" }}}
-
 " tmux-navigator {{{
 " Disabling tmux-navigator defaults since we are using the <C-\>
 let g:tmux_navigator_no_mappings = 1
@@ -528,34 +517,6 @@ let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 let g:webdevicons_enable_airline_statusline = 1
 let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
 let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
-" }}}
-
-" vim-gitgutter {{{
-" Note: This is a custom setting and not a gitgutter default
-let g:custom_git_gutter_lines = 0
-
-if get(g:, 'custom_git_gutter_lines')
-  let g:gitgutter_sign_added = '▎'
-  let g:gitgutter_sign_modified = '▎'
-  let g:gitgutter_sign_removed = '▏'
-  let g:gitgutter_sign_removed_first_line = '▔'
-  let g:gitgutter_sign_modified_removed = '▋'
-  let g:gitgutter_preview_win_floating = 0
-endif
-
-" Disable gitgutter mappings and use our own
-let g:gitgutter_map_keys = 0
-" hp = hunk preview
-nmap <leader>hp <Plug>(GitGutterPreviewHunk)
-" hs = hunk stage
-nmap <leader>hs <Plug>(GitGutterStageHunk)
-xmap <leader>hs <Plug>(GitGutterStageHunk)
-" hu = hunk undo
-nmap <leader>hu <Plug>(GitGutterUndoHunk)
-xmap <leader>hu <Plug>(GitGutterUndoHunk)
-" Got next/previous hunk
-nmap ]h <Plug>(GitGutterNextHunk)
-nmap [h <Plug>(GitGutterPrevHunk)
 " }}}
 
 " vim-slash {{{
