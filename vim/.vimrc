@@ -411,8 +411,8 @@ highlight ALEErrorSign ctermfg=9 ctermbg=15 guifg=#C30500 guibg=NONE
 highlight ALEWarningSign ctermfg=11 ctermbg=15 guifg=#ED6237 guibg=NONE
 
 " next/previous warnings or errors
-nmap ]c <Plug>(ale_next_wrap)
-nmap [c <Plug>(ale_previous_wrap)
+nmap ]w <Plug>(ale_next_wrap)
+nmap [w <Plug>(ale_previous_wrap)
 " }}}
 
 " closetag.vim {{{
