@@ -134,7 +134,9 @@ set ttimeoutlen=50
 " Use rg instead of grep.
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 
-
+" Enable undo directory
+set undodir=~/.vim/undodir
+set undofile
 " Highlight current line under cursor
 " set cursorline
 
