@@ -126,7 +126,7 @@ highlight VertSplit cterm=NONE
 set fillchars=vert:\
 
 " Don't wait too long for key sequences
-set timeoutlen=300
+set timeoutlen=500
 
 " Avoid annoying mode switch lag
 set ttimeoutlen=50
