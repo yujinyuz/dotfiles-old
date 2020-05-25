@@ -547,6 +547,7 @@ let g:waikiki_default_maps = 1
 
 " vista.vim {{{
 nmap \b :Vista!!<CR>
+nnoremap <leader>v :Vista finder<CR>
 " }}}
 
 " End Plugins Custom Settings }}}
