@@ -208,6 +208,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'christoomey/vim-tmux-navigator'
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go'}
 Plug 'alvan/vim-closetag'
+Plug 'itchyny/lightline.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'fcpg/vim-waikiki'
@@ -321,9 +322,9 @@ map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 " Find and Replace highlighted line
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
-" Find and replace with confirmation until EOF
-" rc = replace current
-noremap <leader>rc "sy:ZZWrap .,$s/<C-r>s//gc<Left><Left><Left>
+" Find and replace highlighted word with confirmation until EOF
+" cu =  change under
+noremap <leader>cu "sy:ZZWrap .,$s/<C-r>s//gc<Left><Left><Left>
 
 " Togglewrap
 noremap \\ :ToggleWrap<CR>
@@ -340,7 +341,7 @@ nnoremap gV `[v`]
 cnoremap \fp <C-R>=expand("%:p:h")<CR>
 inoremap \fp <C-R>=expand("%:p:h")<CR>
 cnoremap \fn <C-R>=expand("%:t:r")<CR>
-noremap \fn <C-R>=expand("%:t:r")<CR>
+inoremap \fn <C-R>=expand("%:t:r")<CR>
 
 " Date and datetime formatted
 cnoremap \dt <C-R>=strftime("%b %d, %Y")<CR>
@@ -452,20 +453,30 @@ nnoremap <silent> ++ :Files<CR>
 nnoremap <leader>f :Rg<Space>
 " Buffers search
 nnoremap <leader>b :Buffers<CR>
-" Search files in the root of current buffer
-nnoremap <leader>g :Files %:p:h<cr>
+" Search files relative to the current buffer
+nnoremap <leader>r :Files %:p:h<CR>
 " Tags search
-" nnoremap <leader>t :Tags<CR>
+nnoremap <leader>t :Tags<CR>
 nnoremap <leader>T :BTags<CR>
 " }}}
 
-" fugitive {{{
+" vim-fugitive {{{
+nnoremap <leader>gs :Git<CR>
+nnoremap <leader>gd :Gvdiffsplit<CR>
 nnoremap <leader>h :Git difftool<CR>
-
 " }}}
 
-" jinyuzline {{{
-let g:eleline_powerline_fonts = 1
+" lightline {{{
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
 " }}}
 
 " NERDTree {{{
@@ -485,6 +496,15 @@ let g:NERDTreeIndicatorMapCustom =
 
 nnoremap <silent> <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>nf :NERDTreeFind<CR>
+" }}}
+
+" netrw {{{
+" let g:loaded_netrwPlugin = 1 " Disable netrw
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
 " }}}
 
 " tmux-navigator {{{
