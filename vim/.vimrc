@@ -28,8 +28,6 @@ set relativenumber
 " Show current line number
 set number
 
-" Show matching parenthesis
-set showmatch
 
 " How many tenths of a second to blink when matching brakcets
 set matchtime=2
