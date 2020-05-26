@@ -189,11 +189,9 @@ let g:python3_host_prog = '/usr/local/var/pyenv/versions/nvim/bin/python3'
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
 Plug 'preservim/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
-Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'sainnhe/gruvbox-material'
 Plug 'joshdick/onedark.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
@@ -210,7 +208,6 @@ Plug 'tpope/vim-rhubarb'
 Plug 'christoomey/vim-tmux-navigator'
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go'}
 Plug 'alvan/vim-closetag'
-Plug 'yujinyuz/jinyuzline.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'fcpg/vim-waikiki'
@@ -281,9 +278,6 @@ nnoremap <silent> p p`]
 vnoremap < <gv
 vnoremap > >gv
 
-" So I don't have to press `>` twice in normal mode
-nnoremap > >>
-nnoremap < <<
 
 " Blackhole deletes
 nnoremap <leader>d "_d
@@ -376,14 +370,9 @@ nnoremap <C-]> g<C-]>:echo expand('%:p')<CR>
 
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR><CR>:cw<CR>
-
-" Navigation for quickfix list
-nnoremap <silent> [e :cprevious<CR>
-nnoremap <silent> ]e :cnext<CR>
-nnoremap <silent> \q :cclose<CR>
 " End Native }}}
 
-" Plugins custom settings {{{
+" Plugins custom settings {{{1
 
 " ale {{{
 let g:ale_fixers = {
@@ -510,21 +499,6 @@ nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 
 " mbbill/undotree {{{
 nnoremap <leader>u :UndotreeToggle<CR>
-" }}}
-
-" vim-devicons {{{
-" After a re-source, fix syntax matching issues (concealing brackets):
-if exists('g:loaded_webdevicons')
-  call webdevicons#refresh()
-endif
-let g:webdevicons_enable = 1
-let g:webdevicons_enable_nerdtree = 1
-let g:WebDevIconsUnicodeDecorateFileNodes = 1
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
-let g:webdevicons_enable_airline_statusline = 1
-let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
-let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 " }}}
 
 " vim-slash {{{
