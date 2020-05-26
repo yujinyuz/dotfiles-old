@@ -1,6 +1,6 @@
 [alias]
   ; Amend the currently staged files to the latest commit
-	amend = commit --amend --reuse-message=HEAD
+  amend = commit --amend --reuse-message=HEAD
   aa = add --all
   ap = add --patch
   br = branch
@@ -16,17 +16,17 @@
   d = difftool
   dl = !git ll -1
   ; Find branches containing commit
-	fb = "!f() { git branch -a --contains $1; }; f"
+  fb = "!f() { git branch -a --contains $1; }; f"
   ; Find commits by source code
   fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
   ; Find commits by commit message
-	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+  fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
   ; Find tags containing commit
-	ft = "!f() { git describe --always --contains $1; }; f"
+  ft = "!f() { git describe --always --contains $1; }; f"
   filelog = log -u
   fl = log -u
   ; Switch to a branch, creating it if necessary
-	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+  go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
   ld = log --pretty=format:\"%C(yellow)%h %ad%Cred%d %Creset%s%Cblue [%cn]\" --decorate --date=relative
   lds = log --pretty=format:\"%C(yellow)%h %ad%Cred%d %Creset%s%Cblue [%cn]\" --decorate --date=short
   le = log --oneline --decorate
@@ -75,7 +75,7 @@
   untracked = cyan
 [diff]
   tool = vimdiff
-	# Detect copies as well as renames
+  # Detect copies as well as renames
   renames = copies
 [diff "bin"]
   ; Use `hexdump` to diff binary files
@@ -91,8 +91,6 @@
   process = git-lfs filter-process
   required = true
   smudge = git-lfs smudge -- %f
-[include]
-  path = ~/.gitconfig.local
 [init]
   templatedir = ~/.git_template
 [merge]
@@ -113,3 +111,5 @@
   email = eevoliveros@gmail.com
   name = Eugene Oliveros
   signingkey = A05BDF3FF69CA6A8
+[include]
+  path = ~/.gitconfig.local
