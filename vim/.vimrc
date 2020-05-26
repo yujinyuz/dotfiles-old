@@ -227,8 +227,7 @@ set termguicolors
 syntax on
 
 set t_Co=256
-colorscheme onedark
-" colorscheme gruvbox-material
+colorscheme gruvbox-material
 
 " Make vim transparent so it adapts the background color of the
 " terminal
