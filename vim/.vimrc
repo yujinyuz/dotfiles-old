@@ -119,10 +119,6 @@ set mouse=nicr
 " Syntax coloring lines that are too long just slows down the world
 set synmaxcol=512
 
-" No vertical split bar
-highlight VertSplit cterm=NONE
-set fillchars=vert:\
-
 " Don't wait too long for key sequences
 set timeoutlen=500
 
