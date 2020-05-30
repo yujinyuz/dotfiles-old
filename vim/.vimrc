@@ -205,12 +205,10 @@ Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-rhubarb'
-Plug 'christoomey/vim-tmux-navigator'
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go'}
 Plug 'alvan/vim-closetag'
 Plug 'itchyny/lightline.vim'
 Plug 'wellle/tmux-complete.vim'
-Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'fcpg/vim-waikiki'
 Plug 'honza/vim-snippets'
 Plug 'liuchengxu/vista.vim'
@@ -252,14 +250,6 @@ nmap <leader>qq :q!<CR>
 " sv = source vimrc
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
-
-" Used for navigating to different split panes
-if !get(g:, 'loaded_tmux_navigator', 0)
-  nnoremap <C-J> <C-W>j
-  nnoremap <C-K> <C-W>k
-  nnoremap <C-H> <C-W>h
-  nnoremap <C-L> <C-W>l
-endif
 
 " Map jk/kj to Escape because it's too far away
 inoremap jk <Esc>
@@ -363,6 +353,12 @@ nmap <Space><Space> <C-w>w
 " For easier splitting of files
 nmap ss :split<CR><C-w>w
 nmap sv :vsplit<CR><C-w>w
+
+" For navigating splits
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-k> <C-w>k
+nnoremap <C-j> <C-w>j
 
 " Jump to first tag if only one exists
 " else, let us choose which tag to jump to
@@ -505,15 +501,6 @@ let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
-" }}}
-
-" tmux-navigator {{{
-" Disabling tmux-navigator defaults since we are using the <C-\>
-let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 " }}}
 
 " mbbill/undotree {{{
