@@ -103,7 +103,7 @@
 [pull]
   rebase = true
 [push]
-  ; https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushdefault
+  ; https://willi.am/blog/2014/08/12/the-dark-side-of-the-force-push/
   default = simple
   ; https://stackoverflow.com/a/26438076/3788603
   followTags = true
