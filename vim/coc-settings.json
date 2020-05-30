@@ -27,5 +27,5 @@
   "list.maxHeight": 15,
   "list.insertMappings": {
     "<C-c>": "do:exit"
-  },
+  }
 }

@@ -28,9 +28,6 @@ set relativenumber
 " Show current line number
 set number
 
-" Show matching parenthesis
-set showmatch
-
 " How many tenths of a second to blink when matching brakcets
 set matchtime=2
 
@@ -38,8 +35,8 @@ set matchtime=2
 " triggered when pressing tab while in the
 " execute command mode `:`
 set wildmenu
-" set wildmode=list:longest,list:full
 
+" set wildmode=list:longest,list:full
 " Disabled wildignore since it conflicts with tags
 " set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 
@@ -121,12 +118,8 @@ set mouse=nicr
 " Syntax coloring lines that are too long just slows down the world
 set synmaxcol=512
 
-" No vertical split bar
-highlight VertSplit cterm=NONE
-set fillchars=vert:\
-
 " Don't wait too long for key sequences
-set timeoutlen=300
+set timeoutlen=500
 
 " Avoid annoying mode switch lag
 set ttimeoutlen=50
@@ -134,9 +127,12 @@ set ttimeoutlen=50
 " Use rg instead of grep.
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 
+" Enable undo directory
+set undodir=~/.vim/undodir
+set undofile
 
-" Highlight current line under cursor
-" set cursorline
+" Disable intro message
+set shortmess+=I
 
 " Change leader key
 let mapleader = ' '
@@ -193,11 +189,9 @@ let g:python3_host_prog = '/usr/local/var/pyenv/versions/nvim/bin/python3'
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
 Plug 'preservim/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
-Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'sainnhe/gruvbox-material'
 Plug 'joshdick/onedark.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
@@ -208,14 +202,13 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-obsession'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-rhubarb'
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go'}
 Plug 'alvan/vim-closetag'
-Plug 'yujinyuz/jinyuzline.vim'
+Plug 'yujinyuz/itsmyline.vim', {'dir': expand('~/Sources/itsmyline.vim')}
 Plug 'wellle/tmux-complete.vim'
-Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'luochen1990/rainbow'
 Plug 'fcpg/vim-waikiki'
 Plug 'honza/vim-snippets'
 Plug 'liuchengxu/vista.vim'
@@ -233,14 +226,7 @@ set termguicolors
 syntax on
 
 set t_Co=256
-colorscheme onedark
-" colorscheme gruvbox-material
-
-" Make vim transparent so it adapts the background color of the
-" terminal
-hi Normal guibg=NONE ctermbg=NONE
-hi CursorLineNr guibg=NONE ctermbg=NONE
-hi SignColumn guibg=NONE ctermbg=NONE
+colorscheme gruvbox-material
 " End Colors }}}
 
 " Native Key Mappings {{{
@@ -259,17 +245,8 @@ nmap <leader>qq :q!<CR>
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
-" Used for navigating to different split panes
-if !get(g:, 'loaded_tmux_navigator', 0)
-  nnoremap <C-J> <C-W>j
-  nnoremap <C-K> <C-W>k
-  nnoremap <C-H> <C-W>h
-  nnoremap <C-L> <C-W>l
-endif
-
-" Map jk/kj to Escape because it's too far away
+" Map jk to Escape because it's too far away
 inoremap jk <Esc>
-inoremap kj <Esc>
 
 " Make Y work like other upcase commands
 nnoremap Y y$
@@ -284,9 +261,6 @@ nnoremap <silent> p p`]
 vnoremap < <gv
 vnoremap > >gv
 
-" So I don't have to press `>` twice in normal mode
-nnoremap > >>
-nnoremap < <<
 
 " Blackhole deletes
 nnoremap <leader>d "_d
@@ -329,11 +303,11 @@ endif
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 " Find and Replace highlighted line
-vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+nnoremap <leader>cu "hy:%s/<C-r>h//gc<left><left><left>
 
-" Find and replace with confirmation until EOF
-" rc = replace current
-noremap <leader>rc "sy:ZZWrap .,$s/<C-r>s//gc<Left><Left><Left>
+" Find and replace highlighted word with confirmation until EOF
+" cu =  change under
+noremap <leader>cu "sy:ZZWrap .,$s/<C-r>s//gc<Left><Left><Left>
 
 " Togglewrap
 noremap \\ :ToggleWrap<CR>
@@ -350,7 +324,7 @@ nnoremap gV `[v`]
 cnoremap \fp <C-R>=expand("%:p:h")<CR>
 inoremap \fp <C-R>=expand("%:p:h")<CR>
 cnoremap \fn <C-R>=expand("%:t:r")<CR>
-noremap \fn <C-R>=expand("%:t:r")<CR>
+inoremap \fn <C-R>=expand("%:t:r")<CR>
 
 " Date and datetime formatted
 cnoremap \dt <C-R>=strftime("%b %d, %Y")<CR>
@@ -373,20 +347,21 @@ nmap <Space><Space> <C-w>w
 nmap ss :split<CR><C-w>w
 nmap sv :vsplit<CR><C-w>w
 
+" For navigating splits
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-k> <C-w>k
+nnoremap <C-j> <C-w>j
+
 " Jump to first tag if only one exists
 " else, let us choose which tag to jump to
 nnoremap <C-]> g<C-]>:echo expand('%:p')<CR>
 
 " bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR><CR>:cw<CR>
-
-" Navigation for quickfix list
-nnoremap <silent> [e :cprevious<CR>
-nnoremap <silent> ]e :cnext<CR>
-nnoremap <silent> \q :cclose<CR>
+nnoremap K :Rg <C-R><C-W><CR>
 " End Native }}}
 
-" Plugins custom settings {{{
+" Plugins custom settings {{{1
 
 " ale {{{
 let g:ale_fixers = {
@@ -401,20 +376,17 @@ let g:ale_on_enter = 0
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
-
 " https://github.com/dense-analysis/ale/issues/249
 " highlight clear ALEErrorSign
 " highlight clear ALEWarningSign
 " hi link ALEErrorSign    Error
 " hi link ALEWarningSign  Warning
-highlight ALEErrorSign ctermfg=9 ctermbg=15 guifg=#C30500 guibg=NONE
-highlight ALEWarningSign ctermfg=11 ctermbg=15 guifg=#ED6237 guibg=NONE
+" highlight ALEErrorSign ctermfg=9 ctermbg=15 guifg=#C30500 guibg=NONE
+" highlight ALEWarningSign ctermfg=11 ctermbg=15 guifg=#ED6237 guibg=NONE
 
 " next/previous warnings or errors
-nmap ]c <Plug>(ale_next_wrap)
-nmap [c <Plug>(ale_previous_wrap)
+nmap ]w <Plug>(ale_next_wrap)
+nmap [w <Plug>(ale_previous_wrap)
 " }}}
 
 " closetag.vim {{{
@@ -445,6 +417,10 @@ let g:coc_global_extensions = [
 let g:endwise_no_mappings = 1
 " }}}
 
+" itsmyline.vim {{{
+let g:airline_powerline_fonts = 1
+" }}}
+
 " fzf.vim {{{
 let g:fzf_tags_command = 'ctags -R'
 let g:fzf_preview_window = 'down:1'
@@ -464,18 +440,20 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> ++ :Files<CR>
 " Global search
-nnoremap <leader>f :Rg<CR>
+nnoremap <leader>f :Rg<Space>
 " Buffers search
 nnoremap <leader>b :Buffers<CR>
-" Search files in the root of current buffer
-nnoremap <leader>g :Files %:p:h<cr>
+" Search files relative to the current buffer
+nnoremap <leader>r :Files %:p:h<CR>
 " Tags search
 nnoremap <leader>t :Tags<CR>
 nnoremap <leader>T :BTags<CR>
 " }}}
 
-" jinyuzline {{{
-let g:eleline_powerline_fonts = 1
+" vim-fugitive {{{
+nnoremap <leader>gs :Git<CR>
+nnoremap <leader>gd :Gvdiffsplit<CR>
+nnoremap <leader>h :Git difftool<CR>
 " }}}
 
 " NERDTree {{{
@@ -497,65 +475,17 @@ nnoremap <silent> <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>nf :NERDTreeFind<CR>
 " }}}
 
-" rainbow {{{
-let g:rainbow_active = 1
-let g:rainbow_conf = {
-  \  'separately': {
-  \    'nerdtree': 0,
-  \   }
-  \ }
+" netrw {{{
+" let g:loaded_netrwPlugin = 1 " Disable netrw
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
 " }}}
 
-" tmux-navigator {{{
-" Disabling tmux-navigator defaults since we are using the <C-\>
-let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
-" }}}
-
-" vim-devicons {{{
-" After a re-source, fix syntax matching issues (concealing brackets):
-if exists('g:loaded_webdevicons')
-  call webdevicons#refresh()
-endif
-let g:webdevicons_enable = 1
-let g:webdevicons_enable_nerdtree = 1
-let g:WebDevIconsUnicodeDecorateFileNodes = 1
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
-let g:webdevicons_enable_airline_statusline = 1
-let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
-let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
-" }}}
-
-" vim-gitgutter {{{
-" Note: This is a custom setting and not a gitgutter default
-let g:custom_git_gutter_lines = 0
-
-if get(g:, 'custom_git_gutter_lines')
-  let g:gitgutter_sign_added = '▎'
-  let g:gitgutter_sign_modified = '▎'
-  let g:gitgutter_sign_removed = '▏'
-  let g:gitgutter_sign_removed_first_line = '▔'
-  let g:gitgutter_sign_modified_removed = '▋'
-  let g:gitgutter_preview_win_floating = 0
-endif
-
-" Disable gitgutter mappings and use our own
-let g:gitgutter_map_keys = 0
-" hp = hunk preview
-nmap <leader>hp <Plug>(GitGutterPreviewHunk)
-" hs = hunk stage
-nmap <leader>hs <Plug>(GitGutterStageHunk)
-xmap <leader>hs <Plug>(GitGutterStageHunk)
-" hu = hunk undo
-nmap <leader>hu <Plug>(GitGutterUndoHunk)
-xmap <leader>hu <Plug>(GitGutterUndoHunk)
-" Got next/previous hunk
-nmap ]h <Plug>(GitGutterNextHunk)
-nmap [h <Plug>(GitGutterPrevHunk)
+" mbbill/undotree {{{
+nnoremap <leader>u :UndotreeToggle<CR>
 " }}}
 
 " vim-slash {{{
@@ -572,6 +502,7 @@ let g:waikiki_default_maps = 1
 
 " vista.vim {{{
 nmap \b :Vista!!<CR>
+nnoremap <leader>v :Vista finder<CR>
 " }}}
 
 " End Plugins Custom Settings }}}
@@ -604,8 +535,14 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 " Make CoC and endwise compatible
 " https://github.com/tpope/vim-endwise/issues/22#issuecomment-554685904
-inoremap <expr> <Plug>CustomCocCR pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
-imap <CR> <Plug>CustomCocCR<Plug>DiscretionaryEnd
+" inoremap <expr> <Plug>CustomCocCR complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
+" imap <CR> <Plug>CustomCocCR<Plug>DiscretionaryEnd
+
+if exists('*complete_info')
+  inoremap <silent><expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>\<C-R>=coc#on_enter()\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>\<C-R>=coc#on_enter()\<CR>"
+endif
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -616,14 +553,14 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " to start with `g` but I changed it to `<leader>c[char]` so that
 " it would remind me that it's from coc.nvim.
 nmap <silent> <leader>cd <Plug>(coc-definition)
-nmap <silent> <leader>cy <Plug>(coc-type-definition)
+nmap <silent> <leader>ct <Plug>(coc-type-definition)
 nmap <silent> <leader>ci <Plug>(coc-implementation)
 nmap <silent> <leader>cr <Plug>(coc-references)
 nmap <silent> <leader>cn <Plug>(coc-rename)
 nmap <silent> <leader>ck :call <SID>show_documentation()<CR>
 
 " Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
+imap <C-l> <Plug>(coc-snippets-expand-jump)
 
 " Use <C-j> for select text for visual placeholder of snippet.
 vmap <C-j> <Plug>(coc-snippets-select)
@@ -693,4 +630,7 @@ nnoremap <silent> \k :<C-u>CocPrev<CR>
 nnoremap <silent> \p :<C-u>CocListResume<CR>
 " End coc.nvim settings }}}
 
+if filereadable(expand("$HOME/.vimrc.local"))
+  source $HOME/.vimrc.local
+endif
 " vim:filetype=vim sw=2 foldmethod=marker tw=78 expandtab
