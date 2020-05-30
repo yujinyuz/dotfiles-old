@@ -26,14 +26,14 @@
   filelog = log -u
   fl = log -u
   ; Switch to a branch, creating it if necessary
-  go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+  go = checkout -b
   ld = log --pretty=format:\"%C(yellow)%h %ad%Cred%d %Creset%s%Cblue [%cn]\" --decorate --date=relative
   lds = log --pretty=format:\"%C(yellow)%h %ad%Cred%d %Creset%s%Cblue [%cn]\" --decorate --date=short
   le = log --oneline --decorate
   lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
   ll = log --pretty=format:\"%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]\" --decorate --numstat
   lnc = log --pretty=format:\"%h %s [%cn]\"
-  p = push
+  pu = push
   ; Works like --force but warns you when your local is not up to date
   pf = push --force-with-lease
   pup = "!git push -u origin $(git rev-parse --abbrev-ref HEAD)"
@@ -70,8 +70,8 @@
   oldHighlight = red bold 52
   oldNormal = red bold
 [color "status"]
-  added = yellow
-  changed = green
+  added = green
+  changed = yellow
   untracked = cyan
 [diff]
   tool = vimdiff
