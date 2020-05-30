@@ -28,7 +28,6 @@ set relativenumber
 " Show current line number
 set number
 
-
 " How many tenths of a second to blink when matching brakcets
 set matchtime=2
 
@@ -36,8 +35,8 @@ set matchtime=2
 " triggered when pressing tab while in the
 " execute command mode `:`
 set wildmenu
-" set wildmode=list:longest,list:full
 
+" set wildmode=list:longest,list:full
 " Disabled wildignore since it conflicts with tags
 " set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 
@@ -131,8 +130,9 @@ set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 " Enable undo directory
 set undodir=~/.vim/undodir
 set undofile
-" Highlight current line under cursor
-" set cursorline
+
+" Disable intro message
+set shortmess+=I
 
 " Change leader key
 let mapleader = ' '
@@ -251,9 +251,8 @@ nmap <leader>qq :q!<CR>
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
-" Map jk/kj to Escape because it's too far away
+" Map jk to Escape because it's too far away
 inoremap jk <Esc>
-inoremap kj <Esc>
 
 " Make Y work like other upcase commands
 nnoremap Y y$
@@ -310,7 +309,7 @@ endif
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 " Find and Replace highlighted line
-vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+nnoremap <leader>cu "hy:%s/<C-r>h//gc<left><left><left>
 
 " Find and replace highlighted word with confirmation until EOF
 " cu =  change under
@@ -462,19 +461,6 @@ nnoremap <leader>gd :Gvdiffsplit<CR>
 nnoremap <leader>h :Git difftool<CR>
 " }}}
 
-" lightline {{{
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead'
-      \ },
-      \ }
-" }}}
-
 " NERDTree {{{
 let g:nerdtree_tabs_open_on_console_startup = 0
 let NERDTreeNaturalSort = 1
@@ -573,7 +559,7 @@ nmap <silent> <leader>cn <Plug>(coc-rename)
 nmap <silent> <leader>ck :call <SID>show_documentation()<CR>
 
 " Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
+imap <C-l> <Plug>(coc-snippets-expand-jump)
 
 " Use <C-j> for select text for visual placeholder of snippet.
 vmap <C-j> <Plug>(coc-snippets-select)
@@ -643,4 +629,7 @@ nnoremap <silent> \k :<C-u>CocPrev<CR>
 nnoremap <silent> \p :<C-u>CocListResume<CR>
 " End coc.nvim settings }}}
 
+if filereadable(expand("$HOME/.vimrc.local"))
+  source $HOME/.vimrc.local
+endif
 " vim:filetype=vim sw=2 foldmethod=marker tw=78 expandtab
