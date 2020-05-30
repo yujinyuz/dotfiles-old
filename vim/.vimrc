@@ -364,7 +364,9 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-]> g<C-]>:echo expand('%:p')<CR>
 
 " bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR><CR>:cw<CR>
+nnoremap K :Rg <C-R><C-W><CR>
+" }}}
+
 " End Native }}}
 
 " Plugins custom settings {{{1
@@ -382,16 +384,15 @@ let g:ale_on_enter = 0
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
+" }}}
 
 " https://github.com/dense-analysis/ale/issues/249
 " highlight clear ALEErrorSign
 " highlight clear ALEWarningSign
 " hi link ALEErrorSign    Error
 " hi link ALEWarningSign  Warning
-highlight ALEErrorSign ctermfg=9 ctermbg=15 guifg=#C30500 guibg=NONE
-highlight ALEWarningSign ctermfg=11 ctermbg=15 guifg=#ED6237 guibg=NONE
+" highlight ALEErrorSign ctermfg=9 ctermbg=15 guifg=#C30500 guibg=NONE
+" highlight ALEWarningSign ctermfg=11 ctermbg=15 guifg=#ED6237 guibg=NONE
 
 " next/previous warnings or errors
 nmap ]w <Plug>(ale_next_wrap)
@@ -424,6 +425,10 @@ let g:coc_global_extensions = [
 
 " endwise {{{
 let g:endwise_no_mappings = 1
+" }}}
+
+" itsmyline.vim {{{
+let g:airline_powerline_fonts = 1
 " }}}
 
 " fzf.vim {{{
