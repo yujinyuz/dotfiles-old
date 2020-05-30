@@ -207,7 +207,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-rhubarb'
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go'}
 Plug 'alvan/vim-closetag'
-Plug 'itchyny/lightline.vim'
+Plug 'yujinyuz/itsmyline.vim', {'dir': expand('~/Sources/itsmyline.vim')}
 Plug 'wellle/tmux-complete.vim'
 Plug 'fcpg/vim-waikiki'
 Plug 'honza/vim-snippets'
@@ -227,12 +227,6 @@ syntax on
 
 set t_Co=256
 colorscheme gruvbox-material
-
-" Make vim transparent so it adapts the background color of the
-" terminal
-hi Normal guibg=NONE ctermbg=NONE
-hi CursorLineNr guibg=NONE ctermbg=NONE
-hi SignColumn guibg=NONE ctermbg=NONE
 " End Colors }}}
 
 " Native Key Mappings {{{
@@ -365,8 +359,6 @@ nnoremap <C-]> g<C-]>:echo expand('%:p')<CR>
 
 " bind K to grep word under cursor
 nnoremap K :Rg <C-R><C-W><CR>
-" }}}
-
 " End Native }}}
 
 " Plugins custom settings {{{1
@@ -383,8 +375,6 @@ let g:ale_sign_warning = '⚠'
 let g:ale_on_enter = 0
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
-
-" }}}
 
 " https://github.com/dense-analysis/ale/issues/249
 " highlight clear ALEErrorSign
@@ -545,8 +535,14 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 " Make CoC and endwise compatible
 " https://github.com/tpope/vim-endwise/issues/22#issuecomment-554685904
-inoremap <expr> <Plug>CustomCocCR pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
-imap <CR> <Plug>CustomCocCR<Plug>DiscretionaryEnd
+" inoremap <expr> <Plug>CustomCocCR complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
+" imap <CR> <Plug>CustomCocCR<Plug>DiscretionaryEnd
+
+if exists('*complete_info')
+  inoremap <silent><expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>\<C-R>=coc#on_enter()\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>\<C-R>=coc#on_enter()\<CR>"
+endif
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
