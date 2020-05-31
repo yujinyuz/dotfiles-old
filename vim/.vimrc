@@ -52,8 +52,8 @@ set t_BE=
 " Always show signcolumns
 set signcolumn=yes
 
-" Prefer sh for shell-related tasks
-set shell=/bin/sh
+" Prefer bash for shell-related tasks
+set shell=/bin/bash
 
 " Disable annoying swap files
 set noswapfile
