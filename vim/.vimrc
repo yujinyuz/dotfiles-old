@@ -140,7 +140,7 @@ let mapleader = ' '
 " Enable elite mode. No arrows!!
 let g:elite_mode = 1
 
-let g:python3_host_prog = '/usr/local/var/pyenv/versions/nvim/bin/python3'
+let g:python3_host_prog = $PYTHON_3_HOST_PROG
 
 " NeoVim Enabled Defaults {{{
 " Just uncomment the lines with `set` to when not using neovim
@@ -207,7 +207,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-rhubarb'
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go'}
 Plug 'alvan/vim-closetag'
-Plug 'yujinyuz/itsmyline.vim', {'dir': expand('~/Sources/itsmyline.vim')}
+Plug 'yujinyuz/itsmyline.vim', {'dir': expand('$SOURCES/itsmyline.vim')}
 Plug 'wellle/tmux-complete.vim'
 Plug 'fcpg/vim-waikiki'
 Plug 'honza/vim-snippets'
@@ -300,7 +300,7 @@ if get(g:, 'elite_mode')
 endif
 
 " Open definition in new tab
-map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+map <C-\> :tab split<CR>:exec('tag '.expand('<cword>'))<CR>
 
 " Find and Replace highlighted line
 nnoremap <leader>cu "hy:%s/<C-r>h//gc<left><left><left>
@@ -321,18 +321,18 @@ nnoremap gV `[v`]
 " Access file name data
 " fp = filepath
 " fn = filename
-cnoremap \fp <C-R>=expand("%:p:h")<CR>
-inoremap \fp <C-R>=expand("%:p:h")<CR>
-cnoremap \fn <C-R>=expand("%:t:r")<CR>
-inoremap \fn <C-R>=expand("%:t:r")<CR>
+cnoremap \fp <C-R>=expand('%:p:h')<CR>
+inoremap \fp <C-R>=expand('%:p:h')<CR>
+cnoremap \fn <C-R>=expand('%:t:r')<CR>
+inoremap \fn <C-R>=expand('%:t:r')<CR>
 
 " Date and datetime formatted
-cnoremap \dt <C-R>=strftime("%b %d, %Y")<CR>
-inoremap \dt <C-R>=strftime("%b %d, %Y")<CR>
-cnoremap \dT <C-R>=strftime("%m-%d-%Y")<CR>
+cnoremap \dt <C-R>=strftime('%b %d, %Y')<CR>
+inoremap \dt <C-R>=strftime('%b %d, %Y')<CR>
+cnoremap \dT <C-R>=strftime('%m-%d-%Y')<CR>
 
-cnoremap \tn <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
-inoremap \tn <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
+cnoremap \tn <C-R>=strftime('%Y-%m-%d %a %I:%M %p')<CR>
+inoremap \tn <C-R>=strftime('%Y-%m-%d %a %I:%M %p')<CR>
 
 " For faster navigation
 nnoremap <leader>j 10j
@@ -464,12 +464,6 @@ let NERDTreeIgnore = ['__pycache__', 'node_modules']
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeWinSize = 25
 let NERDTreeAutoCenter = 1
-let g:NERDTreeIndicatorMapCustom =
-\ {"modified"  : "✹", "staged"    : "✚",
-\ "untracked" : "✭", "renamed"   : "➜",
-\ "unmerged"  : "═", "deleted"   : "✖",
-\ "dirty"     : "✗", "clean"     : "✔︎",
-\ "ignored"   : '☒', "unknown"   : "?"}
 
 nnoremap <silent> <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>nf :NERDTreeFind<CR>
@@ -630,7 +624,7 @@ nnoremap <silent> \k :<C-u>CocPrev<CR>
 nnoremap <silent> \p :<C-u>CocListResume<CR>
 " End coc.nvim settings }}}
 
-if filereadable(expand("$HOME/.vimrc.local"))
+if filereadable(expand('$HOME/.vimrc.local'))
   source $HOME/.vimrc.local
 endif
 " vim:filetype=vim sw=2 foldmethod=marker tw=78 expandtab
