@@ -218,6 +218,7 @@ Plug 'kana/vim-textobj-entire'
 Plug 'wakatime/vim-wakatime'
 Plug 'mbbill/undotree'
 Plug 'dense-analysis/ale'
+Plug 'SidOfc/mkdx'
 call plug#end()
 " End Plugins}}}
 
@@ -488,6 +489,15 @@ let g:go_highlight_function_calls = 1
 let g:go_highlight_structs = 1
 let g:go_fmt_command = 'goimports'
 " }}}
+" vim-polyglot {{{
+let g:polyglot_disabled = ['markdown']
+let g:mkdx#settings = { 'highlight': { 'enable': 1 },
+                      \ 'enter': { 'shift': 1 },
+                      \ 'links': { 'external': { 'enable': 1 } },
+                      \ 'toc': { 'text': 'Table of Contents', 'update_on_write': 1 },
+                      \ }
+" }}}
+
 " vim-slash {{{
 if has('timers')
   " Blink 2 times with 50ms interval
