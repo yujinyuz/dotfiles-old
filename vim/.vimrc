@@ -205,7 +205,7 @@ Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-rhubarb'
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go'}
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go'}
 Plug 'alvan/vim-closetag'
 Plug 'yujinyuz/itsmyline.vim', {'dir': expand('$SOURCES/itsmyline.vim')}
 Plug 'wellle/tmux-complete.vim'
@@ -361,7 +361,7 @@ nnoremap <C-]> g<C-]>:echo expand('%:p')<CR>
 nnoremap K :Rg <C-R><C-W><CR>
 " End Native }}}
 
-" Plugins custom settings {{{1
+" Plugins custom settings {{{
 
 " ale {{{
 let g:ale_fixers = {
@@ -401,7 +401,6 @@ let g:coc_global_extensions = [
   \ 'coc-json',
   \ 'coc-sql',
   \ 'coc-tsserver',
-  \ 'coc-go',
   \ 'coc-pairs',
   \ 'coc-yaml',
   \ 'coc-html',
@@ -482,6 +481,13 @@ let g:netrw_winsize = 25
 nnoremap <leader>u :UndotreeToggle<CR>
 " }}}
 
+" vim-go {{{
+let g:go_def_mapping_enabled = 0
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_structs = 1
+let g:go_fmt_command = 'goimports'
+" }}}
 " vim-slash {{{
 if has('timers')
   " Blink 2 times with 50ms interval
