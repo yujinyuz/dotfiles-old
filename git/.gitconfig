@@ -34,7 +34,7 @@
   ll = log --pretty=format:\"%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]\" --decorate --numstat
   lnc = log --pretty=format:\"%h %s [%cn]\"
   pu = push
-  ; Works like --force but warns you when your local is not up to date
+  ; It will halt the push operation if someone has pushed to the same branch while you were working on it (and haven’t pulled any changes).
   pf = push --force-with-lease
   pup = "!git push -u origin $(git rev-parse --abbrev-ref HEAD)"
   remotes = remote -v
