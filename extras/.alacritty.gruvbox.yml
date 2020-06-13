@@ -82,3 +82,5 @@ key_bindings:
   - { key: N,        mods: Command|Shift,        action: SpawnNewInstance             }
   - { key: K,        mods: Command,              action: ClearHistory                 }
   - { key: F,        mods: Command|Control,      action: ToggleSimpleFullscreen       }
+  - { key: Return,   mods: Shift,                chars: "\x1b[13;2u"                  }
+  - { key: Return,   mods: Control,              chars: "\x1b[13;5u"                  }
