@@ -26,7 +26,7 @@
   filelog = log -u
   fl = log -u
   ; Switch to a branch, creating it if necessary
-  go = checkout -b
+  go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
   ld = log --pretty=format:\"%C(yellow)%h %ad%Cred%d %Creset%s%Cblue [%cn]\" --decorate --date=relative
   lds = log --pretty=format:\"%C(yellow)%h %ad%Cred%d %Creset%s%Cblue [%cn]\" --decorate --date=short
   le = log --oneline --decorate
